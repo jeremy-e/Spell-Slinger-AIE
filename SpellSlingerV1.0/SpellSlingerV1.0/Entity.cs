@@ -12,6 +12,9 @@ namespace SpellSlingerV1._0
         ENEMY2
     }
 
+	
+// CHANGE
+
     class Entity
     {
         private string spriteID;    //Giving responsibility to SpriteManager
