@@ -1,0 +1,12 @@
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.csprojResolveAssemblyReference.cache
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\Content\enemy1.png
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\Content\enemy2.png
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\Content\tower.png
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\SpellSlingerV1.0.exe
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\SpellSlingerV1.0.pdb
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\Lidgren.Network.dll
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\MonoGame.Framework.dll
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\OpenTK.dll
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\bin\WindowsGL\Debug\Tao.Sdl.dll
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.exe
+C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.pdb
