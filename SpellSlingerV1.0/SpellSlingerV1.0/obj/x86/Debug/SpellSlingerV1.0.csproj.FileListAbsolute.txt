@@ -12,3 +12,5 @@ C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.e
 C:\dev\CSHARP\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.pdb
 C:\Users\user\Google Drive\X-Platform Assignment\SpellSlinger\Spell-Slinger-AIE\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.exe
 C:\Users\user\Google Drive\X-Platform Assignment\SpellSlinger\Spell-Slinger-AIE\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.pdb
+C:\Users\Jez\Documents\GitHub\Spell-Slinger-AIE\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.exe
+C:\Users\Jez\Documents\GitHub\Spell-Slinger-AIE\SpellSlingerV1.0\SpellSlingerV1.0\obj\x86\Debug\SpellSlingerV1.0.pdb
