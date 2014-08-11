@@ -7,9 +7,9 @@ namespace SpellSlingerV1._0
 {
     public enum TYPE
     {
-        tower,
-        enemy1,
-        enemy2
+        TOWER,
+        ENEMY1,
+        ENEMY2
     }
 
     class Entity

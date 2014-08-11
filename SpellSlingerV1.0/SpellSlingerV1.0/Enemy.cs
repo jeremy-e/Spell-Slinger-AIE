@@ -17,7 +17,7 @@ namespace SpellSlingerV1._0
             this.Width = 32;
             this.Height = 32;
 
-            this.Type = r.Next((int)TYPE.enemy1, (int)TYPE.enemy2+1);
+            this.Type = r.Next((int)TYPE.ENEMY1, (int)TYPE.ENEMY2+1);
 
         }
     }
