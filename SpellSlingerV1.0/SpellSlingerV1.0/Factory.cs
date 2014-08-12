@@ -8,26 +8,35 @@ namespace SpellSlingerV1._0
 
     class Factory
     {
-        public Factory()                                        //Default Constructor
-        {
+        GameAssets gameAssets;
 
+        public Factory(GameAssets gameAssets_)                                        //Default Constructor
+        {
+            gameAssets = gameAssets_;
         }
 
         public Entity CreateObject(string objectName)
         {
+            Entity entity = null;
+
             if (objectName == "tower")
             {
-                Tower tower = new Tower();
-                return tower;
+                entity = new Tower();
+                gameAssets.TowerList.Add((Tower)entity);                
             }
-
             if (objectName == "enemy")
             {
-                Enemy enemy = new Enemy();
-                return enemy;
+                entity = new Enemy();
+                gameAssets.EnemyList.Add((Enemy)entity);
             }
 
-            return null;
+            //All objects must be added to the drawlist
+            if (entity != null)
+            {
+                gameAssets.DrawList.Add(entity);
+            }
+
+            return entity;
         }
 
     }

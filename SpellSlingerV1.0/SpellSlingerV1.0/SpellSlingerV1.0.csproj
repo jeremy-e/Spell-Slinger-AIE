@@ -39,10 +39,12 @@
     <Compile Include="Entity.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="GameAssets.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteManager.cs" />
     <Compile Include="Tower.cs" />
+    <Compile Include="ViewPort.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="OpenTK">

@@ -17,16 +17,11 @@ namespace SpellSlingerV1._0
     /// 
     public class Game1 : Game
     {
-
-        //TESTING CHANGES DUDES - GYM
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        GameAssets gameAssets;
+        ViewPort viewPort;
 
-        List<Entity> DrawList;                  //Used to track ALL objects
-        List<Texture2D> TextureList;            //tracks ALL textures from DrawList
-        List<Enemy> EnemyList;                  //tracking enemies
-        List<Tower> TowerList;                  //Who knows we might want multi player one day?
 
         SpriteManager spriteManager;
         Factory objectFactory;
@@ -45,8 +40,6 @@ namespace SpellSlingerV1._0
             IsMouseVisible = true;
         }
 
-        //TEST - 11/8/2014
-
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -57,15 +50,15 @@ namespace SpellSlingerV1._0
         {
             // TODO: Add your initialization logic here
             SCREEN_WIDTH = graphics.GraphicsDevice.Viewport.Width;
-            SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;
-            objectFactory = new Factory();
-            DrawList = new List<Entity>();                                                          //All objects added to DrawList - use this to draw to screen.
-            TextureList = new List<Texture2D>();
-            EnemyList = new List<Enemy>();
-            TowerList = new List<Tower>();
+            SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;            
+            gameAssets = new GameAssets();
+            objectFactory = new Factory(gameAssets);            
             spriteManager = new SpriteManager();
 
-            CreateObject("tower");                                                                     //Create objects
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+            objectFactory.CreateObject("tower");                                                                     //Create objects
 
             base.Initialize();
         }
@@ -77,12 +70,12 @@ namespace SpellSlingerV1._0
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            
 
             // TODO: use this.Content to load your game content here
             for (int i = 0; i < SpriteManager.numberOfTextures; i++)
             {
-                TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteID(i)));
+                gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteID(i)));
             }
 
         }
@@ -108,23 +101,39 @@ namespace SpellSlingerV1._0
 
             // TODO: Add your update logic here
 
-            if (EnemyList.Count <= 0)
+            if (gameAssets.EnemyList.Count <= 0)
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    CreateObject("enemy");                                      //Create Enemies on the fly - waves based on timer.
+                    objectFactory.CreateObject("enemy");                                      //Create Enemies on the fly - waves based on timer.
                 }
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            {
+                for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+                {
+                    gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
+                }
+            }
 
+            //move viewport
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {
+                viewPort.MoveX(-5);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.A))
+            {
+                viewPort.MoveX(5);
+            }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                for (int i = 0; i < EnemyList.Count; i++)
-                {
-                    EnemyList[i].Y -= 10;                               //Testing movement
-                }
+                viewPort.MoveY(5);
             }
-
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                viewPort.MoveY(-5);
+            }
 
             //Objects that are marked as inactive will be removed from list
 
@@ -143,39 +152,15 @@ namespace SpellSlingerV1._0
             spriteBatch.Begin();
 
             //Separate DrawLists for layers / updating positions
-            for (int i = 0; i < DrawList.Count; i++)                                                             //Add objects to a draw list
+            for (int i = 0; i < gameAssets.DrawList.Count; i++)                                                             //Add objects to a draw list
             {
-                spriteBatch.Draw(TextureList[DrawList[i].Type], new Rectangle((int)DrawList[i].X, (int)DrawList[i].Y, DrawList[i].Width, DrawList[i].Height), Color.White);
+                viewPort.Draw(gameAssets.DrawList[i], gameAssets.TextureList[gameAssets.DrawList[i].Type]);                
             }
 
             spriteBatch.End();
 
 
             base.Draw(gameTime);
-        }
-
-        /// <summary>
-        /// This creates the object - still needs to error check item entered by programmer - adds object to drawList
-        /// </summary>
-        /// <param name="objectName"></param>
-        public void CreateObject(string objectName)
-        {
-            Entity gameEntity = objectFactory.CreateObject(objectName);
-
-            //All objects must be added to the drawlist
-            DrawList.Add(gameEntity);
-
-            //Separate objects into individual lists for collisions - Do not create
-            if (objectName == "tower")
-            {
-                //it is ok to do this instead of accessing DrawList[DrawList.count - 1]
-                TowerList.Add((Tower)gameEntity);
-            }
-
-            if (objectName == "enemy")
-            {
-                EnemyList.Add((Enemy)gameEntity);
-            }
         }
     }
 }
