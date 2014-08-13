@@ -24,13 +24,7 @@ namespace SpellSlingerV1._0
         private float y;
         private int width;
         private int height;
-        private int type;
 
-        public int Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
         //private bool active;
         
         public float X
