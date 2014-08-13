@@ -13,6 +13,8 @@ namespace SpellSlingerV1._0
         //health
         //speed
 
+        private int health;
+
         public Enemy()
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
@@ -22,5 +24,12 @@ namespace SpellSlingerV1._0
             this.Width = 32;
             this.Height = 32;
         }
+
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
     }
 }
