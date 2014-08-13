@@ -28,6 +28,8 @@ namespace SpellSlingerV1._0
         public static int SCREEN_WIDTH;
         public static int SCREEN_HEIGHT;
 
+        int wave;
+
         public Game1()
             : base()
         {
@@ -55,6 +57,8 @@ namespace SpellSlingerV1._0
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
+
+            wave = 1;
 
             base.Initialize();
         }
@@ -97,14 +101,14 @@ namespace SpellSlingerV1._0
 
             if (gameAssets.TowerList.Count <= 0)
             {
-                objectFactory.CreateObject(typeof(Tower));
+                objectFactory.CreateObject(typeof(Tower), wave);
             }
 
             if (gameAssets.EnemyList.Count <= 0)
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    objectFactory.CreateObject(typeof(Enemy));                                      //Create Enemies on the fly - waves based on timer.
+                    objectFactory.CreateObject(typeof(Enemy), wave);                                      //Create Enemies on the fly - waves based on timer.
                 }
             }
 
