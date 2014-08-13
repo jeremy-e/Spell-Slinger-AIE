@@ -15,8 +15,9 @@ namespace SpellSlingerV1._0
         private float y;
         private int width;
         private int height;
+        private int type;
 
-        //private bool active;
+       //private bool active;
         
         public float X
         {
@@ -41,7 +42,12 @@ namespace SpellSlingerV1._0
             get { return height; }
             set { height = value; }
         }
-        
+
+        public int Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
 
         public Texture2D Texture
         {

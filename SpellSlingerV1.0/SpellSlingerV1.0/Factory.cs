@@ -23,17 +23,19 @@ namespace SpellSlingerV1._0
             if (type == typeof(Tower))
             {
                 entity = new Tower();
-                entity.Texture = gameAssets.TextureList[0];
+
+                entity.Type = SetType((int)TYPE.TOWER, (int)TYPE.TOWER);        //Allows for randomisation of tower texture later
+                entity.Texture = gameAssets.TextureList[entity.Type];
+
                 gameAssets.TowerList.Add((Tower)entity);                
             }
             if (type == typeof(Enemy))
             {
                 entity = new Enemy();
-                
-                //Basic random enemy - wave # may also increase possibility of spawning higher difficulty monsters
-                //Weight enemies?  First wave equal chance to spawn monsters 1-3, decreasing as it goes - Discuss (Spitballing idea)
 
-                entity.Texture = gameAssets.TextureList[r.Next((int)TYPE.ENEMY1, (int)TYPE.ENEMY2+1)];
+                entity.Type = SetType((int)TYPE.ENEMY1, (int)TYPE.ENEMY2);
+                entity.Texture = gameAssets.TextureList[entity.Type];
+                
                 gameAssets.EnemyList.Add((Enemy)entity);
             }
 
@@ -45,6 +47,14 @@ namespace SpellSlingerV1._0
 
             return entity;
         }
+
+        public int SetType(int typeMin, int typeMax)
+        {
+            Random r = new Random(Guid.NewGuid().GetHashCode());
+            int temp = r.Next(typeMin, typeMax + 1);                    //+1 to include max value
+            return temp;
+        }
+
 
     }
 }
