@@ -10,10 +10,6 @@ namespace SpellSlingerV1._0
     {
         public Tower()
         {
-<<<<<<< HEAD
-=======
-            //this.SpriteID = "tower.png";SetTexture()
->>>>>>> origin/master
             this.Width = 64;
             this.Height = 64;
             this.Type = (int)TYPE.TOWER;
