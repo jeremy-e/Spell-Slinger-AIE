@@ -72,7 +72,7 @@ namespace SpellSlingerV1._0
             // TODO: use this.Content to load your game content here
             for (int i = 0; i < SpriteManager.numberOfTextures; i++)
             {
-                gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteID(i)));
+                gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteFileName(i)));
             }
             objectFactory.CreateObject(typeof(Tower));                                                                     //Create objects
         }

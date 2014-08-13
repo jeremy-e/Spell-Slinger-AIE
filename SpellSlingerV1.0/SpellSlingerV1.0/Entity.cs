@@ -18,7 +18,11 @@ namespace SpellSlingerV1._0
 
     class Entity
     {
+<<<<<<< HEAD
         private Texture2D texture;
+=======
+        //private string spriteID;    //Giving responsibility to SpriteManager
+>>>>>>> origin/master
         private float x;
         private float y;
         private int width;
@@ -56,11 +60,19 @@ namespace SpellSlingerV1._0
             set { height = value; }
         }
         
+<<<<<<< HEAD
         public Texture2D Texture
         {
             get { return texture; }
             set { texture = value; }
         }
+=======
+        //public string SpriteID
+        //{
+        //    get { return spriteID; }
+        //    set { spriteID = value; }
+        //}
+>>>>>>> origin/master
 
     }
 }
