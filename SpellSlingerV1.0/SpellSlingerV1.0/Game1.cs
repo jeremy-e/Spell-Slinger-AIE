@@ -148,12 +148,6 @@ namespace SpellSlingerV1._0
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            //Separate DrawLists for layers / updating positions
-            //for (int i = 0; i < gameAssets.DrawList.Count; i++)                                                             //Add objects to a draw list
-            //{
-            //    viewPort.Draw(gameAssets.DrawList[i], gameAssets.TextureList[gameAssets.DrawList[i].Type]);
-            //}
-
             for (int i = 0; i < gameAssets.DrawList.Count; i++)
             {
                 viewPort.Draw(gameAssets.DrawList[i], gameAssets.DrawList[i].Texture);
