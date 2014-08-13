@@ -15,16 +15,16 @@ namespace SpellSlingerV1._0
             gameAssets = gameAssets_;
         }
 
-        public Entity CreateObject(string objectName)
+        public Entity CreateObject(Type type)
         {
             Entity entity = null;
 
-            if (objectName == "tower")
+            if (type == typeof(Tower))
             {
                 entity = new Tower();
                 gameAssets.TowerList.Add((Tower)entity);                
             }
-            if (objectName == "enemy")
+            if (type == typeof(Enemy))
             {
                 entity = new Enemy();
                 gameAssets.EnemyList.Add((Enemy)entity);

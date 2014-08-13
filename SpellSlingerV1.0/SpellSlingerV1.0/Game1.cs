@@ -54,11 +54,10 @@ namespace SpellSlingerV1._0
             gameAssets = new GameAssets();
             objectFactory = new Factory(gameAssets);            
             spriteManager = new SpriteManager();
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            objectFactory.CreateObject("tower");                                                                     //Create objects
+            objectFactory.CreateObject(typeof(Tower));                                                                     //Create objects
 
             base.Initialize();
         }
@@ -105,7 +104,7 @@ namespace SpellSlingerV1._0
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    objectFactory.CreateObject("enemy");                                      //Create Enemies on the fly - waves based on timer.
+                    objectFactory.CreateObject(typeof(Enemy));                                      //Create Enemies on the fly - waves based on timer.
                 }
             }
 
