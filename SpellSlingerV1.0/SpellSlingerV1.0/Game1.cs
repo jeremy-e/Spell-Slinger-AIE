@@ -21,8 +21,7 @@ namespace SpellSlingerV1._0
         SpriteBatch spriteBatch;
         GameAssets gameAssets;
         ViewPort viewPort;
-
-
+        
         SpriteManager spriteManager;
         Factory objectFactory;
 
@@ -50,14 +49,14 @@ namespace SpellSlingerV1._0
         {
             // TODO: Add your initialization logic here
             SCREEN_WIDTH = graphics.GraphicsDevice.Viewport.Width;
-            SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;            
+            SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;
             gameAssets = new GameAssets();
-            objectFactory = new Factory(gameAssets);            
+            objectFactory = new Factory(gameAssets);
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            objectFactory.CreateObject(typeof(Tower));                                                                     //Create objects
+            
 
             base.Initialize();
         }
@@ -69,14 +68,13 @@ namespace SpellSlingerV1._0
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            
 
             // TODO: use this.Content to load your game content here
             for (int i = 0; i < SpriteManager.numberOfTextures; i++)
             {
                 gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteID(i)));
             }
-
+            objectFactory.CreateObject(typeof(Tower));                                                                     //Create objects
         }
 
         /// <summary>
@@ -151,9 +149,14 @@ namespace SpellSlingerV1._0
             spriteBatch.Begin();
 
             //Separate DrawLists for layers / updating positions
-            for (int i = 0; i < gameAssets.DrawList.Count; i++)                                                             //Add objects to a draw list
+            //for (int i = 0; i < gameAssets.DrawList.Count; i++)                                                             //Add objects to a draw list
+            //{
+            //    viewPort.Draw(gameAssets.DrawList[i], gameAssets.TextureList[gameAssets.DrawList[i].Type]);
+            //}
+
+            for (int i = 0; i < gameAssets.DrawList.Count; i++)
             {
-                viewPort.Draw(gameAssets.DrawList[i], gameAssets.TextureList[gameAssets.DrawList[i].Type]);                
+                viewPort.Draw(gameAssets.DrawList[i], gameAssets.DrawList[i].Texture);
             }
 
             spriteBatch.End();

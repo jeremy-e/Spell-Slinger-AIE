@@ -9,7 +9,7 @@ namespace SpellSlingerV1._0
     class Factory
     {
         GameAssets gameAssets;
-
+        
         public Factory(GameAssets gameAssets_)                                        //Default Constructor
         {
             gameAssets = gameAssets_;
@@ -22,11 +22,13 @@ namespace SpellSlingerV1._0
             if (type == typeof(Tower))
             {
                 entity = new Tower();
+                entity.Texture = gameAssets.TextureList[0];
                 gameAssets.TowerList.Add((Tower)entity);                
             }
             if (type == typeof(Enemy))
             {
                 entity = new Enemy();
+                entity.Texture = gameAssets.TextureList[1];
                 gameAssets.EnemyList.Add((Enemy)entity);
             }
 

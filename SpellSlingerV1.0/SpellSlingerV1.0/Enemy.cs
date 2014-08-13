@@ -11,7 +11,6 @@ namespace SpellSlingerV1._0
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
 
-            //this.SpriteID = "enemy1.png";   //Handing over responsibility to SpriteManager
             this.X = r.Next(0,Game1.SCREEN_WIDTH);
             this.Y = r.Next(Game1.SCREEN_HEIGHT-50,Game1.SCREEN_HEIGHT);
             this.Width = 32;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpellSlingerV1._0
 {
@@ -17,7 +18,7 @@ namespace SpellSlingerV1._0
 
     class Entity
     {
-        private string spriteID;    //Giving responsibility to SpriteManager
+        private Texture2D texture;
         private float x;
         private float y;
         private int width;
@@ -55,10 +56,10 @@ namespace SpellSlingerV1._0
             set { height = value; }
         }
         
-        public string SpriteID
+        public Texture2D Texture
         {
-            get { return spriteID; }
-            set { spriteID = value; }
+            get { return texture; }
+            set { texture = value; }
         }
 
     }
