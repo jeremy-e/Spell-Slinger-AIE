@@ -17,7 +17,7 @@ namespace SpellSlingerV1._0
 
     class Entity
     {
-        private string spriteID;    //Giving responsibility to SpriteManager
+        //private string spriteID;    //Giving responsibility to SpriteManager
         private float x;
         private float y;
         private int width;
@@ -55,11 +55,11 @@ namespace SpellSlingerV1._0
             set { height = value; }
         }
         
-        public string SpriteID
-        {
-            get { return spriteID; }
-            set { spriteID = value; }
-        }
+        //public string SpriteID
+        //{
+        //    get { return spriteID; }
+        //    set { spriteID = value; }
+        //}
 
     }
 }

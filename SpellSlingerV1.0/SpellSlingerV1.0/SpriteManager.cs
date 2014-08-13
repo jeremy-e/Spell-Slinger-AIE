@@ -7,19 +7,19 @@ namespace SpellSlingerV1._0
 {
     class SpriteManager
     {
-        private string[] spriteID = new string[3];
+        private string[] spriteFileName = new string[3];
         public static int numberOfTextures = 3;                         //Update as required
 
         public SpriteManager()
         {
-            spriteID[0] = "tower.png";
-            spriteID[1] = "enemy1.png";
-            spriteID[2] = "enemy2.png";
+            spriteFileName[0] = "tower.png";
+            spriteFileName[1] = "enemy1.png";
+            spriteFileName[2] = "enemy2.png";
         }
 
-        public string GetSpriteID(int type)
+        public string GetSpriteFileName(int type)
         {
-            return spriteID[type];
+            return spriteFileName[type];
         }
 
     }
