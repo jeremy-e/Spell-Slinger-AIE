@@ -5,16 +5,24 @@ using System.Text;
 
 namespace SpellSlingerV1._0
 {
+    public enum TYPE
+    {
+        TOWER,
+        ENEMY1,
+        ENEMY2
+    }
+
     class SpriteManager
     {
-        private string[] spriteFileName = new string[3];
-        public static int numberOfTextures = 3;                         //Update as required
-
+        public static int numberOfTextures = Enum.GetNames(typeof(TYPE)).Length;
+        private string[] spriteFileName = new string[Enum.GetNames(typeof(TYPE)).Length];
+        
+        ///List Textures here
         public SpriteManager()
         {
-            spriteFileName[0] = "tower.png";
-            spriteFileName[1] = "enemy1.png";
-            spriteFileName[2] = "enemy2.png";
+            spriteFileName[(int)TYPE.TOWER] = "tower.png";
+            spriteFileName[(int)TYPE.ENEMY1] = "enemy1.png";
+            spriteFileName[(int)TYPE.ENEMY2] = "enemy2.png";
         }
 
         public string GetSpriteFileName(int type)

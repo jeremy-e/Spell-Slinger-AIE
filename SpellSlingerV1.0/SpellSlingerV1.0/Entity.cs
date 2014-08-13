@@ -6,15 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace SpellSlingerV1._0
 {
-    public enum TYPE
-    {
-        TOWER,
-        ENEMY1,
-        ENEMY2
-    }
-
-	
-// CHANGE 2
 
     class Entity
     {

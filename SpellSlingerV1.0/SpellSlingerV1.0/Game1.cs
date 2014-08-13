@@ -56,8 +56,6 @@ namespace SpellSlingerV1._0
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
 
-            
-
             base.Initialize();
         }
 
@@ -74,7 +72,6 @@ namespace SpellSlingerV1._0
             {
                 gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteFileName(i)));
             }
-            objectFactory.CreateObject(typeof(Tower));                                                                     //Create objects
         }
 
         /// <summary>
@@ -97,6 +94,11 @@ namespace SpellSlingerV1._0
                 Exit();
 
             // TODO: Add your update logic here
+
+            if (gameAssets.TowerList.Count <= 0)
+            {
+                objectFactory.CreateObject(typeof(Tower));
+            }
 
             if (gameAssets.EnemyList.Count <= 0)
             {

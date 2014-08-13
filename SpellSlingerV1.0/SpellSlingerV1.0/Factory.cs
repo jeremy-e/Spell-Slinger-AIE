@@ -18,6 +18,7 @@ namespace SpellSlingerV1._0
         public Entity CreateObject(Type type)
         {
             Entity entity = null;
+            Random r = new Random(Guid.NewGuid().GetHashCode());
 
             if (type == typeof(Tower))
             {
@@ -28,7 +29,11 @@ namespace SpellSlingerV1._0
             if (type == typeof(Enemy))
             {
                 entity = new Enemy();
-                entity.Texture = gameAssets.TextureList[1];
+                
+                //Basic random enemy - wave # may also increase possibility of spawning higher difficulty monsters
+                //Weight enemies?  First wave equal chance to spawn monsters 1-3, decreasing as it goes - Discuss (Spitballing idea)
+
+                entity.Texture = gameAssets.TextureList[r.Next((int)TYPE.ENEMY1, (int)TYPE.ENEMY2+1)];
                 gameAssets.EnemyList.Add((Enemy)entity);
             }
 
