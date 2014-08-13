@@ -28,7 +28,7 @@ namespace SpellSlingerV1._0
             focusAreaY = 0;
         }
 
-        public void Draw(Entity entity_)//, Texture2D sprite_)
+        public void Draw(Entity entity_)
         {
             int xPos = (int)entity_.X + focusAreaX;
             int yPos = (int)entity_.Y + focusAreaY;
