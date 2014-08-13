@@ -150,7 +150,7 @@ namespace SpellSlingerV1._0
 
             for (int i = 0; i < gameAssets.DrawList.Count; i++)
             {
-                viewPort.Draw(gameAssets.DrawList[i], gameAssets.DrawList[i].Texture);
+                viewPort.Draw(gameAssets.DrawList[i]);
             }
 
             spriteBatch.End();
