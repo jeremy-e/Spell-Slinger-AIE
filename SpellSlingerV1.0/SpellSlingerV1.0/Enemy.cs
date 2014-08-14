@@ -7,6 +7,13 @@ namespace SpellSlingerV1._0
 {
     class Enemy:Entity
     {
+        public enum ENEMY_TYPE
+        {
+            TOWER,
+            ENEMY1,
+            ENEMY2
+        }
+
         public Enemy()
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());

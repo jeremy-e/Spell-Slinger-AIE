@@ -54,12 +54,5 @@ namespace SpellSlingerV1._0
             get { return height; }
             set { height = value; }
         }
-        
-        //public string SpriteID
-        //{
-        //    get { return spriteID; }
-        //    set { spriteID = value; }
-        //}
-
     }
 }

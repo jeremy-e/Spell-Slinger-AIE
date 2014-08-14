@@ -2,3 +2,8 @@
 *.obj
 *.exe
 *.pdb
+*.suo
+*.suo
+SpellSlingerV1.0/SpellSlingerV1.0.v11.suo
+SpellSlingerV1.0/SpellSlingerV1.0/obj/x86/Debug/SpellSlingerV1.0.csproj.FileListAbsolute.txt
+SpellSlingerV1.0/SpellSlingerV1.0/obj/x86/Debug/SpellSlingerV1.0.csprojResolveAssemblyReference.cache
