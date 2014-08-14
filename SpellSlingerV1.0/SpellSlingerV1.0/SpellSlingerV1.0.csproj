@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Enemy.cs" />
+    <Compile Include="EnemySpawner.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Game1.cs" />
