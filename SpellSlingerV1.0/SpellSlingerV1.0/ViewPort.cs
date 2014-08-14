@@ -28,12 +28,12 @@ namespace SpellSlingerV1._0
             focusAreaY = 0;
         }
 
-        public void Draw(Entity entity_, Texture2D sprite_)
+        public void Draw(Entity entity_)
         {
             int xPos = (int)entity_.X + focusAreaX;
             int yPos = (int)entity_.Y + focusAreaY;
             Rectangle drawPos = new Rectangle(xPos, yPos, entity_.Width, entity_.Height);
-            spriteBatch.Draw(sprite_, drawPos, Color.White);
+            spriteBatch.Draw(entity_.Texture, drawPos, Color.White);
         }
 
         public void MoveX(int amount_)

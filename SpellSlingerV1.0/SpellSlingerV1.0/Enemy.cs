@@ -5,8 +5,9 @@ using System.Text;
 
 namespace SpellSlingerV1._0
 {
-    class Enemy:Entity
+    class Enemy : Entity
     {
+
         public enum ENEMY_TYPE
         {
             TOWER,
@@ -14,18 +15,30 @@ namespace SpellSlingerV1._0
             ENEMY2
         }
 
+        //resistance
+        //weakness
+        //armour
+        //health
+        //speed
+
+        private int health;
+
+
         public Enemy()
         {
             Random r = new Random(Guid.NewGuid().GetHashCode());
 
-            //this.SpriteID = "enemy1.png";   //Handing over responsibility to SpriteManager
-            this.X = r.Next(0,Game1.SCREEN_WIDTH);
-            this.Y = r.Next(Game1.SCREEN_HEIGHT-50,Game1.SCREEN_HEIGHT);
+            this.X = r.Next(0, Game1.SCREEN_WIDTH);
+            this.Y = r.Next(Game1.SCREEN_HEIGHT - 50, Game1.SCREEN_HEIGHT);
             this.Width = 32;
             this.Height = 32;
-
-            this.Type = r.Next((int)TYPE.ENEMY1, (int)TYPE.ENEMY2+1);
-
         }
+
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
+        }
+
     }
 }

@@ -2,34 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace SpellSlingerV1._0
 {
-    public enum TYPE
-    {
-        TOWER,
-        ENEMY1,
-        ENEMY2
-    }
-
-	
-// CHANGE 2
 
     class Entity
     {
-        //private string spriteID;    //Giving responsibility to SpriteManager
+
+        private Texture2D texture;
         private float x;
         private float y;
         private int width;
         private int height;
         private int type;
 
-        public int Type
-        {
-            get { return type; }
-            set { type = value; }
-        }
-        //private bool active;
+       //private bool active;
         
         public float X
         {
@@ -53,6 +41,19 @@ namespace SpellSlingerV1._0
         {
             get { return height; }
             set { height = value; }
+        }
+
+
+        public int Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set { texture = value; }
         }
     }
 }
