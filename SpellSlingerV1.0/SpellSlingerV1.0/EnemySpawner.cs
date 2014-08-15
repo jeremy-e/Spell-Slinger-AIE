@@ -18,10 +18,15 @@ namespace SpellSlingerV1._0
         public EnemySpawner(Factory factory_, uint timerIntervalMs_)
         {
             factoryOrder = factory_;
+
+            //create the timer that will control when enemies are created. 
             spawnTimer = new System.Timers.Timer(timerIntervalMs_);
 
+            //this line adds the SpawnEnemy envent handler (see SpawnEnemy function) that fires when the spawnTimer fires
             spawnTimer.Elapsed += SpawnEnemy;
-            spawnTimer.Enabled = true;
+           
+            //kick off the timer
+            spawnTimer.Start();
         }
 
         //start the timer again
@@ -31,8 +36,7 @@ namespace SpellSlingerV1._0
             spawnTimer.Start();
         }
 
-        //this is only static because the timer needs a static callback, 
-        //I am using PushThroughOrder to get back to this EnemySpawner instance
+        //Tell the factory to make us another enemy, because we only got here from spawnTimer going off!!!
         private void SpawnEnemy(Object source, ElapsedEventArgs e)
         {
             factoryOrder.CreateObject(typeof(Enemy), 1);
