@@ -21,6 +21,7 @@ namespace SpellSlingerV1._0
         SpriteBatch spriteBatch;
         GameAssets gameAssets;
         ViewPort viewPort;
+        EnemySpawner enemySpawner;
         
         SpriteManager spriteManager;
         Factory objectFactory;
@@ -54,9 +55,11 @@ namespace SpellSlingerV1._0
             SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;
             gameAssets = new GameAssets();
             objectFactory = new Factory(gameAssets);
+            enemySpawner = new EnemySpawner(objectFactory, 1000); //this will be moved out of initialise to somewhere specific to a wave (just for testing)
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
+
 
             wave = 1;
 
@@ -104,13 +107,13 @@ namespace SpellSlingerV1._0
                 objectFactory.CreateObject(typeof(Tower), wave);
             }
 
-            if (gameAssets.EnemyList.Count <= 0)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    objectFactory.CreateObject(typeof(Enemy), wave);                                      //Create Enemies on the fly - waves based on timer.
-                }
-            }
+            //if (gameAssets.EnemyList.Count <= 0)
+            //{
+            //    for (int i = 0; i < 10; i++)
+            //    {
+            //        objectFactory.CreateObject(typeof(Enemy), wave);                                      //Create Enemies on the fly - waves based on timer.
+            //    }
+            //}
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
