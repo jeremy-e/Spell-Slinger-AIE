@@ -28,8 +28,8 @@ namespace SpellSlingerV1._0
 
         public static int SCREEN_WIDTH;
         public static int SCREEN_HEIGHT;
-
-        int wave;
+        public static uint waveTimer = 1000;
+        public static int wave = 1;
 
         public Game1()
             : base()
@@ -55,13 +55,10 @@ namespace SpellSlingerV1._0
             SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;
             gameAssets = new GameAssets();
             objectFactory = new Factory(gameAssets);
-            enemySpawner = new EnemySpawner(objectFactory, 1000); //this will be moved out of initialise to somewhere specific to a wave (just for testing)
+            enemySpawner = new EnemySpawner(objectFactory, waveTimer); //this will be moved out of initialise to somewhere specific to a wave (just for testing)
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-
-            wave = 1;
 
             base.Initialize();
         }
