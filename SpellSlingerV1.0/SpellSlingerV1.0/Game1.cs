@@ -28,8 +28,8 @@ namespace SpellSlingerV1._0
 
         public static int SCREEN_WIDTH;
         public static int SCREEN_HEIGHT;
-
-        int wave;
+        public static uint waveTimer = 1000;
+        public static int wave = 1;
 
         public Game1()
             : base()
@@ -77,6 +77,7 @@ namespace SpellSlingerV1._0
 
             //follow execution to see new randomization code. 
             CreateWave1();
+
 
             base.Initialize();
         }
