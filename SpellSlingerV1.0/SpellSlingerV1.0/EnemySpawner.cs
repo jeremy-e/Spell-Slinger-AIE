@@ -14,9 +14,14 @@ namespace SpellSlingerV1._0
         //this object used to create enemies when told to spawn (ordering them from the factory :)
         Factory factoryOrder; 
 
+        //the rules that govern the chance of enemy type spawn. 
+        EnemySpawnRules esr;
+
         //constructor takes a factory (because we have already created this in Game and dont want to create a second one)
-        public EnemySpawner(Factory factory_, uint timerIntervalMs_)
+        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_)
         {
+            //assign classwide variables
+            esr = esr_;
             factoryOrder = factory_;
 
             //create the timer that will control when enemies are created. 
@@ -39,7 +44,10 @@ namespace SpellSlingerV1._0
         //Tell the factory to make us another enemy, because we only got here from spawnTimer going off!!!
         private void SpawnEnemy(Object source, ElapsedEventArgs e)
         {
-            factoryOrder.CreateObject(typeof(Enemy), 1);
+            ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
+            
+            factoryOrder.CreateEnemy(enemy_type);
+                        
             ResetTimer();    
         }
     }

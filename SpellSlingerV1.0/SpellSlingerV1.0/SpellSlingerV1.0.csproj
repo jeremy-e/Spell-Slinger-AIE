@@ -35,8 +35,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dice.cs" />
     <Compile Include="Enemy.cs" />
     <Compile Include="EnemySpawner.cs" />
+    <Compile Include="EnemySpawnRules.cs" />
+    <Compile Include="EnemyType.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Game1.cs" />

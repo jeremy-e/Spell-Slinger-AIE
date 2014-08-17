@@ -42,6 +42,21 @@ namespace SpellSlingerV1._0
             IsMouseVisible = true;
         }
 
+        private void CreateWave1()
+        {
+            //2 six sided dice. 
+            Dice dice = new Dice(2, 6);
+
+            //all dice rolls will give us a ghoul if no other rule is set
+            EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
+
+            //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
+            rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
+
+            //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
+            enemySpawner = new EnemySpawner(objectFactory, rules, 1000); 
+        }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -55,13 +70,13 @@ namespace SpellSlingerV1._0
             SCREEN_HEIGHT = graphics.GraphicsDevice.Viewport.Height;
             gameAssets = new GameAssets();
             objectFactory = new Factory(gameAssets);
-            enemySpawner = new EnemySpawner(objectFactory, 1000); //this will be moved out of initialise to somewhere specific to a wave (just for testing)
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
-
-
             wave = 1;
+
+            //follow execution to see new randomization code. 
+            CreateWave1();
 
             base.Initialize();
         }
@@ -75,9 +90,13 @@ namespace SpellSlingerV1._0
             // Create a new SpriteBatch, which can be used to draw textures.
 
             // TODO: use this.Content to load your game content here
-            for (int i = 0; i < SpriteManager.numberOfTextures; i++)
+            for (int i = 0; i < SpriteManager.playerNumTextures; i++)
             {
-                gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpriteFileName(i)));
+                gameAssets.TextureList.Add(Content.Load<Texture2D>(spriteManager.GetPlayerSpriteFileName(i)));
+            }
+            for (int i = 0; i < SpriteManager.enemyNumTextures; i++)
+            {
+                gameAssets.EnemyTextureList.Add(Content.Load<Texture2D>(spriteManager.GetEnemySpriteFileName(i)));
             }
         }
 
@@ -104,7 +123,7 @@ namespace SpellSlingerV1._0
 
             if (gameAssets.TowerList.Count <= 0)
             {
-                objectFactory.CreateObject(typeof(Tower), wave);
+                objectFactory.CreatePlayer();
             }
 
             //if (gameAssets.EnemyList.Count <= 0)
