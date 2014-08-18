@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
@@ -11,8 +12,9 @@ namespace SpellSlingerV1._0
     {
 
         private Texture2D texture;
-        private float x;
-        private float y;
+        //private float x;
+        //private float y;
+        Vector2 pos;
         private int width;
         private int height;
         //private int type;
@@ -21,14 +23,14 @@ namespace SpellSlingerV1._0
         
         public float X
         {
-            get { return x; }
-            set { x = value; }
+            get { return pos.X; }
+            set { pos.X = value; }
         }
         
         public float Y
         {
-            get { return y; }
-            set { y = value; }
+            get { return pos.Y; }
+            set { pos.Y = value; }
         }
         
         public int Width
