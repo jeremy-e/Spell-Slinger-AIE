@@ -14,12 +14,17 @@ namespace SpellSlingerV1._0
         private Texture2D texture;
         //private float x;
         //private float y;
-        Vector2 pos;
+        protected Vector2 pos;
         private int width;
         private int height;
         //private int type;
 
        //private bool active;
+
+        public Vector2 Pos
+        {
+            get { return pos; }
+        }
         
         public float X
         {

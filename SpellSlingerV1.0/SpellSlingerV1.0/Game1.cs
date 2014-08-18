@@ -139,7 +139,8 @@ namespace SpellSlingerV1._0
             {
                 for (int i = 0; i < gameAssets.EnemyList.Count; i++)
                 {
-                    gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
+                    //gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
+                    gameAssets.EnemyList[i].Move();                               //Testing movement
                 }
             }
 

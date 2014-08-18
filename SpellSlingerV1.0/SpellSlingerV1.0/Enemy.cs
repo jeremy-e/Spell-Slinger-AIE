@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
@@ -17,10 +18,20 @@ namespace SpellSlingerV1._0
 
         private ENEMY_TYPE enemyType;
 
+        private Vector2 playerPos;
+        
+        //direction property (we dont need to store as we can calculate on the fly)
+        public Vector2 Direction
+        {
+            get { return Pos - playerPos; }
+        }
 
-        public Enemy(ENEMY_TYPE enemyType_)
+
+        public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_)
         {
             enemyType = enemyType_;
+            playerPos = playerPos_;
+
             Random r = new Random(Guid.NewGuid().GetHashCode());
 
             this.X = r.Next(0, Game1.SCREEN_WIDTH);
@@ -52,6 +63,14 @@ namespace SpellSlingerV1._0
             }
 
             return health;
+        }
+
+        //to be called by Update
+        //Move enemy towards player
+        public void Move()
+        {
+            //TODO!!! unhardcode magic numbers!!!!
+            pos -= (Direction * 0.001f);
         }
 
         public int Health
