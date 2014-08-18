@@ -54,7 +54,7 @@ namespace SpellSlingerV1._0
             rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
 
             //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
-            enemySpawner = new EnemySpawner(objectFactory, rules, 1000); 
+            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer); 
         }
 
         /// <summary>
