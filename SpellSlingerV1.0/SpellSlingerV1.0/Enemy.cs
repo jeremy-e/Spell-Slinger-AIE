@@ -23,7 +23,12 @@ namespace SpellSlingerV1._0
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction
         {
-            get { return Pos - playerPos; }
+            get 
+            {
+                Vector2 dir = Pos - playerPos;
+                dir.Normalize();
+                return dir;
+            }
         }
 
 
@@ -70,7 +75,7 @@ namespace SpellSlingerV1._0
         public void Move()
         {
             //TODO!!! unhardcode magic numbers!!!!
-            pos -= (Direction * 0.001f);
+            pos -= (Direction * 1f);
         }
 
         public int Health
