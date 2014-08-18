@@ -19,6 +19,9 @@ namespace SpellSlingerV1._0
         private ENEMY_TYPE enemyType;
 
         private Vector2 playerPos;
+
+        private const float GHOUL_SPEED = 0.10f;
+        private const float RUNNING_GHOUL_SPEED = 0.16f;
         
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction
@@ -72,10 +75,17 @@ namespace SpellSlingerV1._0
 
         //to be called by Update
         //Move enemy towards player
-        public void Move()
+        public void Move(GameTime gameTime_)
         {
-            //TODO!!! unhardcode magic numbers!!!!
-            pos -= (Direction * 1f);
+            int delta = gameTime_.ElapsedGameTime.Milliseconds;
+            Vector2 movementPreDelta = new Vector2();
+
+            if ( EnemyType == ENEMY_TYPE.GHOUL )
+                movementPreDelta = (Direction * GHOUL_SPEED);
+            else if ( EnemyType == ENEMY_TYPE.RUNNING_GHOUL )
+                movementPreDelta = (Direction * RUNNING_GHOUL_SPEED);
+
+            pos -= (movementPreDelta * delta);
         }
 
         public int Health
