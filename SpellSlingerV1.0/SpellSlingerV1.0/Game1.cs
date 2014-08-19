@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
+using System.Diagnostics;
 #endregion
 
 namespace SpellSlingerV1._0
@@ -22,7 +23,8 @@ namespace SpellSlingerV1._0
         GameAssets gameAssets;
         ViewPort viewPort;
         EnemySpawner enemySpawner;
-        
+        ColliderHandler colliderHandler;
+
         SpriteManager spriteManager;
         Factory objectFactory;
 
@@ -54,7 +56,8 @@ namespace SpellSlingerV1._0
             rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
 
             //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
-            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer); 
+            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer);
+
         }
 
         /// <summary>
@@ -73,6 +76,7 @@ namespace SpellSlingerV1._0
             spriteManager = new SpriteManager();
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
+            colliderHandler = new ColliderHandler();
             wave = 1;
 
             //follow execution to see new randomization code. 
@@ -127,14 +131,6 @@ namespace SpellSlingerV1._0
                 objectFactory.CreatePlayer();
             }
 
-            //if (gameAssets.EnemyList.Count <= 0)
-            //{
-            //    for (int i = 0; i < 10; i++)
-            //    {
-            //        objectFactory.CreateObject(typeof(Enemy), wave);                                      //Create Enemies on the fly - waves based on timer.
-            //    }
-            //}
-
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {
                 for (int i = 0; i < gameAssets.EnemyList.Count; i++)
@@ -163,6 +159,13 @@ namespace SpellSlingerV1._0
             }
 
             //Objects that are marked as inactive will be removed from list
+
+
+            //Basic Player/Enemy Collission Test
+            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+            {
+                colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]);
+            }
 
             base.Update(gameTime);
         }

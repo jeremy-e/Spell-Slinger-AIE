@@ -38,7 +38,7 @@ namespace SpellSlingerV1._0
         private void ResetTimer()
         {
             spawnTimer.Stop();
-            spawnTimer.Start();
+            spawnTimer.Start();   //Comment out to spawn 1 enemy for testing
         }
 
         //Tell the factory to make us another enemy, because we only got here from spawnTimer going off!!!
