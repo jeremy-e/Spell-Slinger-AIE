@@ -13,7 +13,7 @@ namespace SpellSlingerV1._0
         public List<Texture2D> EnemyTextureList;       //tracks ALL textures from DrawList
         public List<Enemy> EnemyList;                  //tracking enemies
         public List<Tower> TowerList;                  //Who knows we might want multi player one day?
-        //List of active spells
+        public List<Spell> SpellList;                   //tracks active/current spells
 
         public GameAssets()
         {
