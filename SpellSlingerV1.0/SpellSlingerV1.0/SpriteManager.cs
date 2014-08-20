@@ -14,9 +14,11 @@ namespace SpellSlingerV1._0
     {
         public static int playerNumTextures = Enum.GetNames(typeof(PLAYER_SPRITES)).Length;
         public static int enemyNumTextures = Enum.GetNames(typeof(ENEMY_TYPE)).Length;
+        public static int spellNumTextures = Enum.GetNames(typeof(SPELL_TYPE)).Length;
 
         private string[] playerSpriteFileNames = new string[playerNumTextures];
         private string[] enemySpriteFileNames = new string[enemyNumTextures];
+        private string[] spellSpriteFileNames = new string[spellNumTextures];
         
         ///List Textures here
         public SpriteManager()
@@ -29,7 +31,11 @@ namespace SpellSlingerV1._0
             enemySpriteFileNames[(int)ENEMY_TYPE.SKELETON_KNIGHT] = "enemy2.png";
             enemySpriteFileNames[(int)ENEMY_TYPE.OGRE] = "enemy1.png";
             enemySpriteFileNames[(int)ENEMY_TYPE.WEREWOLF] = "enemy2.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.GREEN_DRAGON] = "enemy1.png";          
+            enemySpriteFileNames[(int)ENEMY_TYPE.GREEN_DRAGON] = "enemy1.png";
+
+            spellSpriteFileNames[(int)SPELL_TYPE.FIREBALL] = "spell1.png";
+            spellSpriteFileNames[(int)SPELL_TYPE.ICELANCE] = "spell2.png";
+
         }
 
         public string GetPlayerSpriteFileName(int type)
@@ -40,6 +46,11 @@ namespace SpellSlingerV1._0
         public string GetEnemySpriteFileName(int type)
         {
             return enemySpriteFileNames[type];
+        }
+
+        public string GetSpellSpriteFileName(int type)
+        {
+            return spellSpriteFileNames[type];
         }
 
 

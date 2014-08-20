@@ -33,5 +33,14 @@ namespace SpellSlingerV1._0
             gameAssets.TowerList.Add((Tower)entity);
             gameAssets.DrawList.Add(entity);
         }
+
+        public void CastSpell(SPELL_TYPE spellType_, int level_, float x_, float y_)
+        {
+            Spell spell = new Spell(spellType_, level_, x_, y_);
+
+            spell.Texture = gameAssets.SpellTextureList[(int)spellType_];
+            gameAssets.SpellList.Add((Spell)spell);
+            gameAssets.DrawList.Add(spell);
+        }
     }
 }

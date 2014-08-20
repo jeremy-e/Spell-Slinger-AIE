@@ -103,6 +103,10 @@ namespace SpellSlingerV1._0
             {
                 gameAssets.EnemyTextureList.Add(Content.Load<Texture2D>(spriteManager.GetEnemySpriteFileName(i)));
             }
+            for (int i = 0; i < SpriteManager.spellNumTextures; i++)
+            {
+                gameAssets.SpellTextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpellSpriteFileName(i)));
+            }
         }
 
         /// <summary>
@@ -159,7 +163,15 @@ namespace SpellSlingerV1._0
             }
 
             //Objects that are marked as inactive will be removed from list
+            
+            //Click to cast
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                //Debug.WriteLine("BOOM");
 
+
+                objectFactory.CastSpell(0, 1, Mouse.GetState().X, Mouse.GetState().Y);
+            }
 
             //Basic Player/Enemy Collission Test
             for (int i = 0; i < gameAssets.EnemyList.Count; i++)
