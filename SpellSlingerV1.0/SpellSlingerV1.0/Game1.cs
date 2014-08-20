@@ -163,16 +163,14 @@ namespace SpellSlingerV1._0
             }
 
             //Objects that are marked as inactive will be removed from list
-            
+
             //Click to cast
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 //Debug.WriteLine("BOOM");
-
-
                 objectFactory.CastSpell(0, 1, Mouse.GetState().X, Mouse.GetState().Y);
             }
-
+            
             //Basic Player/Enemy Collission Test
             for (int i = 0; i < gameAssets.EnemyList.Count; i++)
             {
