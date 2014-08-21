@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
@@ -17,10 +18,14 @@ namespace SpellSlingerV1._0
         //the rules that govern the chance of enemy type spawn. 
         EnemySpawnRules esr;
 
+        //The Circle used to determine spawn location
+        Circle spawnCircle;
+
         //constructor takes a factory (because we have already created this in Game and dont want to create a second one)
-        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_)
-        {
+        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, Circle spawnCircle_)
+        {            
             //assign classwide variables
+            spawnCircle = spawnCircle_;
             esr = esr_;
             factoryOrder = factory_;
 
@@ -46,7 +51,7 @@ namespace SpellSlingerV1._0
         {
             ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
             
-            factoryOrder.CreateEnemy(enemy_type);
+            factoryOrder.CreateEnemy(enemy_type, new Vector2());
                         
             ResetTimer();    
         }

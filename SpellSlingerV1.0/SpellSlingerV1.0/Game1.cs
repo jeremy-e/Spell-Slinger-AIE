@@ -55,8 +55,16 @@ namespace SpellSlingerV1._0
             //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
             rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
 
+            //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
+            objectFactory.CreatePlayer();
+
+            //Circle
+            Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
+
+            objectFactory.CircleTest();
+
             //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
-            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer);
+            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer, circle);
 
         }
 
@@ -79,10 +87,7 @@ namespace SpellSlingerV1._0
             colliderHandler = new ColliderHandler();
             wave = 1;
 
-            //follow execution to see new randomization code. 
-            CreateWave1();
-
-
+            
             base.Initialize();
         }
 
@@ -107,6 +112,8 @@ namespace SpellSlingerV1._0
             {
                 gameAssets.SpellTextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpellSpriteFileName(i)));
             }
+
+            CreateWave1();
         }
 
         /// <summary>
@@ -128,12 +135,12 @@ namespace SpellSlingerV1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
 
-            if (gameAssets.TowerList.Count <= 0)
-            {
-                objectFactory.CreatePlayer();
-            }
+            //if (gameAssets.TowerList.Count <= 0)
+            //{
+            //    objectFactory.CreatePlayer();
+            //    //objectFactory.CircleTest();
+            //}
 
             if (Keyboard.GetState().IsKeyDown(Keys.Up))
             {

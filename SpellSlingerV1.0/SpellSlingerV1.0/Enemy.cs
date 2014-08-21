@@ -35,15 +35,16 @@ namespace SpellSlingerV1._0
         }
 
 
-        public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_)
+        public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
         {
+            pos = pos_;
             enemyType = enemyType_;
             playerPos = playerPos_;
 
             Random r = new Random(Guid.NewGuid().GetHashCode());
 
-            this.X = r.Next(0, Game1.SCREEN_WIDTH);
-            this.Y = r.Next(Game1.SCREEN_HEIGHT - 50, Game1.SCREEN_HEIGHT);
+            //this.X = r.Next(0, Game1.SCREEN_WIDTH);
+            //this.Y = r.Next(Game1.SCREEN_HEIGHT - 50, Game1.SCREEN_HEIGHT);
             this.Width = 32;
             this.Height = 32;
             SetHealth();
