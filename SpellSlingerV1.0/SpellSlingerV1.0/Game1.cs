@@ -34,7 +34,7 @@ namespace SpellSlingerV1._0
         public static int wave = 1;
 
         bool leftMouseButtonDown = false;
-        SPELL_TYPE spellSelect = 0;
+        SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
 
         public Game1()
             : base()
