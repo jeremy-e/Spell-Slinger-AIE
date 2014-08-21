@@ -34,6 +34,7 @@ namespace SpellSlingerV1._0
         public static int wave = 1;
 
         bool leftMouseButtonDown = false;
+        SPELL_TYPE spellSelect = 0;
 
         public Game1()
             : base()
@@ -174,10 +175,20 @@ namespace SpellSlingerV1._0
             
             //-------------------------------------------SPELLS
             //Click to cast
+            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                spellSelect = SPELL_TYPE.FIREBALL;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D2))
+            {
+                spellSelect = SPELL_TYPE.ICELANCE;
+            }
+
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
                 //Debug.WriteLine("BOOM");
-                objectFactory.CastSpell(0, 1, Mouse.GetState().X, Mouse.GetState().Y);
+                objectFactory.CastSpell(spellSelect, 1, Mouse.GetState().X, Mouse.GetState().Y);
                 leftMouseButtonDown = true;
             }
 
