@@ -11,6 +11,11 @@ namespace SpellSlingerV1._0
     {
         //the timer that controls creation
         private Timer spawnTimer;
+        private Timer stopTimer;
+        private Timer startTimer;
+        Vector2 spawnPoint;
+
+        bool timerStopped;
         
         //this object used to create enemies when told to spawn (ordering them from the factory :)
         Factory factoryOrder; 
@@ -22,7 +27,7 @@ namespace SpellSlingerV1._0
         Circle spawnCircle;
 
         //constructor takes a factory (because we have already created this in Game and dont want to create a second one)
-        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, Circle spawnCircle_)
+        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, uint startTimerms_, uint stopTimerMs_,Circle spawnCircle_)
         {            
             //assign classwide variables
             spawnCircle = spawnCircle_;
@@ -31,29 +36,68 @@ namespace SpellSlingerV1._0
 
             //create the timer that will control when enemies are created. 
             spawnTimer = new System.Timers.Timer(timerIntervalMs_);
+            
+            //the timer controlling when we stop spawning
+            stopTimer = new System.Timers.Timer(stopTimerMs_);
+
+            //when do we kick it off? 
+            startTimer = new System.Timers.Timer(startTimerms_); 
 
             //this line adds the SpawnEnemy envent handler (see SpawnEnemy function) that fires when the spawnTimer fires
             spawnTimer.Elapsed += SpawnEnemy;
-           
+            stopTimer.Elapsed += StopSpawner;
+            startTimer.Elapsed += Start;
+
+            //where do we want to spawn them from? 
+            spawnPoint = spawnCircle.RandomPoint();
+
             //kick off the timer
-            spawnTimer.Start();
+            startTimer.Start();
+            //spawnTimer.Start();
+
+            timerStopped = false;
         }
 
         //start the timer again
         private void ResetTimer()
         {
-            spawnTimer.Stop();
-            spawnTimer.Start();   //Comment out to spawn 1 enemy for testing
+            if (!timerStopped)
+            {
+                spawnTimer.Stop();
+                spawnTimer.Start();   //Comment out to spawn 1 enemy for testing
+            }
+        }
+
+        //Callback for startTimer.Elapsed
+        private void Start(Object source, ElapsedEventArgs e)
+        {
+            startTimer.Stop();
+            spawnTimer.Start();
+            stopTimer.Start();
         }
 
         //Tell the factory to make us another enemy, because we only got here from spawnTimer going off!!!
         private void SpawnEnemy(Object source, ElapsedEventArgs e)
         {
-            ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
-            
-            factoryOrder.CreateEnemy(enemy_type, new Vector2());
-                        
-            ResetTimer();    
+            if (!timerStopped)
+            {
+                ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
+
+                
+                factoryOrder.CreateEnemy(enemy_type, spawnPoint);
+
+                ResetTimer();
+            }
         }
+
+        private void StopSpawner(Object source, ElapsedEventArgs e)
+        {
+            timerStopped = true;
+            spawnTimer.Stop();
+            startTimer.Stop();
+            stopTimer.Stop();
+            //TODO: flag for deletion
+        }
+        
     }
 }

@@ -36,12 +36,8 @@ namespace SpellSlingerV1._0
 
         //hopefully we dont get anything out of range here. dice.Roll() should return between 0 AND dice.MAX - 1
         public ENEMY_TYPE RandomiseEnemy()
-        {
-            
+        {            
             int dice_roll = dice.Roll();
-
-            Debug.WriteLine("Dice Roll: " + dice_roll);
-            Debug.WriteLine("Enemy Type: " + enemyTypes[dice_roll]);
             return enemyTypes[dice_roll];
         }
     }

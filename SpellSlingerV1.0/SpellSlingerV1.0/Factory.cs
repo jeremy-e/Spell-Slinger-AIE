@@ -10,6 +10,7 @@ namespace SpellSlingerV1._0
     class Factory
     {
         GameAssets gameAssets;
+        
 
         public Factory(GameAssets gameAssets_)                                        //Default Constructor
         {
@@ -28,6 +29,36 @@ namespace SpellSlingerV1._0
                 output = c1.GetPoint(i);
                 CreateEnemy(ENEMY_TYPE.GHOUL, output);
             }          
+        }
+
+        public void CreateTestWave()
+        {
+            //2 six sided dice. 
+            Dice dice = new Dice(2, 6);
+
+            //all dice rolls will give us a ghoul if no other rule is set
+            EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
+
+            //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
+            rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
+
+            //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
+            CreatePlayer();
+
+            //Circle
+            Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
+
+
+            // in plain english:
+            //create an enemy spawner
+            //arg3: spawn enemies every 100ms (10 every second)
+            //arg4: only start spawning once this timer has gone off (1 second)
+            //arg5: stop spawning 5 seconds after you start.             
+
+            for (int i = 0; i < 10; ++i)
+            {
+                EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 20)), (uint)(i * 2000) + 500, 2000, circle);
+            }            
         }
 
         //By the time we get to CreateEnemy the EnemySpawner, Dice and EnemySpawnRules have done their job i.e. decided what enemy to spawn. 

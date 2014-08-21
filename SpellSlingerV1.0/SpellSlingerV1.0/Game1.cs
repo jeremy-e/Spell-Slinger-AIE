@@ -22,7 +22,7 @@ namespace SpellSlingerV1._0
         SpriteBatch spriteBatch;
         GameAssets gameAssets;
         ViewPort viewPort;
-        EnemySpawner enemySpawner;
+        //EnemySpawner enemySpawner;
         ColliderHandler colliderHandler;
 
         SpriteManager spriteManager;
@@ -47,29 +47,31 @@ namespace SpellSlingerV1._0
             IsMouseVisible = true;
         }
 
-        private void CreateWave1()
-        {
-            //2 six sided dice. 
-            Dice dice = new Dice(2, 6);
+        //private void CreateWave1()
+        //{
+        //    //2 six sided dice. 
+        //    Dice dice = new Dice(2, 6);
 
-            //all dice rolls will give us a ghoul if no other rule is set
-            EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
+        //    //all dice rolls will give us a ghoul if no other rule is set
+        //    EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
 
-            //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
-            rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
+        //    //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
+        //    rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
 
-            //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
-            objectFactory.CreatePlayer();
+        //    //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
+        //    objectFactory.CreatePlayer();
 
-            //Circle
-            Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
+        //    //Circle
+        //    Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
 
-            objectFactory.CircleTest();
+        //    //comment below line to remove circle of enemies
+        //    //objectFactory.CircleTest();
 
-            //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
-            enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer, circle);
+        //    //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
+        //    //enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer, circle);
+        //    objectFactory.CreateTestWave();
 
-        }
+        //}
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -116,7 +118,7 @@ namespace SpellSlingerV1._0
                 gameAssets.SpellTextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpellSpriteFileName(i)));
             }
 
-            CreateWave1();
+            objectFactory.CreateTestWave();
         }
 
         /// <summary>
@@ -145,14 +147,14 @@ namespace SpellSlingerV1._0
             //    //objectFactory.CircleTest();
             //}
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            {
+           // if (Keyboard.GetState().IsKeyDown(Keys.Up))
+           //{
                 for (int i = 0; i < gameAssets.EnemyList.Count; i++)
                 {
                     //gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
                     gameAssets.EnemyList[i].Move(gameTime);                               //Testing movement
                 }
-            }
+            //}
 
             //move viewport
             if (Keyboard.GetState().IsKeyDown(Keys.D))
