@@ -14,6 +14,7 @@ namespace SpellSlingerV1._0
             this.Height = 64;
             X = Game1.SCREEN_WIDTH / 2 - Width / 2;
             Y = Game1.SCREEN_HEIGHT / 2 - Width / 2;
+            Active = true;
         }
 
     }

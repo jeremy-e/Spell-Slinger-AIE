@@ -33,6 +33,8 @@ namespace SpellSlingerV1._0
         public static uint waveTimer = 1000;
         public static int wave = 1;
 
+        bool leftMouseButtonDown = false;
+
         public Game1()
             : base()
         {
@@ -169,15 +171,48 @@ namespace SpellSlingerV1._0
                 viewPort.MoveY(-5);
             }
 
-            //Objects that are marked as inactive will be removed from list
-
+            
+            //-------------------------------------------SPELLS
             //Click to cast
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
                 //Debug.WriteLine("BOOM");
                 objectFactory.CastSpell(0, 1, Mouse.GetState().X, Mouse.GetState().Y);
+                leftMouseButtonDown = true;
             }
-            
+
+            if (Mouse.GetState().LeftButton == ButtonState.Released)
+            {
+                leftMouseButtonDown = false;
+            }
+
+            //Remove inactive spell from SpellList
+            if (gameAssets.SpellList.Count > 0)
+            {
+                for (int i = gameAssets.SpellList.Count-1; i >= 0; i--)
+                {
+                    if (!gameAssets.SpellList[i].Active)
+                    {
+                        gameAssets.SpellList.RemoveAt(i);
+                    }
+                }
+            }
+
+            //-------------------------------------------SPELLS
+
+            //Remove inactive items from draw call - must iterate in reverse
+            if (gameAssets.DrawList.Count > 0)
+            {
+                for (int i = gameAssets.DrawList.Count-1; i >= 0; i--)
+                {
+                    if (!gameAssets.DrawList[i].Active)
+                    {
+                        gameAssets.DrawList.RemoveAt(i);
+                    }
+                }
+            }
+
+
             //Basic Player/Enemy Collission Test
             for (int i = 0; i < gameAssets.EnemyList.Count; i++)
             {

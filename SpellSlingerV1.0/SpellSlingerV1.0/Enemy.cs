@@ -47,6 +47,7 @@ namespace SpellSlingerV1._0
             //this.Y = r.Next(Game1.SCREEN_HEIGHT - 50, Game1.SCREEN_HEIGHT);
             this.Width = 32;
             this.Height = 32;
+            Active = true;
             SetHealth();
         }
 

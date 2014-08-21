@@ -10,16 +10,19 @@ namespace SpellSlingerV1._0
 
     class Entity
     {
-
         private Texture2D texture;
-        //private float x;
-        //private float y;
         protected Vector2 pos;
         private int width;
         private int height;
-        //private int type;
 
-       //private bool active;
+        //Will allow for iteration through lists and if false object will be removed - ie dead enemies, spells cast
+        private bool active;                
+
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
 
         public Vector2 Pos
         {
