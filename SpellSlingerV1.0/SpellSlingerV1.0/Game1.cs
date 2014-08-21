@@ -92,7 +92,7 @@ namespace SpellSlingerV1._0
             colliderHandler = new ColliderHandler();
             wave = 1;
 
-            
+
             base.Initialize();
         }
 
@@ -174,7 +174,7 @@ namespace SpellSlingerV1._0
                 viewPort.MoveY(-5);
             }
 
-            
+
             //-------------------------------------------SPELLS
             //Click to cast
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
@@ -185,7 +185,6 @@ namespace SpellSlingerV1._0
             {
                 spellSelect = SPELL_TYPE.ICELANCE;
             }
-
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
@@ -202,7 +201,7 @@ namespace SpellSlingerV1._0
             //Remove inactive spell from SpellList
             if (gameAssets.SpellList.Count > 0)
             {
-                for (int i = gameAssets.SpellList.Count-1; i >= 0; i--)
+                for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
                 {
                     if (!gameAssets.SpellList[i].Active)
                     {
@@ -216,7 +215,7 @@ namespace SpellSlingerV1._0
             //Remove inactive items from draw call - must iterate in reverse
             if (gameAssets.DrawList.Count > 0)
             {
-                for (int i = gameAssets.DrawList.Count-1; i >= 0; i--)
+                for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
                 {
                     if (!gameAssets.DrawList[i].Active)
                     {
