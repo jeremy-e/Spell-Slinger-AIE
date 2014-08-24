@@ -259,8 +259,8 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            
-                                  
+
+
             if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
                 for (int i = 0; i < gameAssets.DrawList.Count; i++)
@@ -297,5 +297,6 @@ namespace SpellSlingerV1._0
 
             base.Draw(gameTime);
         }
+
     }
 }

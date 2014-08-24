@@ -11,7 +11,6 @@ namespace SpellSlingerV1._0
     class Factory
     {
         GameAssets gameAssets;
-        
 
         public Factory(GameAssets gameAssets_)                                        //Default Constructor
         {
@@ -29,7 +28,7 @@ namespace SpellSlingerV1._0
             {
                 output = c1.GetPoint(i);
                 CreateEnemy(ENEMY_TYPE.GHOUL, output);
-            }          
+            }
         }
 
         public void CreateTestWave()
@@ -44,14 +43,14 @@ namespace SpellSlingerV1._0
             rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
 
             //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
-            CreatePlayer();            
+            CreatePlayer();
 
             //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
             for (int i = 0; i < 30; ++i)
             {
                 Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 400.0);
                 EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 10)), (uint)(i * 2000) + 500, (uint)i * 2, circle);
-            }            
+            }
         }
 
         //By the time we get to CreateEnemy the EnemySpawner, Dice and EnemySpawnRules have done their job i.e. decided what enemy to spawn. 
@@ -62,7 +61,7 @@ namespace SpellSlingerV1._0
 
             enemy.Texture = gameAssets.EnemyTextureList[(int)enemyType_];
             gameAssets.EnemyList.Add(enemy);
-            gameAssets.DrawList.Add(enemy);            
+            gameAssets.DrawList.Add(enemy);
         }
 
         public void CreatePlayer()
