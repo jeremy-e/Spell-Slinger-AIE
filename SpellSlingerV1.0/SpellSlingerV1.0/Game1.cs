@@ -119,7 +119,7 @@ namespace SpellSlingerV1._0
             }
             for (int i = 0; i < SpriteManager.GUINumTextures; i++)
             {
-                //gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
+                gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
             }
 
             objectFactory.CreateTestWave();
@@ -189,7 +189,7 @@ namespace SpellSlingerV1._0
                 //Debug.WriteLine("BOOM");
                 int spellX = Mouse.GetState().X - viewPort.X;
                 int spellY = Mouse.GetState().Y - viewPort.Y;
-                objectFactory.CastSpell(spellSelect, 1, spellX, spellY );
+                objectFactory.CastSpell(spellSelect, 1, spellX, spellY);
                 leftMouseButtonDown = true;
             }
 
@@ -198,6 +198,43 @@ namespace SpellSlingerV1._0
                 leftMouseButtonDown = false;
             }
             //-------------------------------------------SPELLS
+
+            //Remove inactive spells from SpellList
+            if (gameAssets.SpellList.Count > 0)
+            {
+                for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
+                {
+                    if (!gameAssets.SpellList[i].Active)
+                    {
+                        gameAssets.SpellList.RemoveAt(i);
+                    }
+                }
+            }
+
+            //Remove inactive enemies from EnemyList
+            if (gameAssets.EnemyList.Count > 0)
+            {
+                for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
+                {
+                    if (!gameAssets.EnemyList[i].Active)
+                    {
+                        gameAssets.EnemyList.RemoveAt(i);
+                    }
+                }
+            }
+
+            //Remove any inactive items from draw call - iterate in reverse
+            if (gameAssets.DrawList.Count > 0)
+            {
+                for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
+                {
+                    if (!gameAssets.DrawList[i].Active)
+                    {
+                        gameAssets.DrawList.RemoveAt(i);
+                    }
+                }
+            }
+
 
             //COLLISSION TESTING
             //Basic Player/Enemy Collission Test
@@ -222,44 +259,17 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            //Remove inactive spells from SpellList
-            if (gameAssets.SpellList.Count > 0)
+            
+                                  
+            if (Keyboard.GetState().IsKeyDown(Keys.P))
             {
-                for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
+                for (int i = 0; i < gameAssets.DrawList.Count; i++)
                 {
-                    if (!gameAssets.SpellList[i].Active)
-                    {
-                        gameAssets.SpellList.RemoveAt(i);
-                    }
+                    Debug.WriteLine(i + ". " + gameAssets.DrawList[i] + ". Active: " + gameAssets.DrawList[i].Active);
                 }
+
+                Debug.WriteLine(gameAssets.EnemyList.Count);    //Check EnemyList
             }
-
-
-            //Remove inactive enemies from EnemyList
-            if (gameAssets.EnemyList.Count > 0)
-            {
-                for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
-                {
-                    if (!gameAssets.EnemyList[i].Active)
-                    {
-                        gameAssets.EnemyList.RemoveAt(i);
-                    }
-                }
-            }
-
-
-            //Remove any inactive items from draw call - iterate in reverse
-            if (gameAssets.DrawList.Count > 0)
-            {
-                for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
-                {
-                    if (!gameAssets.DrawList[i].Active)
-                    {
-                        gameAssets.DrawList.RemoveAt(i);
-                    }
-                }
-            }
-
 
             base.Update(gameTime);
         }
