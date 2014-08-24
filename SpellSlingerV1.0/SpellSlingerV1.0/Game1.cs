@@ -187,7 +187,9 @@ namespace SpellSlingerV1._0
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
                 //Debug.WriteLine("BOOM");
-                objectFactory.CastSpell(spellSelect, 1, Mouse.GetState().X, Mouse.GetState().Y);
+                int spellX = Mouse.GetState().X - viewPort.X;
+                int spellY = Mouse.GetState().Y - viewPort.Y;
+                objectFactory.CastSpell(spellSelect, 1, spellX, spellY );
                 leftMouseButtonDown = true;
             }
 

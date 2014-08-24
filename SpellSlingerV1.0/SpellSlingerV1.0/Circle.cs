@@ -45,7 +45,7 @@ namespace SpellSlingerV1._0
             return GetPoint(lastRandomAngle);
         }
 
-        public Vector2 GetPointNearLastRandomAngle(double tolleranceInRadians_ = 0.6)
+        public Vector2 GetPointNearLastRandomAngle(double tolleranceInRadians_ = 0.4)
         {
             double maxAngle = lastRandomAngle + (tolleranceInRadians_ / 2.0);
             double minAngle = lastRandomAngle - (tolleranceInRadians_ / 2.0);

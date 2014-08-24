@@ -45,5 +45,15 @@ namespace SpellSlingerV1._0
         {
             focusAreaY += amount_;
         }
+
+        public int X
+        {
+            get { return focusAreaX; }
+        }
+
+        public int Y
+        {
+            get { return focusAreaY; }
+        }
     }
 }
