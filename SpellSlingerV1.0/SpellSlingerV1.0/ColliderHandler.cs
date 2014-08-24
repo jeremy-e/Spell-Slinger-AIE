@@ -16,16 +16,14 @@ namespace SpellSlingerV1._0
             float entity_a_T = entity_a.Y;	                    //Top
             float entity_a_B = entity_a.Y + entity_a.Height;	//Btm
 
-            //Debug.WriteLine("T LH: " + entity_a_LH);
-            //Debug.WriteLine("T RH: " + entity_a_RH);
-            //Debug.WriteLine("T Top: " + entity_a_T);
-            //Debug.WriteLine("T Btm: " + entity_a_B);
+            //Let's get centre of entity_b for a little more realism/accuracy
+            float entity_b_X = entity_b.X + (entity_b.Width * 0.5f);
+            float entity_b_Y = entity_b.Y + (entity_b.Height * 0.5f);
 
-            //Debug.WriteLine("Enemy x pos: " + entity_b.X);
-            //Debug.WriteLine("Enemy Y Pos: " + entity_b.Y);
-
-            if (entity_b.X >= entity_a_LH && entity_b.X <= entity_a_RH && entity_b.Y <= entity_a_B && entity_b.Y >= entity_a_T)
+            if (entity_b_X >= entity_a_LH && entity_b_X <= entity_a_RH && entity_b_Y <= entity_a_B && entity_b_Y >= entity_a_T)
             {
+                //Temporary for testing - set object to inactive for list clean up - Pass responsibility to enemy directly
+                entity_b.Active = false;
                 return true;
             }
             else

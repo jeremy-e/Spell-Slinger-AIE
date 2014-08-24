@@ -147,13 +147,13 @@ namespace SpellSlingerV1._0
             //    //objectFactory.CircleTest();
             //}
 
-           // if (Keyboard.GetState().IsKeyDown(Keys.Up))
-           //{
-                for (int i = 0; i < gameAssets.EnemyList.Count; i++)
-                {
-                    //gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
-                    gameAssets.EnemyList[i].Move(gameTime);                               //Testing movement
-                }
+            // if (Keyboard.GetState().IsKeyDown(Keys.Up))
+            //{
+            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+            {
+                //gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
+                gameAssets.EnemyList[i].Move(gameTime);                               //Testing movement
+            }
             //}
 
             //move viewport
@@ -197,8 +197,30 @@ namespace SpellSlingerV1._0
             {
                 leftMouseButtonDown = false;
             }
+            //-------------------------------------------SPELLS
 
-            //Remove inactive spell from SpellList
+            //COLLISSION TESTING
+            //Basic Player/Enemy Collission Test
+
+            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+            {
+                colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]);
+            }
+
+            ///if any spells are active we check for collissions against active enemies
+            if (gameAssets.SpellList.Count > 0)
+            {
+                for (int i = 0; i < gameAssets.SpellList.Count; i++)
+                {
+                    for (int j = 0; j < gameAssets.EnemyList.Count; j++)
+                    {
+                        colliderHandler.Collider(gameAssets.SpellList[i], gameAssets.EnemyList[j]);
+                    }
+                }
+            }
+            
+
+            //Remove inactive spells from SpellList
             if (gameAssets.SpellList.Count > 0)
             {
                 for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
@@ -210,9 +232,21 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            //-------------------------------------------SPELLS
 
-            //Remove inactive items from draw call - must iterate in reverse
+            //Remove inactive enemies from EnemyList
+            if (gameAssets.EnemyList.Count > 0)
+            {
+                for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
+                {
+                    if (!gameAssets.EnemyList[i].Active)
+                    {
+                        gameAssets.EnemyList.RemoveAt(i);
+                    }
+                }
+            }
+
+
+            //Remove any inactive items from draw call - iterate in reverse
             if (gameAssets.DrawList.Count > 0)
             {
                 for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
@@ -224,12 +258,6 @@ namespace SpellSlingerV1._0
                 }
             }
 
-
-            //Basic Player/Enemy Collission Test
-            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
-            {
-                colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]);
-            }
 
             base.Update(gameTime);
         }

@@ -29,7 +29,7 @@ namespace SpellSlingerV1._0
 
             timer = new System.Timers.Timer(1000);  //1 second interval
             timer.Elapsed += OnTimedEvent;
-            timer.Interval = 1000;
+            timer.Interval = 500;
             timer.Enabled = true;
             timer.Start();
         }
