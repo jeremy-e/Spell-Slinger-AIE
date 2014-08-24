@@ -20,8 +20,8 @@ namespace SpellSlingerV1._0
 
         private Vector2 playerPos;
 
-        private const float GHOUL_SPEED = 0.10f;
-        private const float RUNNING_GHOUL_SPEED = 0.16f;
+        private const float GHOUL_SPEED = 0.05f;
+        private const float RUNNING_GHOUL_SPEED = 0.07f;
         
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction

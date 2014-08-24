@@ -92,7 +92,7 @@ namespace SpellSlingerV1._0
             {
                 ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
 
-                factoryOrder.CreateEnemy(enemy_type, spawnPoint);
+                factoryOrder.CreateEnemy(enemy_type, spawnCircle.GetPointNearLastRandomAngle());
                 
                 ++numEnemiesSpawned;
 

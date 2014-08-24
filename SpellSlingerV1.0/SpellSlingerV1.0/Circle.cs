@@ -13,7 +13,8 @@ namespace SpellSlingerV1._0
         Vector2 centre;
         public double radius;
         //Random random;
-        private static Random random; 
+        private static Random random;
+        private double lastRandomAngle;
 
         public Circle(Vector2 centre_, double radius_)
         {
@@ -40,11 +41,17 @@ namespace SpellSlingerV1._0
 
         public Vector2 RandomPoint()
         {
-            //Math.PI * 2 * 1000 to increase accuracy. 
-            int result = random.Next(0, (int)(Math.PI * 2 * 1000.0));
-            double realResult = result / 1000.0;
-            Debug.WriteLine("circle result: " + realResult);
-            return GetPoint(realResult);
-        }        
+            lastRandomAngle = random.NextDouble() * (Math.PI * 2);
+            return GetPoint(lastRandomAngle);
+        }
+
+        //TODO unhardcode 0.5
+        public Vector2 GetPointNearLastRandomAngle(double tolleranceInRadians_ = 0.6)
+        {
+            double maxAngle = lastRandomAngle + (tolleranceInRadians_ / 2.0);
+            double minAngle = lastRandomAngle - (tolleranceInRadians_ / 2.0);
+            double randomAngle = random.NextDouble() * (maxAngle - minAngle) + minAngle;
+            return GetPoint(randomAngle);
+        }
     }
 }
