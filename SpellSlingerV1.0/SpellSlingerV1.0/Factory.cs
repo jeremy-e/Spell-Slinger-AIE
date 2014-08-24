@@ -47,7 +47,7 @@ namespace SpellSlingerV1._0
             CreatePlayer();            
 
             //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
-            for (int i = 0; i < 10; ++i)
+            for (int i = 0; i < 30; ++i)
             {
                 Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 400.0);
                 EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 10)), (uint)(i * 2000) + 500, (uint)i * 2, circle);
