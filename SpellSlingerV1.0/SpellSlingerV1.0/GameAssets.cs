@@ -23,6 +23,7 @@ namespace SpellSlingerV1._0
             TextureList = new List<Texture2D>();
             EnemyTextureList = new List<Texture2D>();
             SpellTextureList = new List<Texture2D>();
+            GUITextureList = new List<Texture2D>();
             EnemyList = new List<Enemy>();
             TowerList = new List<Tower>();
             SpellList = new List<Spell>();

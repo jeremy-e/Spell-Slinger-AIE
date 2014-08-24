@@ -45,7 +45,6 @@ namespace SpellSlingerV1._0
             return GetPoint(lastRandomAngle);
         }
 
-        //TODO unhardcode 0.5
         public Vector2 GetPointNearLastRandomAngle(double tolleranceInRadians_ = 0.6)
         {
             double maxAngle = lastRandomAngle + (tolleranceInRadians_ / 2.0);
