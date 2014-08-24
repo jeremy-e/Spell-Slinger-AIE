@@ -9,6 +9,7 @@ namespace SpellSlingerV1._0
     class GameAssets
     {
         public List<Entity> DrawList;                  //Used to track ALL objects
+        public List<Texture2D> GUITextureList;
         public List<Texture2D> TextureList;            //tracks ALL textures from DrawList
         public List<Texture2D> EnemyTextureList;       //tracks ALL textures from DrawList
         public List<Texture2D> SpellTextureList;        //tracks spell textures

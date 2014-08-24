@@ -117,6 +117,10 @@ namespace SpellSlingerV1._0
             {
                 gameAssets.SpellTextureList.Add(Content.Load<Texture2D>(spriteManager.GetSpellSpriteFileName(i)));
             }
+            for (int i = 0; i < SpriteManager.GUINumTextures; i++)
+            {
+                gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
+            }
 
             objectFactory.CreateTestWave();
         }
@@ -273,6 +277,8 @@ namespace SpellSlingerV1._0
             {
                 viewPort.Draw(gameAssets.DrawList[i]);
             }
+
+            //Add GUI to separate drawlist - Always draw on top of everything else
 
             spriteBatch.End();
 

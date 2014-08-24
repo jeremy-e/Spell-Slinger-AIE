@@ -10,15 +10,26 @@ namespace SpellSlingerV1._0
         TOWER
     }
 
+    public enum GUI_SPRITES
+    {
+        HOTBAR_1,
+        HOTBAR_2,
+        HOTBAR_3,
+        HOTBAR_4,
+        HOTBAR_5
+    }
+
     class SpriteManager
     {
         public static int playerNumTextures = Enum.GetNames(typeof(PLAYER_SPRITES)).Length;
         public static int enemyNumTextures = Enum.GetNames(typeof(ENEMY_TYPE)).Length;
         public static int spellNumTextures = Enum.GetNames(typeof(SPELL_TYPE)).Length;
+        public static int GUINumTextures = Enum.GetNames(typeof(GUI_SPRITES)).Length;
 
         private string[] playerSpriteFileNames = new string[playerNumTextures];
         private string[] enemySpriteFileNames = new string[enemyNumTextures];
         private string[] spellSpriteFileNames = new string[spellNumTextures];
+        private string[] GUISpriteFileNames = new string[GUINumTextures];
         
         ///List Textures here
         public SpriteManager()
@@ -36,6 +47,12 @@ namespace SpellSlingerV1._0
             spellSpriteFileNames[(int)SPELL_TYPE.FIREBALL] = "spell1.png";
             spellSpriteFileNames[(int)SPELL_TYPE.ICELANCE] = "spell2.png";
 
+            GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_1] = "gui_hotbar1.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_2] = "gui_hotbar2.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_3] = "gui_hotbar3.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_4] = "gui_hotbar4.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_5] = "gui_hotbar5.png";
+
         }
 
         public string GetPlayerSpriteFileName(int type)
@@ -51,6 +68,11 @@ namespace SpellSlingerV1._0
         public string GetSpellSpriteFileName(int type)
         {
             return spellSpriteFileNames[type];
+        }
+
+        public string GetGUISpriteFileName(int type)
+        {
+            return GUISpriteFileNames[type];
         }
 
 
