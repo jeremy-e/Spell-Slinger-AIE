@@ -119,7 +119,7 @@ namespace SpellSlingerV1._0
             }
             for (int i = 0; i < SpriteManager.GUINumTextures; i++)
             {
-                gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
+                //gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
             }
 
             objectFactory.CreateTestWave();
