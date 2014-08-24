@@ -11,7 +11,14 @@ namespace SpellSlingerV1._0
     {
         //the timer that controls creation
         private Timer spawnTimer;
-        private Timer stopTimer;
+        
+        //stopTimer was a (my) dumb idea. better off just counting how many enemies to spawn
+        //private Timer stopTimer;
+
+        private uint numEnemiesToSpawn;
+        private uint numEnemiesSpawned;
+
+
         private Timer startTimer;
         Vector2 spawnPoint;
 
@@ -27,8 +34,10 @@ namespace SpellSlingerV1._0
         Circle spawnCircle;
 
         //constructor takes a factory (because we have already created this in Game and dont want to create a second one)
-        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, uint startTimerms_, uint stopTimerMs_,Circle spawnCircle_)
-        {            
+        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, uint startTimerms_, uint numEnemiesToSpawn_,Circle spawnCircle_)
+        {
+            numEnemiesSpawned = 0;
+            numEnemiesToSpawn = numEnemiesToSpawn_;
             //assign classwide variables
             spawnCircle = spawnCircle_;
             esr = esr_;
@@ -38,14 +47,14 @@ namespace SpellSlingerV1._0
             spawnTimer = new System.Timers.Timer(timerIntervalMs_);
             
             //the timer controlling when we stop spawning
-            stopTimer = new System.Timers.Timer(stopTimerMs_);
+            //stopTimer = new System.Timers.Timer(stopTimerMs_);
 
             //when do we kick it off? 
             startTimer = new System.Timers.Timer(startTimerms_); 
 
             //this line adds the SpawnEnemy envent handler (see SpawnEnemy function) that fires when the spawnTimer fires
             spawnTimer.Elapsed += SpawnEnemy;
-            stopTimer.Elapsed += StopSpawner;
+            //stopTimer.Elapsed += StopSpawner;
             startTimer.Elapsed += Start;
 
             //where do we want to spawn them from? 
@@ -73,7 +82,7 @@ namespace SpellSlingerV1._0
         {
             startTimer.Stop();
             spawnTimer.Start();
-            stopTimer.Start();
+            //stopTimer.Start();
         }
 
         //Tell the factory to make us another enemy, because we only got here from spawnTimer going off!!!
@@ -83,19 +92,25 @@ namespace SpellSlingerV1._0
             {
                 ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
 
-                
                 factoryOrder.CreateEnemy(enemy_type, spawnPoint);
+                
+                ++numEnemiesSpawned;
 
-                ResetTimer();
+                //do we keep spawning? 
+                if (numEnemiesSpawned < numEnemiesToSpawn)
+                    ResetTimer();
+                else
+                    StopSpawner();
             }
         }
 
-        private void StopSpawner(Object source, ElapsedEventArgs e)
+        private void StopSpawner()
         {
             timerStopped = true;
             spawnTimer.Stop();
             startTimer.Stop();
-            stopTimer.Stop();
+            //stopTimer.Stop();
+            
             //TODO: flag for deletion
         }
         

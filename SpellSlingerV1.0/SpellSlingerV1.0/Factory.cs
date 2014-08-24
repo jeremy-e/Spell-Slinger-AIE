@@ -49,16 +49,10 @@ namespace SpellSlingerV1._0
             //Circle
             Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
 
-
-            // in plain english:
-            //create an enemy spawner
-            //arg3: spawn enemies every 100ms (10 every second)
-            //arg4: only start spawning once this timer has gone off (1 second)
-            //arg5: stop spawning 5 seconds after you start.             
-
+            //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
             for (int i = 0; i < 10; ++i)
             {
-                EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 20)), (uint)(i * 2000) + 500, 2000, circle);
+                EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 10)), (uint)(i * 2000) + 500, (uint)i * 2, circle);
             }            
         }
 
