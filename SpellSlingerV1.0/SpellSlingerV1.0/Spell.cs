@@ -38,5 +38,17 @@ namespace SpellSlingerV1._0
         {
             Active = false;
         }
+
+        public int SpellLevel
+        {
+            get { return spellLevel; }
+            set { spellLevel = value; }
+        }
+
+        internal SPELL_TYPE Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
     }
 }

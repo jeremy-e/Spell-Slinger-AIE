@@ -22,8 +22,14 @@ namespace SpellSlingerV1._0
 
             if (entity_b_X >= entity_a_LH && entity_b_X <= entity_a_RH && entity_b_Y <= entity_a_B && entity_b_Y >= entity_a_T)
             {
+                //On enemy collission with tower increase capacity of tower - or this can be ran in main game loop
+                //if (entity_a.GetType() == typeof(Tower))
+                //{
+                //    Debug.WriteLine("ADD1");
+                //}
                 //Temporary for testing - set object to inactive for list clean up - Pass responsibility to enemy directly
                 entity_b.Active = false;
+
                 return true;
             }
             else

@@ -140,21 +140,15 @@ namespace SpellSlingerV1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-
-            //if (gameAssets.TowerList.Count <= 0)
-            //{
-            //    objectFactory.CreatePlayer();
-            //    //objectFactory.CircleTest();
-            //}
-
-            // if (Keyboard.GetState().IsKeyDown(Keys.Up))
-            //{
             for (int i = 0; i < gameAssets.EnemyList.Count; i++)
             {
-                //gameAssets.EnemyList[i].Y -= 10;                               //Testing movement
                 gameAssets.EnemyList[i].Move(gameTime);                               //Testing movement
             }
-            //}
+
+            for (int i = 0; i < gameAssets.TowerList.Count; i++)
+            {
+                gameAssets.TowerList[i].Update();
+            }
 
             //move viewport
             if (Keyboard.GetState().IsKeyDown(Keys.D))
@@ -201,10 +195,13 @@ namespace SpellSlingerV1._0
 
             //COLLISSION TESTING
             //Basic Player/Enemy Collission Test
-
+            //Do we put logic here or collider can handle it?
             for (int i = 0; i < gameAssets.EnemyList.Count; i++)
             {
-                colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]);
+                if (colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]))
+                {
+                    gameAssets.TowerList[0].Capacity++;
+                }
             }
 
             ///if any spells are active we check for collissions against active enemies
@@ -218,7 +215,6 @@ namespace SpellSlingerV1._0
                     }
                 }
             }
-            
 
             //Remove inactive spells from SpellList
             if (gameAssets.SpellList.Count > 0)
