@@ -46,7 +46,7 @@ namespace SpellSlingerV1._0
             CreatePlayer();
 
             //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
-            for (int i = 0; i < 30; ++i)
+            for (int i = 0; i < 3; ++i)
             {
                 Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 400.0);
                 EnemySpawner enemySpawner = new EnemySpawner(this, rules, (uint)(300 - (i * 10)), (uint)(i * 2000) + 500, (uint)i * 2, circle);
@@ -60,16 +60,22 @@ namespace SpellSlingerV1._0
             Enemy enemy = new Enemy(enemyType_, gameAssets.TowerList[0].Pos, enemyPos_);
 
             enemy.Texture = gameAssets.EnemyTextureList[(int)enemyType_];
-            gameAssets.EnemyList.Add(enemy);
-            gameAssets.DrawList.Add(enemy);
+            lock (gameAssets.threadSafeLock)
+            {
+                gameAssets.EnemyList.Add(enemy);
+                gameAssets.DrawList.Add(enemy);
+            }
         }
 
         public void CreatePlayer()
         {
             Tower entity = new Tower();
             entity.Texture = gameAssets.TextureList[(int)PLAYER_SPRITES.TOWER];
-            gameAssets.TowerList.Add((Tower)entity);
-            gameAssets.DrawList.Add(entity);
+            lock (gameAssets.threadSafeLock)
+            {
+                gameAssets.TowerList.Add((Tower)entity);
+                gameAssets.DrawList.Add(entity);
+            }
         }
 
         public void CastSpell(SPELL_TYPE spellType_, int level_, float x_, float y_)
@@ -77,8 +83,11 @@ namespace SpellSlingerV1._0
             Spell spell = new Spell(spellType_, level_, x_, y_);
 
             spell.Texture = gameAssets.SpellTextureList[(int)spellType_];
-            gameAssets.SpellList.Add((Spell)spell);
-            gameAssets.DrawList.Add(spell);
+            lock (gameAssets.threadSafeLock)
+            {
+                gameAssets.SpellList.Add((Spell)spell);
+                gameAssets.DrawList.Add(spell);
+            }
         }
     }
 }

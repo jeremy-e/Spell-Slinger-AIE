@@ -199,38 +199,43 @@ namespace SpellSlingerV1._0
             }
             //-------------------------------------------SPELLS
 
-            //Remove inactive spells from SpellList
-            if (gameAssets.SpellList.Count > 0)
+            //I think we should look at moving the below stuff into GameAssets. But I will leave here for testing/simplicity
+            //maybe have a GameAssets.RemoveInactive() method? 
+            lock (gameAssets.threadSafeLock)
             {
-                for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
+                //Remove inactive spells from SpellList
+                if (gameAssets.SpellList.Count > 0)
                 {
-                    if (!gameAssets.SpellList[i].Active)
+                    for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
                     {
-                        gameAssets.SpellList.RemoveAt(i);
+                        if (!gameAssets.SpellList[i].Active)
+                        {
+                            gameAssets.SpellList.RemoveAt(i);
+                        }
                     }
                 }
-            }
 
-            //Remove inactive enemies from EnemyList
-            if (gameAssets.EnemyList.Count > 0)
-            {
-                for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
+                //Remove inactive enemies from EnemyList
+                if (gameAssets.EnemyList.Count > 0)
                 {
-                    if (!gameAssets.EnemyList[i].Active)
+                    for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
                     {
-                        gameAssets.EnemyList.RemoveAt(i);
+                        if (!gameAssets.EnemyList[i].Active)
+                        {
+                            gameAssets.EnemyList.RemoveAt(i);
+                        }
                     }
                 }
-            }
 
-            //Remove any inactive items from draw call - iterate in reverse
-            if (gameAssets.DrawList.Count > 0)
-            {
-                for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
+                //Remove any inactive items from draw call - iterate in reverse
+                if (gameAssets.DrawList.Count > 0)
                 {
-                    if (!gameAssets.DrawList[i].Active)
+                    for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
                     {
-                        gameAssets.DrawList.RemoveAt(i);
+                        if (!gameAssets.DrawList[i].Active)
+                        {
+                            gameAssets.DrawList.RemoveAt(i);
+                        }
                     }
                 }
             }

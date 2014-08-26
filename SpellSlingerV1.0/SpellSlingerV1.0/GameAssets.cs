@@ -8,6 +8,7 @@ namespace SpellSlingerV1._0
 {
     class GameAssets
     {
+        public readonly Object threadSafeLock = new Object();
         public List<Entity> DrawList;                  //Used to track ALL objects
         public List<Texture2D> GUITextureList;
         public List<Texture2D> TextureList;            //tracks ALL textures from DrawList
