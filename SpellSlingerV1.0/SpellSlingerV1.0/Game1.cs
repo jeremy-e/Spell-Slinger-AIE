@@ -264,18 +264,6 @@ namespace SpellSlingerV1._0
                 }
             }
 
-
-
-            if (Keyboard.GetState().IsKeyDown(Keys.P))
-            {
-                for (int i = 0; i < gameAssets.DrawList.Count; i++)
-                {
-                    Debug.WriteLine(i + ". " + gameAssets.DrawList[i] + ". Active: " + gameAssets.DrawList[i].Active);
-                }
-
-                Debug.WriteLine(gameAssets.EnemyList.Count);    //Check EnemyList
-            }
-
             base.Update(gameTime);
         }
 
