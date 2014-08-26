@@ -201,46 +201,8 @@ namespace SpellSlingerV1._0
 
             //I think we should look at moving the below stuff into GameAssets. But I will leave here for testing/simplicity
             //maybe have a GameAssets.RemoveInactive() method? 
-            lock (gameAssets.threadSafeLock)
-            {
-                //Remove inactive spells from SpellList
-                if (gameAssets.SpellList.Count > 0)
-                {
-                    for (int i = gameAssets.SpellList.Count - 1; i >= 0; i--)
-                    {
-                        if (!gameAssets.SpellList[i].Active)
-                        {
-                            gameAssets.SpellList.RemoveAt(i);
-                        }
-                    }
-                }
-
-                //Remove inactive enemies from EnemyList
-                if (gameAssets.EnemyList.Count > 0)
-                {
-                    for (int i = gameAssets.EnemyList.Count - 1; i >= 0; i--)
-                    {
-                        if (!gameAssets.EnemyList[i].Active)
-                        {
-                            gameAssets.EnemyList.RemoveAt(i);
-                        }
-                    }
-                }
-
-                //Remove any inactive items from draw call - iterate in reverse
-                if (gameAssets.DrawList.Count > 0)
-                {
-                    for (int i = gameAssets.DrawList.Count - 1; i >= 0; i--)
-                    {
-                        if (!gameAssets.DrawList[i].Active)
-                        {
-                            gameAssets.DrawList.RemoveAt(i);
-                        }
-                    }
-                }
-            }
-
-
+            gameAssets.RemoveEntitiesMarkedForDelete();
+            
             //COLLISSION TESTING
             //Basic Player/Enemy Collission Test
             //Do we put logic here or collider can handle it?
