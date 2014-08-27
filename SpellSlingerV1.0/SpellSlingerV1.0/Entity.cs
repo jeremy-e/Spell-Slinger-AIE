@@ -14,6 +14,7 @@ namespace SpellSlingerV1._0
         protected Vector2 pos;
         private int width;
         private int height;
+        protected Color drawColour = Color.White;
 
         //Will allow for iteration through lists and if false object will be removed - ie dead enemies, spells cast
         private bool active;                
@@ -51,6 +52,11 @@ namespace SpellSlingerV1._0
         {
             get { return height; }
             set { height = value; }
+        }
+
+        public Color DrawColor
+        {
+            get { return drawColour; }
         }
 
 

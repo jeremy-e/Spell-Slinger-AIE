@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
+    enum ENEMY_STATUS
+    {
+        OK,
+        RECOVERING
+    }
+
     class Enemy : Entity
     {
 
@@ -15,17 +22,37 @@ namespace SpellSlingerV1._0
         private Vector2 playerPos;
         private SPELL_TYPE resistance;
         private SPELL_TYPE weakness;
+        private ENEMY_STATUS status;
+        private Timer recoveryTimer;
+
         
         public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
         {
             pos = pos_;
+            status = ENEMY_STATUS.OK;
             enemyType = enemyType_;
             InitialiseEnemyVariables();
             playerPos = playerPos_;
             this.Width = 32;
             this.Height = 32;
             Active = true;
+
+            //enemy invincible for this long after a hit
+            recoveryTimer = new System.Timers.Timer(500);
+            recoveryTimer.Elapsed += EnemyRecovered;
         }
+
+        public ENEMY_STATUS Status
+        {
+            get{ return status; }
+        }
+
+        private void EnemyRecovered(Object source, ElapsedEventArgs e)
+        {
+            recoveryTimer.Stop();
+            status = ENEMY_STATUS.OK;
+            drawColour = Color.White;
+        } 
 
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction
@@ -92,24 +119,36 @@ namespace SpellSlingerV1._0
         //else returns 0
         public int Hit(Spell spell_)
         {
-            //not yet implemented
-            int dmg = spell_.Damage;
-            
-            //do we have a resistance to this spell? if so half the damage
-            if (resistance == spell_.Type)
-                dmg /= 2;
+            //dont kick him while he is down
+            if (status != ENEMY_STATUS.RECOVERING)
+            {
 
-            //are we weak on this spell?
-            if (weakness == spell_.Type)
-                dmg *= 2;
+                int dmg = spell_.Damage;
 
-            //reduce enemy health by dmg
-            health -= dmg;
+                //do we have a resistance to this spell? if so half the damage
+                if (resistance == spell_.Type)
+                    dmg /= 2;
 
-            if (health <= 0)
-                Active = false;
+                //are we weak on this spell?
+                if (weakness == spell_.Type)
+                    dmg *= 2;
 
-            return 100;
+                //reduce enemy health by dmg
+                health -= dmg;
+
+                if (health <= 0)
+                    Active = false;
+                else
+                {
+                    status = ENEMY_STATUS.RECOVERING;
+                    drawColour = Color.Red;
+                    recoveryTimer.Start();
+                }
+
+                //TODO fix the way the essence is calculated
+                return 100; 
+            }
+            return 0;
         }
 
         //to be called by Update

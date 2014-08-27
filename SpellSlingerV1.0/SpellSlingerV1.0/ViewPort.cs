@@ -33,7 +33,7 @@ namespace SpellSlingerV1._0
             int xPos = (int)entity_.X + focusAreaX;
             int yPos = (int)entity_.Y + focusAreaY;
             Rectangle drawPos = new Rectangle(xPos, yPos, entity_.Width, entity_.Height);
-            spriteBatch.Draw(entity_.Texture, drawPos, Color.White);
+            spriteBatch.Draw(entity_.Texture, drawPos, entity_.DrawColor);
         }
 
         public void MoveX(int amount_)
