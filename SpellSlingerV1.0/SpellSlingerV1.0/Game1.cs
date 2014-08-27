@@ -219,7 +219,8 @@ namespace SpellSlingerV1._0
                 {
                     for (int j = 0; j < gameAssets.EnemyListCount; j++)
                     {
-                        colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j));
+                        if (colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j)))
+                            gameAssets.EnemyListItem(j).Hit(gameAssets.SpellListItem(i));
                     }
                 }
             }

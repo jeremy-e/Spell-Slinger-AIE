@@ -51,5 +51,23 @@ namespace SpellSlingerV1._0
             get { return type; }
             set { type = value; }
         }
+
+        //Hey jez, i needed this property
+        //I will leave it with you to change or clean up or whatevs bru :)
+        public int Damage
+        {
+            get
+            {
+                switch(type)
+                {
+                    case SPELL_TYPE.FIREBALL:
+                        return 40;
+                    case SPELL_TYPE.ICELANCE:
+                        return 60;
+                    default :
+                        return 0;
+                }
+            }
+        }
     }
 }

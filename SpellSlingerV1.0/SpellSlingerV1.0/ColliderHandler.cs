@@ -28,7 +28,7 @@ namespace SpellSlingerV1._0
                 //    Debug.WriteLine("ADD1");
                 //}
                 //Temporary for testing - set object to inactive for list clean up - Pass responsibility to enemy directly
-                entity_b.Active = false;
+                //entity_b.Active = false;
 
                 return true;
             }

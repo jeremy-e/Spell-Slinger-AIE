@@ -93,6 +93,22 @@ namespace SpellSlingerV1._0
         public int Hit(Spell spell_)
         {
             //not yet implemented
+            int dmg = spell_.Damage;
+            
+            //do we have a resistance to this spell? if so half the damage
+            if (resistance == spell_.Type)
+                dmg /= 2;
+
+            //are we weak on this spell?
+            if (weakness == spell_.Type)
+                dmg *= 2;
+
+            //reduce enemy health by dmg
+            health -= dmg;
+
+            if (health <= 0)
+                Active = false;
+
             return 100;
         }
 
