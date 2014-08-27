@@ -8,15 +8,96 @@ namespace SpellSlingerV1._0
 {
     class GameAssets
     {
-        public readonly Object threadSafeLock = new Object();
-        public List<Entity> DrawList;                  //Used to track ALL objects
+        private readonly Object threadSafeLock = new Object();
+        private List<Entity> DrawList;                  //Used to track ALL objects
         public List<Texture2D> GUITextureList;
         public List<Texture2D> TextureList;            //tracks ALL textures from DrawList
         public List<Texture2D> EnemyTextureList;       //tracks ALL textures from DrawList
         public List<Texture2D> SpellTextureList;        //tracks spell textures
-        public List<Enemy> EnemyList;                  //tracking enemies
-        public List<Tower> TowerList;                  //Who knows we might want multi player one day?
-        public List<Spell> SpellList;                   //tracks active/current spells
+        private List<Enemy> EnemyList;                  //tracking enemies
+        private List<Tower> TowerList;                  //Who knows we might want multi player one day?
+        private List<Spell> SpellList;                   //tracks active/current spells
+
+
+        public GameAssets()
+        {
+            DrawList = new List<Entity>();                                                          //All objects added to DrawList - use this to draw to screen.
+            TextureList = new List<Texture2D>();
+            EnemyTextureList = new List<Texture2D>();
+            SpellTextureList = new List<Texture2D>();
+            GUITextureList = new List<Texture2D>();
+            EnemyList = new List<Enemy>();
+            TowerList = new List<Tower>();
+            SpellList = new List<Spell>();
+        }
+
+        public int DrawListCount
+        {
+            get { return DrawList.Count; }
+        }
+
+        public Entity DrawListItem(int index_)
+        {
+            return DrawList[index_];
+        }
+
+        public int EnemyListCount
+        {
+            get { return EnemyList.Count; }
+        }
+        
+        public Enemy EnemyListItem(int index_)
+        {
+            return EnemyList[index_];
+        }
+
+        public void EnemyListAdd(Enemy e_)
+        {
+            lock (threadSafeLock)
+            {
+                EnemyList.Add(e_);
+                DrawList.Add(e_);
+            }
+        }
+
+        public int TowerListCount
+        {
+            get { return TowerList.Count; }
+        }
+
+        public Tower TowerListItem(int index_)
+        {
+            return TowerList[index_];
+        }
+
+        public void TowerListAdd(Tower e_)
+        {
+            lock (threadSafeLock)
+            {
+                TowerList.Add(e_);
+                DrawList.Add(e_);
+            }
+        }
+
+        public int SpellListCount
+        {
+            get { return SpellList.Count; }
+        }
+
+        public Spell SpellListItem(int index_)
+        {
+            return SpellList[index_];
+        }
+
+        public void SpellListAdd(Spell e_)
+        {
+            lock (threadSafeLock)
+            {
+                SpellList.Add(e_);
+                DrawList.Add(e_);
+            }
+        }
+
 
         //This method can definitely be tidied up.. 
         //need to look into how we can write the delete loop just once. 
@@ -60,18 +141,6 @@ namespace SpellSlingerV1._0
                     }
                 }
             }
-        }
-
-        public GameAssets()
-        {
-            DrawList = new List<Entity>();                                                          //All objects added to DrawList - use this to draw to screen.
-            TextureList = new List<Texture2D>();
-            EnemyTextureList = new List<Texture2D>();
-            SpellTextureList = new List<Texture2D>();
-            GUITextureList = new List<Texture2D>();
-            EnemyList = new List<Enemy>();
-            TowerList = new List<Tower>();
-            SpellList = new List<Spell>();
         }
     }
 }

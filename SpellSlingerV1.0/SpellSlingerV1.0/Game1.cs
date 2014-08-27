@@ -144,14 +144,14 @@ namespace SpellSlingerV1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+            for (int i = 0; i < gameAssets.EnemyListCount; i++)
             {
-                gameAssets.EnemyList[i].Move(gameTime);                               //Testing movement
+                gameAssets.EnemyListItem(i).Move(gameTime);                               //Testing movement
             }
 
-            for (int i = 0; i < gameAssets.TowerList.Count; i++)
+            for (int i = 0; i < gameAssets.TowerListCount; i++)
             {
-                gameAssets.TowerList[i].Update();
+                gameAssets.TowerListItem(i).Update();
             }
 
             //move viewport
@@ -206,22 +206,22 @@ namespace SpellSlingerV1._0
             //COLLISSION TESTING
             //Basic Player/Enemy Collission Test
             //Do we put logic here or collider can handle it?
-            for (int i = 0; i < gameAssets.EnemyList.Count; i++)
+            for (int i = 0; i < gameAssets.EnemyListCount; i++)
             {
-                if (colliderHandler.Collider(gameAssets.TowerList[0], gameAssets.EnemyList[i]))
+                if (colliderHandler.Collider(gameAssets.TowerListItem(0), gameAssets.EnemyListItem(i)))
                 {
-                    gameAssets.TowerList[0].Capacity++;
+                    gameAssets.TowerListItem(0).Capacity++;
                 }
             }
 
             ///if any spells are active we check for collissions against active enemies
-            if (gameAssets.SpellList.Count > 0)
+            if (gameAssets.SpellListCount > 0)
             {
-                for (int i = 0; i < gameAssets.SpellList.Count; i++)
+                for (int i = 0; i < gameAssets.SpellListCount; i++)
                 {
-                    for (int j = 0; j < gameAssets.EnemyList.Count; j++)
+                    for (int j = 0; j < gameAssets.EnemyListCount; j++)
                     {
-                        colliderHandler.Collider(gameAssets.SpellList[i], gameAssets.EnemyList[j]);
+                        colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j));
                     }
                 }
             }
@@ -240,9 +240,9 @@ namespace SpellSlingerV1._0
             // TODO: Add your drawing code here
             spriteBatch.Begin();
 
-            for (int i = 0; i < gameAssets.DrawList.Count; i++)
+            for (int i = 0; i < gameAssets.DrawListCount; i++)
             {
-                viewPort.Draw(gameAssets.DrawList[i]);
+                viewPort.Draw(gameAssets.DrawListItem(i));
             }
 
             //Add GUI to separate drawlist - Always draw on top of everything else
