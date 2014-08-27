@@ -8,25 +8,29 @@ namespace SpellSlingerV1._0
 {
     class Enemy : Entity
     {
-        //resistance
-        //weakness
-        //armour
-        //health
-        //speed
 
         private int health;
-
+        private float speed;
         private ENEMY_TYPE enemyType;
-
         private Vector2 playerPos;
-
-        private const float GHOUL_SPEED = 0.05f;
-        private const float RUNNING_GHOUL_SPEED = 0.07f;
+        private SPELL_TYPE resistance;
+        private SPELL_TYPE weakness;
         
+        public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
+        {
+            pos = pos_;
+            enemyType = enemyType_;
+            InitialiseEnemyVariables();
+            playerPos = playerPos_;
+            this.Width = 32;
+            this.Height = 32;
+            Active = true;
+        }
+
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction
         {
-            get 
+            get
             {
                 Vector2 dir = Pos - playerPos;
                 dir.Normalize();
@@ -34,45 +38,62 @@ namespace SpellSlingerV1._0
             }
         }
 
-
-        public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
+        //happy to leave this hardcoded for now rather than using const vars
+        //at least it is neat and everything is in the same spot. 
+        //eventually want to database drive this. 
+        private void InitialiseEnemyVariables()
         {
-            pos = pos_;
-            enemyType = enemyType_;
-            playerPos = playerPos_;
-
-            Random r = new Random(Guid.NewGuid().GetHashCode());
-
-            //this.X = r.Next(0, Game1.SCREEN_WIDTH);
-            //this.Y = r.Next(Game1.SCREEN_HEIGHT - 50, Game1.SCREEN_HEIGHT);
-            this.Width = 32;
-            this.Height = 32;
-            Active = true;
-            SetHealth();
-        }
-
-        //TODO:
-        //update switch for all enemy types
-        private int SetHealth()
-        {
-            int health = 0;
-
-            Random r = new Random(Guid.NewGuid().GetHashCode());
-
             switch (enemyType)
             {
                 case ENEMY_TYPE.GHOUL:
-                    health = r.Next(80, 100 + 1);
+                    health = 60;
+                    speed = 0.03f;
+                    weakness = SPELL_TYPE.FIREBALL;                    
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
-                    health = r.Next(100, 140 + 1);
+                    health = 30;
+                    speed = 0.06f;
+                    weakness = SPELL_TYPE.FIREBALL;
                     break;
-                default:
-                    health = r.Next(80, 100 + 1);
+                case ENEMY_TYPE.HEAVY_ZOMBIE:
+                    health = 110;
+                    speed = 0.04f;
+                    weakness = SPELL_TYPE.FIREBALL;
+                    resistance = SPELL_TYPE.LIGHTNING;
+                    break;
+                case ENEMY_TYPE.SKELETON_KNIGHT:
+                    health = 150;
+                    speed = 0.04f;
+                    weakness = SPELL_TYPE.RAPTURE;
+                    resistance = SPELL_TYPE.DESPAIR;
+                    break;
+                case ENEMY_TYPE.OGRE:
+                    health = 150;
+                    speed = 0.05f;
+                    weakness = SPELL_TYPE.ICELANCE;
+                    resistance = SPELL_TYPE.FIREBALL;
+                    break;
+                case ENEMY_TYPE.WEREWOLF:
+                    health = 180;
+                    speed = 0.05f;
+                    weakness = SPELL_TYPE.ICELANCE;
+                    resistance = SPELL_TYPE.FIREBALL;
+                    break;
+                case ENEMY_TYPE.GREEN_DRAGON:
+                    health = 250;
+                    speed = 0.04f;
+                    weakness = SPELL_TYPE.RAPTURE;
+                    resistance = SPELL_TYPE.DESPAIR;
                     break;
             }
+        }
 
-            return health;
+        //returns amount of essense received if hit results in a kill
+        //else returns 0
+        public int Hit(Spell spell_)
+        {
+            //not yet implemented
+            return 100;
         }
 
         //to be called by Update
@@ -81,12 +102,7 @@ namespace SpellSlingerV1._0
         {
             int delta = gameTime_.ElapsedGameTime.Milliseconds;
             Vector2 movementPreDelta = new Vector2();
-
-            if ( EnemyType == ENEMY_TYPE.GHOUL )
-                movementPreDelta = (Direction * GHOUL_SPEED);
-            else if ( EnemyType == ENEMY_TYPE.RUNNING_GHOUL )
-                movementPreDelta = (Direction * RUNNING_GHOUL_SPEED);
-
+            movementPreDelta = (Direction * speed);
             pos -= (movementPreDelta * delta);
         }
 

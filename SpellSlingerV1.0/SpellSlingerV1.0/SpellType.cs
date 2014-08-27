@@ -8,7 +8,10 @@ namespace SpellSlingerV1._0
     enum SPELL_TYPE
     {
         FIREBALL,
-        ICELANCE
+        ICELANCE,
+        LIGHTNING,
+        DESPAIR,
+        RAPTURE
     }
 
 }

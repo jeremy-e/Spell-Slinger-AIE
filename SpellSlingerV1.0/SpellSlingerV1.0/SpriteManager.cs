@@ -46,6 +46,14 @@ namespace SpellSlingerV1._0
 
             spellSpriteFileNames[(int)SPELL_TYPE.FIREBALL] = "spell1.png";
             spellSpriteFileNames[(int)SPELL_TYPE.ICELANCE] = "spell2.png";
+            
+            //TODO - ADD Different sprites for these spells. 
+            //I Added these so I could do all the resistance/weakness stuff, we dont have to use them for the demo. 
+            spellSpriteFileNames[(int)SPELL_TYPE.DESPAIR] = "spell1.png";
+            spellSpriteFileNames[(int)SPELL_TYPE.LIGHTNING] = "spell2.png";
+            spellSpriteFileNames[(int)SPELL_TYPE.RAPTURE] = "spell1.png";
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
             GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_1] = "gui_hotbar1.png";
             GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_2] = "gui_hotbar2.png";

@@ -199,8 +199,6 @@ namespace SpellSlingerV1._0
             }
             //-------------------------------------------SPELLS
 
-            //I think we should look at moving the below stuff into GameAssets. But I will leave here for testing/simplicity
-            //maybe have a GameAssets.RemoveInactive() method? 
             gameAssets.RemoveEntitiesMarkedForDelete();
             
             //COLLISSION TESTING
