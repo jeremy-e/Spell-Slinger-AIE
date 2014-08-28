@@ -74,12 +74,12 @@ namespace SpellSlingerV1._0
             {
                 case ENEMY_TYPE.GHOUL:
                     health = 60;
-                    speed = 0.03f;
+                    speed = 0.02f;
                     weakness = SPELL_TYPE.FIREBALL;                    
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
                     health = 30;
-                    speed = 0.06f;
+                    speed = 0.03f;
                     weakness = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.HEAVY_ZOMBIE:
