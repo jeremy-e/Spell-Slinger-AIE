@@ -16,8 +16,7 @@ namespace SpellSlingerV1._0
         ViewPort viewPort_;
         Factory objectFactory_;
         ColliderHandler colliderHandler_;
-        int activeSpell;
-
+        
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
             gameAssets_ = gameAssets;
