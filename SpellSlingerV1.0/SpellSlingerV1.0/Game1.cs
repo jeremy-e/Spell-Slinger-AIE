@@ -209,6 +209,7 @@ namespace SpellSlingerV1._0
                 if (colliderHandler.Collider(gameAssets.TowerListItem(0), gameAssets.EnemyListItem(i)))
                 {
                     gameAssets.TowerListItem(0).Capacity++;
+
                 }
             }
 
@@ -220,7 +221,10 @@ namespace SpellSlingerV1._0
                     for (int j = 0; j < gameAssets.EnemyListCount; j++)
                     {
                         if (colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j)))
-                            gameAssets.EnemyListItem(j).Hit(gameAssets.SpellListItem(i));
+                        {
+                            int essenceReturned = gameAssets.EnemyListItem(j).Hit(gameAssets.SpellListItem(i));
+                            gameAssets.TowerListItem(0).Essence += essenceReturned;
+                        }
                     }
                 }
             }
