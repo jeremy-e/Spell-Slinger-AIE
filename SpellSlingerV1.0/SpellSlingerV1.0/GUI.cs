@@ -5,27 +5,48 @@ using System.Text;
 
 namespace SpellSlingerV1._0
 {
-    class GUI : Entity
+    class GUI
     {
-        float offsetX;
-        float offsetY;
 
-        public GUI(float x_, float y_, int width_, int height_)
+        Factory objectFactory;
+        ViewPort viewPort;
+
+        public GUI(Factory objectFactory_, ViewPort viewPort_)
         {
-            Width = width_;
-            Height = height_;
-            X = x_;
-            Y = y_;
-            offsetX = X;
-            offsetY = Y;
-            Active = false;
+            objectFactory = objectFactory_;
+            viewPort = viewPort_;
         }
 
-        public void Update(float x_, float y_)
+        public void GUIIntro()
         {
-            X = offsetX - x_;
-            Y = offsetY - y_;
+
         }
+
+        public void GUIMenu()
+        {
+
+        }
+
+        public void GUIPlayGame()
+        {
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50, true);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50, false);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_3, 25, viewPort.ViewPortHeight - 75, 250, 50, false);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_4, 25, viewPort.ViewPortHeight - 75, 250, 50, false);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_5, 25, viewPort.ViewPortHeight - 75, 250, 50, false);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.SPELL_BOOK, viewPort.ViewPortWidth - 64, viewPort.ViewPortHeight - 64, 64, 64, true);
+        }
+
+        public void GUIOptions()
+        {
+
+        }
+
+        public void GUIEnd()
+        {
+
+        }
+
 
     }
 }

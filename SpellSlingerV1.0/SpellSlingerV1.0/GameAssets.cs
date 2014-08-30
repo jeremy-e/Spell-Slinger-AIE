@@ -17,7 +17,7 @@ namespace SpellSlingerV1._0
         private List<Enemy> EnemyList;                  //tracking enemies
         private List<Tower> TowerList;                  //Who knows we might want multi player one day?
         private List<Spell> SpellList;                   //tracks active/current spells
-        private List<GUI> GUIList;
+        private List<GUI_Component> GUIList;
 
         public GameAssets()
         {
@@ -29,7 +29,7 @@ namespace SpellSlingerV1._0
             EnemyList = new List<Enemy>();
             TowerList = new List<Tower>();
             SpellList = new List<Spell>();
-            GUIList = new List<GUI>();
+            GUIList = new List<GUI_Component>();
         }
 
         public int DrawListCount
@@ -106,12 +106,12 @@ namespace SpellSlingerV1._0
             get { return GUIList.Count; }
         }
 
-        public GUI GUIListItem(int index_)
+        public GUI_Component GUIListItem(int index_)
         {
             return GUIList[index_];
         }
 
-        public void GUIListAdd(GUI e_)
+        public void GUIListAdd(GUI_Component e_)
         {
             lock (threadSafeLock)
             {

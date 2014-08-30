@@ -16,9 +16,11 @@ namespace SpellSlingerV1._0
         ViewPort viewPort_;
         Factory objectFactory_;
         ColliderHandler colliderHandler_;
+        GUI gui;
         
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
+            gui = new GUI(objectFactory, viewPort);
             gameAssets_ = gameAssets;
             viewPort_ = viewPort;
             objectFactory_ = objectFactory;
@@ -26,14 +28,7 @@ namespace SpellSlingerV1._0
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
             
             //Initialise GUI
-            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_3, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_4, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_5, 25, viewPort.ViewPortHeight - 75, 250, 50);
-
-            //Set first spell as active
-            gameAssets_.GUIListItem(0).Active = true;
+            gui.GUIPlayGame();
         }
 
         public void SetActiveSpell(SPELL_TYPE type_)

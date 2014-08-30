@@ -49,6 +49,7 @@
     <Compile Include="Game1.cs" />
     <Compile Include="GameAssets.cs" />
     <Compile Include="GUI.cs" />
+    <Compile Include="GUI_Component.cs" />
     <Compile Include="Intro.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Options.cs" />
@@ -104,6 +105,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\spell2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\spellbook.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\tower.png">

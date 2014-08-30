@@ -113,9 +113,9 @@ namespace SpellSlingerV1._0
             gameAssets.SpellListAdd(spell);
         }
 
-        public void CreateGUIComponent(GUI_SPRITES sprite_, float x_, float y_, int width_, int height_)
+        public void CreateGUIComponent(GUI_SPRITES sprite_, float x_, float y_, int width_, int height_, bool active_)
         {
-            GUI button = new GUI(x_, y_, width_, height_);
+            GUI_Component button = new GUI_Component(x_, y_, width_, height_, active_);
             button.Texture = gameAssets.GUITextureList[(int)sprite_];
             gameAssets.GUIListAdd(button);
         }
