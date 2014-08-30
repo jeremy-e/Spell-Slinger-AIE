@@ -24,8 +24,7 @@ namespace SpellSlingerV1._0
             objectFactory_ = objectFactory;
             colliderHandler_ = colliderHandler;
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
-            activeSpell = 1;
-
+            
             //Initialise GUI
             objectFactory.CreateButton(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50);
             objectFactory.CreateButton(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50);
