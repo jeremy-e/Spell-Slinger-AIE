@@ -38,11 +38,11 @@ namespace SpellSlingerV1._0
             gameAssets_.GUIListItem(0).Active = true;
         }
 
-        public void SetActiveSpell(int spell)
+        public void SetActiveSpell(SPELL_TYPE type_)
         {
             for (int i = 0; i < gameAssets_.GUIListCount; i++)
             {
-                if (i == spell-1)
+                if (i == (int)type_)
                 {
                     gameAssets_.GUIListItem(i).Active = true;
                 }
@@ -95,27 +95,27 @@ namespace SpellSlingerV1._0
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 spellSelect = SPELL_TYPE.FIREBALL;
-                SetActiveSpell(1);
+                SetActiveSpell(SPELL_TYPE.FIREBALL);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 spellSelect = SPELL_TYPE.ICELANCE;
-                SetActiveSpell(2);
+                SetActiveSpell(SPELL_TYPE.ICELANCE);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D3))
             {
                 spellSelect = SPELL_TYPE.LIGHTNING;
-                SetActiveSpell(3);
+                SetActiveSpell(SPELL_TYPE.LIGHTNING);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D4))
             {
                 spellSelect = SPELL_TYPE.DESPAIR;
-                SetActiveSpell(4);
+                SetActiveSpell(SPELL_TYPE.DESPAIR);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D5))
             {
                 spellSelect = SPELL_TYPE.RAPTURE;
-                SetActiveSpell(5);
+                SetActiveSpell(SPELL_TYPE.RAPTURE);
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
