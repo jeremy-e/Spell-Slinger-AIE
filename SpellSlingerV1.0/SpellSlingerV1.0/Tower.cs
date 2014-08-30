@@ -11,6 +11,13 @@ namespace SpellSlingerV1._0
         int capacity;
         int maxCap = 15;
         float recoveryTime = 1.0f;  //Seconds
+        int essence;
+
+        public int Essence
+        {
+            get { return essence; }
+            set { essence = value; }
+        }
 
         public Tower()
         {
