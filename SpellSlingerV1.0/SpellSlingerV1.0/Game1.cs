@@ -33,11 +33,9 @@ namespace SpellSlingerV1._0
         public static uint waveTimer = 1000;
         public static int wave = 1;
 
-        bool leftMouseButtonDown = false;
-        SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
-
-        GAME_STATES gameState = GAME_STATES.PLAY_GAME;
         PlayGame playGame;
+        BASE_GAMESTATE gameState;
+        int currentGameState;
 
         public Game1()
             : base()
@@ -93,9 +91,14 @@ namespace SpellSlingerV1._0
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
             colliderHandler = new ColliderHandler();
+
+            gameState = new Intro();
+            currentGameState = -1;
+
             wave = 1;
 
-            playGame = new PlayGame(gameAssets, viewPort, objectFactory, colliderHandler);
+            //playGame = new PlayGame(gameAssets, viewPort, objectFactory, colliderHandler);
+            //gameState.CurrentGameState = (int)GAME_STATES.PLAY_GAME;
 
             base.Initialize();
         }
@@ -148,22 +151,31 @@ namespace SpellSlingerV1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            switch (gameState)
+            if (currentGameState != gameState.CurrentGameState)
             {
-                case GAME_STATES.INTRO:
-                    break;
-                case GAME_STATES.MENU:
-                    break;
-                case GAME_STATES.PLAY_GAME:
-                    playGame.Update(gameTime);
-                    break;
-                case GAME_STATES.OPTIONS:
-                    break;
-                case GAME_STATES.END:
-                    break;
-                default:
-                    break;
+                switch (gameState.CurrentGameState)
+                {
+                    case (int)GAME_STATES.INTRO:
+                        break;
+                    case (int)GAME_STATES.MENU:
+                        Debug.WriteLine("MENU");
+                        break;
+                    case (int)GAME_STATES.PLAY_GAME:
+                        gameState = new PlayGame(gameAssets, viewPort, objectFactory, colliderHandler);
+                        break;
+                    case (int)GAME_STATES.OPTIONS:
+                        Debug.WriteLine("OPTIONS");
+                        break;
+                    case (int)GAME_STATES.END:
+                        Debug.WriteLine("END");
+                        break;
+                    default:
+                        break;
+                }
+                currentGameState = gameState.CurrentGameState;
             }
+
+            gameState.Update(gameTime);
 
             base.Update(gameTime);
         }

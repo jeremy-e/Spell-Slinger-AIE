@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace SpellSlingerV1._0
 {
-    class PlayGame
+    class PlayGame : BASE_GAMESTATE
     {
         bool leftMouseButtonDown = false;
         SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
@@ -22,9 +23,10 @@ namespace SpellSlingerV1._0
             viewPort_ = viewPort;
             objectFactory_ = objectFactory;
             colliderHandler_ = colliderHandler;
+            CurrentGameState = (int)GAME_STATES.PLAY_GAME;
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
             
             for (int i = 0; i < gameAssets_.EnemyListCount; i++)
