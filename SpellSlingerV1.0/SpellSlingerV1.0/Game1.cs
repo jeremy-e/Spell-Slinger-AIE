@@ -194,6 +194,14 @@ namespace SpellSlingerV1._0
             }
 
             //Add GUI to separate drawlist - Always draw on top of everything else
+            for (int i = 0; i < gameAssets.GUIListCount; i++)
+            {
+                if (gameAssets.GUIListItem(i).Active)
+                {
+                    viewPort.Draw(gameAssets.GUIListItem(i));
+                }
+            }
+
 
             spriteBatch.End();
 

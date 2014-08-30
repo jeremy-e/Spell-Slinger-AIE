@@ -55,5 +55,17 @@ namespace SpellSlingerV1._0
         {
             get { return focusAreaY; }
         }
+
+        public int ViewPortWidth
+        {
+            get { return viewPortWidth; }
+            set { viewPortWidth = value; }
+        }
+
+        public int ViewPortHeight
+        {
+            get { return viewPortHeight; }
+            set { viewPortHeight = value; }
+        }
     }
 }

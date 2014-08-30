@@ -17,7 +17,7 @@ namespace SpellSlingerV1._0
         private List<Enemy> EnemyList;                  //tracking enemies
         private List<Tower> TowerList;                  //Who knows we might want multi player one day?
         private List<Spell> SpellList;                   //tracks active/current spells
-
+        private List<GUI> GUIList;
 
         public GameAssets()
         {
@@ -29,6 +29,7 @@ namespace SpellSlingerV1._0
             EnemyList = new List<Enemy>();
             TowerList = new List<Tower>();
             SpellList = new List<Spell>();
+            GUIList = new List<GUI>();
         }
 
         public int DrawListCount
@@ -98,6 +99,29 @@ namespace SpellSlingerV1._0
             }
         }
         
+
+        //GUI
+        public int GUIListCount
+        {
+            get { return GUIList.Count; }
+        }
+
+        public GUI GUIListItem(int index_)
+        {
+            return GUIList[index_];
+        }
+
+        public void GUIListAdd(GUI e_)
+        {
+            lock (threadSafeLock)
+            {
+                GUIList.Add(e_);
+            }
+        }
+        //GUI
+
+
+
         //This method can definitely be tidied up.. 
         //need to look into how we can write the delete loop just once. 
         public void RemoveEntitiesMarkedForDelete()

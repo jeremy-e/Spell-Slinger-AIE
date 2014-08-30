@@ -48,6 +48,7 @@
     <Compile Include="Factory.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="GameAssets.cs" />
+    <Compile Include="GUI.cs" />
     <Compile Include="Intro.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="Options.cs" />

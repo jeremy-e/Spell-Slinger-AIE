@@ -112,5 +112,13 @@ namespace SpellSlingerV1._0
             spell.Texture = gameAssets.SpellTextureList[(int)spellType_];
             gameAssets.SpellListAdd(spell);
         }
+
+        public void CreateButton(GUI_SPRITES sprite_, float x_, float y_, int width_, int height_)
+        {
+            GUI button = new GUI(x_, y_, width_, height_);
+            button.Texture = gameAssets.GUITextureList[(int)sprite_];
+            gameAssets.GUIListAdd(button);
+        }
+
     }
 }

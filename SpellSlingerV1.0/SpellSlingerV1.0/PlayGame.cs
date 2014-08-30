@@ -16,6 +16,7 @@ namespace SpellSlingerV1._0
         ViewPort viewPort_;
         Factory objectFactory_;
         ColliderHandler colliderHandler_;
+        int activeSpell;
 
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
@@ -24,6 +25,32 @@ namespace SpellSlingerV1._0
             objectFactory_ = objectFactory;
             colliderHandler_ = colliderHandler;
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
+            activeSpell = 1;
+
+            //Initialise GUI
+            objectFactory.CreateButton(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateButton(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateButton(GUI_SPRITES.HOTBAR_3, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateButton(GUI_SPRITES.HOTBAR_4, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateButton(GUI_SPRITES.HOTBAR_5, 25, viewPort.ViewPortHeight - 75, 250, 50);
+
+            //Set first spell as active
+            gameAssets_.GUIListItem(0).Active = true;
+        }
+
+        public void SetActiveSpell(int spell)
+        {
+            for (int i = 0; i < gameAssets_.GUIListCount; i++)
+            {
+                if (i == spell-1)
+                {
+                    gameAssets_.GUIListItem(i).Active = true;
+                }
+                else
+                {
+                    gameAssets_.GUIListItem(i).Active = false;
+                }
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -56,17 +83,39 @@ namespace SpellSlingerV1._0
             {
                 viewPort_.MoveY(-5);
             }
-
+            
+            //move GUI w/viewport
+            for (int i = 0; i < gameAssets_.GUIListCount; i++)
+            {
+                gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
+            }
 
             //-------------------------------------------SPELLS
             //Click to cast
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
                 spellSelect = SPELL_TYPE.FIREBALL;
+                SetActiveSpell(1);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.D2))
             {
                 spellSelect = SPELL_TYPE.ICELANCE;
+                SetActiveSpell(2);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                spellSelect = SPELL_TYPE.LIGHTNING;
+                SetActiveSpell(3);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D4))
+            {
+                spellSelect = SPELL_TYPE.DESPAIR;
+                SetActiveSpell(4);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.D5))
+            {
+                spellSelect = SPELL_TYPE.RAPTURE;
+                SetActiveSpell(5);
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)

@@ -59,13 +59,6 @@ namespace SpellSlingerV1._0
             get { return drawColour; }
         }
 
-
-        //public int Type
-        //{
-        //    get { return type; }
-        //    set { type = value; }
-        //}
-
         public Texture2D Texture
         {
             get { return texture; }
