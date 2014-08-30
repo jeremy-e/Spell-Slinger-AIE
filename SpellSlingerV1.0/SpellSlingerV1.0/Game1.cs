@@ -158,16 +158,13 @@ namespace SpellSlingerV1._0
                     case (int)GAME_STATES.INTRO:
                         break;
                     case (int)GAME_STATES.MENU:
-                        Debug.WriteLine("MENU");
                         break;
                     case (int)GAME_STATES.PLAY_GAME:
                         gameState = new PlayGame(gameAssets, viewPort, objectFactory, colliderHandler);
                         break;
                     case (int)GAME_STATES.OPTIONS:
-                        Debug.WriteLine("OPTIONS");
                         break;
                     case (int)GAME_STATES.END:
-                        Debug.WriteLine("END");
                         break;
                     default:
                         break;
