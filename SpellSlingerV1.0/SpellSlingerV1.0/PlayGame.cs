@@ -26,11 +26,11 @@ namespace SpellSlingerV1._0
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
             
             //Initialise GUI
-            objectFactory.CreateGUIElement(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIElement(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIElement(GUI_SPRITES.HOTBAR_3, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIElement(GUI_SPRITES.HOTBAR_4, 25, viewPort.ViewPortHeight - 75, 250, 50);
-            objectFactory.CreateGUIElement(GUI_SPRITES.HOTBAR_5, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_1, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_2, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_3, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_4, 25, viewPort.ViewPortHeight - 75, 250, 50);
+            objectFactory.CreateGUIComponent(GUI_SPRITES.HOTBAR_5, 25, viewPort.ViewPortHeight - 75, 250, 50);
 
             //Set first spell as active
             gameAssets_.GUIListItem(0).Active = true;
