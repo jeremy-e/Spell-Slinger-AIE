@@ -97,8 +97,7 @@ namespace SpellSlingerV1._0
                 DrawList.Add(e_);
             }
         }
-
-
+        
         //This method can definitely be tidied up.. 
         //need to look into how we can write the delete loop just once. 
         public void RemoveEntitiesMarkedForDelete()
@@ -140,6 +139,8 @@ namespace SpellSlingerV1._0
                         }
                     }
                 }
+
+                
             }
         }
     }

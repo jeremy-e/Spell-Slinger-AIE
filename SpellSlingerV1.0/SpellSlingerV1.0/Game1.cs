@@ -36,6 +36,9 @@ namespace SpellSlingerV1._0
         bool leftMouseButtonDown = false;
         SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
 
+        GAME_STATES gameState_ = GAME_STATES.PLAY_GAME;
+        PlayGame playGame_;
+
         public Game1()
             : base()
         {
@@ -92,6 +95,7 @@ namespace SpellSlingerV1._0
             colliderHandler = new ColliderHandler();
             wave = 1;
 
+            playGame_ = new PlayGame(gameAssets, viewPort, objectFactory, colliderHandler);
 
             base.Initialize();
         }
@@ -144,91 +148,97 @@ namespace SpellSlingerV1._0
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            for (int i = 0; i < gameAssets.EnemyListCount; i++)
-            {
-                gameAssets.EnemyListItem(i).Move(gameTime);                               //Testing movement
-            }
 
-            for (int i = 0; i < gameAssets.TowerListCount; i++)
+            if (gameState_ == GAME_STATES.PLAY_GAME)
             {
-                gameAssets.TowerListItem(i).Update();
-            }
+                playGame_.Update(gameTime);
 
-            //move viewport
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                viewPort.MoveX(-5);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                viewPort.MoveX(5);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.W))
-            {
-                viewPort.MoveY(5);
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                viewPort.MoveY(-5);
-            }
+                //for (int i = 0; i < gameAssets.EnemyListCount; i++)
+                //{
+                //    gameAssets.EnemyListItem(i).Move(gameTime);                               //Testing movement
+                //}
+
+                //for (int i = 0; i < gameAssets.TowerListCount; i++)
+                //{
+                //    gameAssets.TowerListItem(i).Update();
+                //}
+
+                ////move viewport
+                //if (Keyboard.GetState().IsKeyDown(Keys.D))
+                //{
+                //    viewPort.MoveX(-5);
+                //}
+                //if (Keyboard.GetState().IsKeyDown(Keys.A))
+                //{
+                //    viewPort.MoveX(5);
+                //}
+                //if (Keyboard.GetState().IsKeyDown(Keys.W))
+                //{
+                //    viewPort.MoveY(5);
+                //}
+                //if (Keyboard.GetState().IsKeyDown(Keys.S))
+                //{
+                //    viewPort.MoveY(-5);
+                //}
 
 
-            //-------------------------------------------SPELLS
-            //Click to cast
-            if (Keyboard.GetState().IsKeyDown(Keys.D1))
-            {
-                spellSelect = SPELL_TYPE.FIREBALL;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.D2))
-            {
-                spellSelect = SPELL_TYPE.ICELANCE;
-            }
+                ////-------------------------------------------SPELLS
+                ////Click to cast
+                //if (Keyboard.GetState().IsKeyDown(Keys.D1))
+                //{
+                //    spellSelect = SPELL_TYPE.FIREBALL;
+                //}
+                //if (Keyboard.GetState().IsKeyDown(Keys.D2))
+                //{
+                //    spellSelect = SPELL_TYPE.ICELANCE;
+                //}
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
-            {
-                //Debug.WriteLine("BOOM");
-                int spellX = Mouse.GetState().X - viewPort.X;
-                int spellY = Mouse.GetState().Y - viewPort.Y;
-                objectFactory.CastSpell(spellSelect, 1, spellX, spellY);
-                leftMouseButtonDown = true;
+                //if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
+                //{
+                //    //Debug.WriteLine("BOOM");
+                //    int spellX = Mouse.GetState().X - viewPort.X;
+                //    int spellY = Mouse.GetState().Y - viewPort.Y;
+                //    objectFactory.CastSpell(spellSelect, 1, spellX, spellY);
+                //    leftMouseButtonDown = true;
+                //}
+
+                //if (Mouse.GetState().LeftButton == ButtonState.Released)
+                //{
+                //    leftMouseButtonDown = false;
+                //}
+                ////-------------------------------------------SPELLS
+
+                //gameAssets.RemoveEntitiesMarkedForDelete();
+
+                ////COLLISSION TESTING
+                ////Basic Player/Enemy Collission Test
+                ////Do we put logic here or collider can handle it?
+                //for (int i = 0; i < gameAssets.EnemyListCount; i++)
+                //{
+                //    if (colliderHandler.Collider(gameAssets.TowerListItem(0), gameAssets.EnemyListItem(i)))
+                //    {
+                //        gameAssets.TowerListItem(0).Capacity++;
+
+                //    }
+                //}
+
+                /////if any spells are active we check for collissions against active enemies
+                //if (gameAssets.SpellListCount > 0)
+                //{
+                //    for (int i = 0; i < gameAssets.SpellListCount; i++)
+                //    {
+                //        for (int j = 0; j < gameAssets.EnemyListCount; j++)
+                //        {
+                //            if (colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j)))
+                //            {
+                //                int essenceReturned = gameAssets.EnemyListItem(j).Hit(gameAssets.SpellListItem(i));
+                //                gameAssets.TowerListItem(0).Essence += essenceReturned;
+                //            }
+                //        }
+                //    }
+                //}
+
             }
-
-            if (Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                leftMouseButtonDown = false;
-            }
-            //-------------------------------------------SPELLS
-
-            gameAssets.RemoveEntitiesMarkedForDelete();
-            
-            //COLLISSION TESTING
-            //Basic Player/Enemy Collission Test
-            //Do we put logic here or collider can handle it?
-            for (int i = 0; i < gameAssets.EnemyListCount; i++)
-            {
-                if (colliderHandler.Collider(gameAssets.TowerListItem(0), gameAssets.EnemyListItem(i)))
-                {
-                    gameAssets.TowerListItem(0).Capacity++;
-
-                }
-            }
-
-            ///if any spells are active we check for collissions against active enemies
-            if (gameAssets.SpellListCount > 0)
-            {
-                for (int i = 0; i < gameAssets.SpellListCount; i++)
-                {
-                    for (int j = 0; j < gameAssets.EnemyListCount; j++)
-                    {
-                        if (colliderHandler.Collider(gameAssets.SpellListItem(i), gameAssets.EnemyListItem(j)))
-                        {
-                            int essenceReturned = gameAssets.EnemyListItem(j).Hit(gameAssets.SpellListItem(i));
-                            gameAssets.TowerListItem(0).Essence += essenceReturned;
-                        }
-                    }
-                }
-            }
-
             base.Update(gameTime);
         }
 

@@ -16,6 +16,8 @@ namespace SpellSlingerV1._0
         int spellLevel;
         Timer timer;
         float cooldownTimer = 5.0f; //Specific to spells and level - weight based on level?
+        int initDamage; //initial damage
+        //Calculated 
 
         public Spell(SPELL_TYPE type_, int spellLevel_, float x_, float y_)
         {
