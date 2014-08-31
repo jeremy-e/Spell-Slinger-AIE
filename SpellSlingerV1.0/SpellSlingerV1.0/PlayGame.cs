@@ -17,7 +17,7 @@ namespace SpellSlingerV1._0
         Factory objectFactory_;
         ColliderHandler colliderHandler_;
         GUI gui;
-        
+
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
             gui = new GUI(objectFactory, viewPort);
@@ -26,7 +26,7 @@ namespace SpellSlingerV1._0
             objectFactory_ = objectFactory;
             colliderHandler_ = colliderHandler;
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
-            
+
             //Initialise GUI
             gui.GUIPlayGame();
         }
@@ -39,7 +39,7 @@ namespace SpellSlingerV1._0
                 {
                     gameAssets_.GUIListItem(i).Active = true;
                 }
-                else if(i < 5) //hack temp fix
+                else if (i < 5) //hack temp fix
                 {
                     gameAssets_.GUIListItem(i).Active = false;
                 }
@@ -48,7 +48,7 @@ namespace SpellSlingerV1._0
 
         public override void Update(GameTime gameTime)
         {
-            
+
             for (int i = 0; i < gameAssets_.EnemyListCount; i++)
             {
                 gameAssets_.EnemyListItem(i).Move(gameTime);                               //Testing movement
@@ -76,7 +76,7 @@ namespace SpellSlingerV1._0
             {
                 viewPort_.MoveY(-5);
             }
-            
+
             //move GUI elements w/viewport
             for (int i = 0; i < gameAssets_.GUIListCount; i++)
             {
@@ -110,14 +110,14 @@ namespace SpellSlingerV1._0
                 spellSelect = SPELL_TYPE.RAPTURE;
                 SetActiveSpell(SPELL_TYPE.RAPTURE);
             }
-            
+
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
                 leftMouseButtonDown = true;
                 bool GUIElementClicked = false;
                 //Get Mouse position in viewport
                 Vector2 mousePos = new Vector2(Mouse.GetState().X - viewPort_.X, Mouse.GetState().Y - viewPort_.Y);
-            
+
                 for (int i = 0; i < gameAssets_.GUIListCount; i++)
                 {
                     if (colliderHandler_.Collider(gameAssets_.GUIListItem(i), mousePos))
@@ -131,11 +131,14 @@ namespace SpellSlingerV1._0
                     }
                 }
 
-                if (!GUIElementClicked)
+                if (!GUIElementClicked && !gameAssets_.TowerListItem(0).SpellCast)
                 {
+                    //We must iterate through current active spell list to see whether the selected spell is currently on cooldown. (may change)
                     int spellX = Mouse.GetState().X - viewPort_.X;
                     int spellY = Mouse.GetState().Y - viewPort_.Y;
                     objectFactory_.CastSpell(spellSelect, gameAssets_.TowerListItem(0).SpellLevel[(int)spellSelect], spellX, spellY);
+                    //Player has cast a spell - intiate global cooldown
+                    gameAssets_.TowerListItem(0).SpellCast = true;
                     leftMouseButtonDown = true;
                 }
 

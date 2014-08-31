@@ -14,11 +14,8 @@ namespace SpellSlingerV1._0
     {
         SPELL_TYPE type;
         int spellLevel;
-        Timer timer;
-        float cooldownTimer = 5.0f; //Specific to spells and level - weight based on level?
-        int initDamage; //initial damage
-        //Calculated 
-
+        Timer activeTimer;
+        
         public Spell(SPELL_TYPE type_, int spellLevel_, float x_, float y_)
         {
             type = type_;
@@ -27,14 +24,14 @@ namespace SpellSlingerV1._0
             Width = 64;
             Height = 64;
 
-            X = x_ - Width/2;
-            Y = y_ - Height/2;
-
-            timer = new System.Timers.Timer(1000);  //1 second interval
-            timer.Elapsed += OnTimedEvent;
-            timer.Interval = 500;
-            timer.Enabled = true;
-            timer.Start();
+            X = x_ - Width / 2;
+            Y = y_ - Height / 2;
+                        
+            activeTimer = new System.Timers.Timer(1000);  //1 second interval
+            activeTimer.Elapsed += OnTimedEvent;
+            activeTimer.Interval = 500;
+            activeTimer.Enabled = true;
+            activeTimer.Start();
 
             Debug.WriteLine("BOOM SPELL CAST: " + type + ". SPELL LEVEL: " + spellLevel);
         }
@@ -56,18 +53,24 @@ namespace SpellSlingerV1._0
             set { type = value; }
         }
 
-        
+
         public int Damage
         {
             get
             {
-                switch(type)
+                switch (type)
                 {
                     case SPELL_TYPE.FIREBALL:
-                        return 40;
+                        return 50;
                     case SPELL_TYPE.ICELANCE:
-                        return 60;
-                    default :
+                        return 40;
+                    case SPELL_TYPE.LIGHTNING:
+                        return 30;
+                    case SPELL_TYPE.DESPAIR:
+                        return 20;
+                    case SPELL_TYPE.RAPTURE:
+                        return 10;
+                    default:
                         return 0;
                 }
             }

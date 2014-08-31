@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Diagnostics;
+using System.Timers;
 
 namespace SpellSlingerV1._0
 {
@@ -10,9 +11,10 @@ namespace SpellSlingerV1._0
     {
         int capacity;
         int maxCap = 15;
-        float recoveryTime = 1.0f;  //Seconds
+        bool spellCast;
         int essence;
         List<int> spellLevel;
+        Timer spellTimer;
 
         public Tower()
         {
@@ -22,13 +24,18 @@ namespace SpellSlingerV1._0
             {
                 spellLevel.Add(1);
             }
-            
+
             this.Width = 64;
             this.Height = 64;
             X = Game1.SCREEN_WIDTH / 2 - Width / 2;
             Y = Game1.SCREEN_HEIGHT / 2 - Width / 2;
             Active = true;
             capacity = 0;
+
+            spellTimer = new System.Timers.Timer();
+            spellTimer.Elapsed += OnTimedEvent;
+            spellTimer.Interval = 500;                          //Set player global cooldown
+            spellCast = false;
         }
 
         public void Update()
@@ -37,6 +44,16 @@ namespace SpellSlingerV1._0
             {
                 Debug.WriteLine("You have been overwhelmed!");
             }
+
+            if (spellCast && !spellTimer.Enabled)               //spell cast & timer not enabled
+            {
+                spellTimer.Start();                             //Start global cooldown
+            }
+        }
+
+        private void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            spellCast = false;
         }
 
         public int Essence
@@ -55,6 +72,12 @@ namespace SpellSlingerV1._0
         {
             get { return spellLevel; }
             set { spellLevel = value; }
+        }
+
+        public bool SpellCast
+        {
+            get { return spellCast; }
+            set { spellCast = value; }
         }
     }
 }
