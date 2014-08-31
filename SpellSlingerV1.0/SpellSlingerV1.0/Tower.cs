@@ -12,15 +12,17 @@ namespace SpellSlingerV1._0
         int maxCap = 15;
         float recoveryTime = 1.0f;  //Seconds
         int essence;
-
-        public int Essence
-        {
-            get { return essence; }
-            set { essence = value; }
-        }
+        List<int> spellLevel;
 
         public Tower()
         {
+            //Add initial spell level 1 to all spells.
+            spellLevel = new List<int>();
+            for (int i = 0; i < Enum.GetNames(typeof(SPELL_TYPE)).Length; i++)
+            {
+                spellLevel.Add(1);
+            }
+            
             this.Width = 64;
             this.Height = 64;
             X = Game1.SCREEN_WIDTH / 2 - Width / 2;
@@ -37,6 +39,11 @@ namespace SpellSlingerV1._0
             }
         }
 
+        public int Essence
+        {
+            get { return essence; }
+            set { essence = value; }
+        }
 
         public int Capacity
         {
@@ -44,5 +51,10 @@ namespace SpellSlingerV1._0
             set { capacity = value; }
         }
 
+        public List<int> SpellLevel
+        {
+            get { return spellLevel; }
+            set { spellLevel = value; }
+        }
     }
 }

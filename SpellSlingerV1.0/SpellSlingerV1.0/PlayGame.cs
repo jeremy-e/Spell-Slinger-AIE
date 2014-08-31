@@ -135,7 +135,7 @@ namespace SpellSlingerV1._0
                 {
                     int spellX = Mouse.GetState().X - viewPort_.X;
                     int spellY = Mouse.GetState().Y - viewPort_.Y;
-                    objectFactory_.CastSpell(spellSelect, 1, spellX, spellY);
+                    objectFactory_.CastSpell(spellSelect, gameAssets_.TowerListItem(0).SpellLevel[(int)spellSelect], spellX, spellY);
                     leftMouseButtonDown = true;
                 }
 

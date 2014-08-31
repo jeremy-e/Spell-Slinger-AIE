@@ -35,6 +35,8 @@ namespace SpellSlingerV1._0
             timer.Interval = 500;
             timer.Enabled = true;
             timer.Start();
+
+            Debug.WriteLine("BOOM SPELL CAST: " + type + ". SPELL LEVEL: " + spellLevel);
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
