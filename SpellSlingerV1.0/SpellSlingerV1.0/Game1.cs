@@ -36,6 +36,10 @@ namespace SpellSlingerV1._0
         BASE_GAMESTATE gameState;
         int currentGameState;
 
+        //Text to screen
+        SpriteFont myFont;
+        Vector2 fontPos;
+
         public Game1()
             : base()
         {
@@ -128,6 +132,10 @@ namespace SpellSlingerV1._0
                 gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
             }
 
+            //Text to screen - initiliase font & position
+            myFont = Content.Load<SpriteFont>("myFont");
+            fontPos = new Vector2(20, 80);
+
             objectFactory.CreateTestWave();
         }
 
@@ -201,6 +209,8 @@ namespace SpellSlingerV1._0
                 }
             }
 
+            string output = gameAssets.TowerListItem(0).Essence.ToString();
+            spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
 
             spriteBatch.End();
 

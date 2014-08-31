@@ -20,7 +20,7 @@ namespace SpellSlingerV1._0
         int currentGameState;
 
         public virtual void Update(GameTime gameTime_) { ;}
-                
+        
         public int CurrentGameState
         {
             get { return currentGameState; }
