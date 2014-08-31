@@ -39,7 +39,7 @@ namespace SpellSlingerV1._0
                 {
                     gameAssets_.GUIListItem(i).Active = true;
                 }
-                else
+                else if(i < 5) //hack temp fix
                 {
                     gameAssets_.GUIListItem(i).Active = false;
                 }
