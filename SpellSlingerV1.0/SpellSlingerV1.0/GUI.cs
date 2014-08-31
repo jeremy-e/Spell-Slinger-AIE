@@ -54,6 +54,12 @@ namespace SpellSlingerV1._0
             objectFactory.CreateGUIComponent(GUI_SPRITES.ARROW_LEFT, 0, viewPort.ViewPortHeight / 2 - height / 2, width, height, true);
             objectFactory.CreateGUIComponent(GUI_SPRITES.ARROW_RIGHT, viewPort.ViewPortWidth - width, viewPort.ViewPortHeight/2 - height/2, width, height, true);
 
+            //Tower - thank you captain fkn obvious
+            width = 32;
+            height = 64;
+            int pad = 10;
+            objectFactory.CreateGUIComponent(GUI_SPRITES.GUI_TOWER, pad, pad, width, height, true);
+
         }
 
         public void GUIOptions()

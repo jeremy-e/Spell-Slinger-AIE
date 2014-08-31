@@ -21,7 +21,8 @@ namespace SpellSlingerV1._0
         ARROW_UP,
         ARROW_DOWN,
         ARROW_LEFT,
-        ARROW_RIGHT
+        ARROW_RIGHT,
+        GUI_TOWER
     }
 
     class SpriteManager
@@ -70,6 +71,7 @@ namespace SpellSlingerV1._0
             GUISpriteFileNames[(int)GUI_SPRITES.ARROW_DOWN] = "arrowDown.png";
             GUISpriteFileNames[(int)GUI_SPRITES.ARROW_LEFT] = "arrowLeft.png";
             GUISpriteFileNames[(int)GUI_SPRITES.ARROW_RIGHT] = "arrowRight.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.GUI_TOWER] = "GUItower.png";
         }
 
         public string GetPlayerSpriteFileName(int type)
