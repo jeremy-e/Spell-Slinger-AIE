@@ -54,8 +54,7 @@ namespace SpellSlingerV1._0
             set { type = value; }
         }
 
-        //Hey jez, i needed this property
-        //I will leave it with you to change or clean up or whatevs bru :)
+        
         public int Damage
         {
             get

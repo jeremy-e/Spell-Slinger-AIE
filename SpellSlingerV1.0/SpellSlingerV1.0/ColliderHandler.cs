@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 using System.Diagnostics;
 
 namespace SpellSlingerV1._0
@@ -30,6 +31,23 @@ namespace SpellSlingerV1._0
                 //Temporary for testing - set object to inactive for list clean up - Pass responsibility to enemy directly
                 entity_b.Active = false;
 
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool Collider(Entity entity_a, Vector2 mousePos_)
+        {
+            float entity_a_LH = entity_a.X; 	                //LH
+            float entity_a_RH = entity_a.X + entity_a.Width;	//RH
+            float entity_a_T = entity_a.Y;	                    //Top
+            float entity_a_B = entity_a.Y + entity_a.Height;	//Btm
+
+            if (mousePos_.X >= entity_a_LH && mousePos_.X <= entity_a_RH && mousePos_.Y <= entity_a_B && mousePos_.Y >= entity_a_T)
+            {
                 return true;
             }
             else

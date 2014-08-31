@@ -110,14 +110,35 @@ namespace SpellSlingerV1._0
                 spellSelect = SPELL_TYPE.RAPTURE;
                 SetActiveSpell(SPELL_TYPE.RAPTURE);
             }
-
+            
             if (Mouse.GetState().LeftButton == ButtonState.Pressed && !leftMouseButtonDown)
             {
-                //Debug.WriteLine("BOOM");
-                int spellX = Mouse.GetState().X - viewPort_.X;
-                int spellY = Mouse.GetState().Y - viewPort_.Y;
-                objectFactory_.CastSpell(spellSelect, 1, spellX, spellY);
                 leftMouseButtonDown = true;
+                bool GUIElementClicked = false;
+                //Get Mouse position in viewport
+                Vector2 mousePos = new Vector2(Mouse.GetState().X - viewPort_.X, Mouse.GetState().Y - viewPort_.Y);
+            
+                for (int i = 0; i < gameAssets_.GUIListCount; i++)
+                {
+                    if (colliderHandler_.Collider(gameAssets_.GUIListItem(i), mousePos))
+                    {
+                        //Logic for GUI Element depending on type
+                        //Tower - Upgrades?
+                        //Spellbook - spell book
+                        //hotbar - select
+                        Debug.WriteLine("PING" + gameTime.TotalGameTime);
+                        GUIElementClicked = true;
+                    }
+                }
+
+                if (!GUIElementClicked)
+                {
+                    int spellX = Mouse.GetState().X - viewPort_.X;
+                    int spellY = Mouse.GetState().Y - viewPort_.Y;
+                    objectFactory_.CastSpell(spellSelect, 1, spellX, spellY);
+                    leftMouseButtonDown = true;
+                }
+
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Released)
@@ -139,6 +160,12 @@ namespace SpellSlingerV1._0
 
                 }
             }
+
+
+            
+            
+            
+
 
             ///if any spells are active we check for collissions against active enemies
             if (gameAssets_.SpellListCount > 0)
