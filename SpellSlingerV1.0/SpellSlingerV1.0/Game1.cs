@@ -33,7 +33,6 @@ namespace SpellSlingerV1._0
         public static uint waveTimer = 1000;
         public static int wave = 1;
 
-        PlayGame playGame;
         BASE_GAMESTATE gameState;
         int currentGameState;
 

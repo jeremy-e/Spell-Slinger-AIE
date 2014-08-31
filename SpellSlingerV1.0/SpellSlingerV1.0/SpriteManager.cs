@@ -17,7 +17,11 @@ namespace SpellSlingerV1._0
         HOTBAR_3,
         HOTBAR_4,
         HOTBAR_5,
-        SPELL_BOOK
+        SPELL_BOOK,
+        ARROW_UP,
+        ARROW_DOWN,
+        ARROW_LEFT,
+        ARROW_RIGHT
     }
 
     class SpriteManager
@@ -62,6 +66,10 @@ namespace SpellSlingerV1._0
             GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_4] = "gui_hotbar4.png";
             GUISpriteFileNames[(int)GUI_SPRITES.HOTBAR_5] = "gui_hotbar5.png";
             GUISpriteFileNames[(int)GUI_SPRITES.SPELL_BOOK] = "spellbook.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.ARROW_UP] = "arrowUp.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.ARROW_DOWN] = "arrowDown.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.ARROW_LEFT] = "arrowLeft.png";
+            GUISpriteFileNames[(int)GUI_SPRITES.ARROW_RIGHT] = "arrowRight.png";
         }
 
         public string GetPlayerSpriteFileName(int type)
