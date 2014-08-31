@@ -162,11 +162,6 @@ namespace SpellSlingerV1._0
             }
 
 
-            
-            
-            
-
-
             ///if any spells are active we check for collissions against active enemies
             if (gameAssets_.SpellListCount > 0)
             {

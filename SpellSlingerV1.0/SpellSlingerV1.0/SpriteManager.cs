@@ -44,11 +44,11 @@ namespace SpellSlingerV1._0
             
             enemySpriteFileNames[(int)ENEMY_TYPE.GHOUL] = "enemy1.png";
             enemySpriteFileNames[(int)ENEMY_TYPE.RUNNING_GHOUL] = "enemy2.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.HEAVY_ZOMBIE] = "enemy1.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.SKELETON_KNIGHT] = "enemy2.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.OGRE] = "enemy1.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.WEREWOLF] = "enemy2.png";
-            enemySpriteFileNames[(int)ENEMY_TYPE.GREEN_DRAGON] = "enemy1.png";
+            enemySpriteFileNames[(int)ENEMY_TYPE.HEAVY_ZOMBIE] = "enemy3.png";
+            enemySpriteFileNames[(int)ENEMY_TYPE.SKELETON_KNIGHT] = "enemy4.png";
+            enemySpriteFileNames[(int)ENEMY_TYPE.OGRE] = "enemy5.png";
+            enemySpriteFileNames[(int)ENEMY_TYPE.WEREWOLF] = "enemy6.png";
+            enemySpriteFileNames[(int)ENEMY_TYPE.GREEN_DRAGON] = "enemy7.png";
 
             spellSpriteFileNames[(int)SPELL_TYPE.FIREBALL] = "spell1.png";
             spellSpriteFileNames[(int)SPELL_TYPE.ICELANCE] = "spell2.png";
