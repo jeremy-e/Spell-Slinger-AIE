@@ -53,15 +53,8 @@ namespace SpellSlingerV1._0
             }
 
             MoveViewPort();                                                         //Viewport control
-            SpellManagement();                                                      //Spells - would like to sort out an input handler later to cover some functions already being handled by this function
-
-            if (Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                leftMouseButtonDown = false;
-            }
-
+            SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
             gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists
-
             CollisionTesting();                                                     //Collisions
         }
 
@@ -222,6 +215,11 @@ namespace SpellSlingerV1._0
                 {
                     activeSpellCDs[i] = 0;
                 }
+            }
+
+            if (Mouse.GetState().LeftButton == ButtonState.Released)
+            {
+                leftMouseButtonDown = false;
             }
         }
 
