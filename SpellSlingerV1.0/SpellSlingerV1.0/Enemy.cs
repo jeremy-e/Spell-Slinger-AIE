@@ -123,7 +123,7 @@ namespace SpellSlingerV1._0
             if (status != ENEMY_STATUS.RECOVERING)
             {
 
-                int dmg = spell_.Damage;
+                float dmg = spell_.Damage;
 
                 //do we have a resistance to this spell? if so half the damage
                 if (resistance == spell_.Type)
@@ -134,7 +134,7 @@ namespace SpellSlingerV1._0
                     dmg *= 2;
 
                 //reduce enemy health by dmg
-                health -= dmg;
+                health -= (int)dmg;
 
                 if (health <= 0)
                     Active = false;

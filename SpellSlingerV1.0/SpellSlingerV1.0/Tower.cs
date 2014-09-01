@@ -23,7 +23,7 @@ namespace SpellSlingerV1._0
             spellLevel = new List<int>();
             for (int i = 0; i < Enum.GetNames(typeof(SPELL_TYPE)).Length; i++)
             {
-                spellLevel.Add(1);
+                spellLevel.Add(2);
             }
 
             this.Width = 64;

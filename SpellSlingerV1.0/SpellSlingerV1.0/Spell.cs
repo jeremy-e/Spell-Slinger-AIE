@@ -14,7 +14,7 @@ namespace SpellSlingerV1._0
     {
         SPELL_TYPE type;
         int spellLevel;
-        int damage;
+        float damage;
         Timer activeTimer;
         int activeTime;
         int spellCooldown;
@@ -38,19 +38,19 @@ namespace SpellSlingerV1._0
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    damage = 50;
+                    damage = 50 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.ICELANCE:
-                    damage = 40;
+                    damage = 40 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.LIGHTNING:
-                    damage = 30;
+                    damage = 30 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.DESPAIR:
-                    damage = 20;
+                    damage = 20 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.RAPTURE:
-                    damage = 10;
+                    damage = 10 * (1 + spellLevel * 0.1f);
                     break;
                 default:
                     damage = 0;
@@ -105,7 +105,7 @@ namespace SpellSlingerV1._0
             set { type = value; }
         }
 
-        public int Damage
+        public float Damage
         {
             get { return damage; }
             set { damage = value; }
