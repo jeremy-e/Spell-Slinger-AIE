@@ -71,7 +71,7 @@ namespace SpellSlingerV1._0
             {
                 viewSnappedState = false;
                 focusAreaX = 0;
-                snapPosition.X = 0.0f;
+                focusAreaY = 0;
             }
         }
 
