@@ -93,8 +93,6 @@ namespace SpellSlingerV1._0
 
         void MoveViewPort()
         {
-
-
             if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) )
             {
                 viewPort_.UnSnapX();
