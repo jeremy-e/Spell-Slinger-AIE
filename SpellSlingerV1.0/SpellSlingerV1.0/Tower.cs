@@ -11,10 +11,10 @@ namespace SpellSlingerV1._0
     {
         int capacity;
         int maxCap = 15;
-        bool spellCast;
         int essence;
         List<int> spellLevel;
         Timer spellTimer;
+        bool spellCast;                                                     //Has player cast a spell
 
         public Tower()
         {

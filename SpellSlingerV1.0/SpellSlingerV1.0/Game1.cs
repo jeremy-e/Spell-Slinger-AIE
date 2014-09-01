@@ -190,7 +190,7 @@ namespace SpellSlingerV1._0
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.ForestGreen);
 
             // TODO: Add your drawing code here
             spriteBatch.Begin();
@@ -215,8 +215,7 @@ namespace SpellSlingerV1._0
                 spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
             }
             spriteBatch.End();
-
-
+            
             base.Draw(gameTime);
         }
 

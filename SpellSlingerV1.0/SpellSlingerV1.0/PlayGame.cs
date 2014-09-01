@@ -19,6 +19,8 @@ namespace SpellSlingerV1._0
         ColliderHandler colliderHandler_;
         GUI gui;
 
+        List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
+
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
             gui = new GUI(objectFactory, viewPort);
@@ -28,8 +30,14 @@ namespace SpellSlingerV1._0
             colliderHandler_ = colliderHandler;
             CurrentGameState = (int)GAME_STATES.PLAY_GAME;
 
-            //Initialise GUI
-            gui.GUIPlayGame();
+            gui.GUIPlayGame();                                                      //Initialise GUI
+
+            activeSpellCDs = new List<int>();
+            for (int i = 0; i < Enum.GetNames(typeof(SPELL_TYPE)).Length; i++)
+            {
+                activeSpellCDs.Add(0);
+            }
+
         }
 
         public void SetActiveSpell(SPELL_TYPE type_)
@@ -121,7 +129,7 @@ namespace SpellSlingerV1._0
 
                 for (int i = 0; i < gameAssets_.GUIListCount; i++)
                 {
-                    if (colliderHandler_.Collider(gameAssets_.GUIListItem(i), mousePos))
+                    if (colliderHandler_.Collider(gameAssets_.GUIListItem(i), mousePos) && gameAssets_.GUIListItem(i).Active)
                     {
                         //Logic for GUI Element depending on type
                         //Tower - Upgrades?
@@ -132,7 +140,7 @@ namespace SpellSlingerV1._0
                     }
                 }
 
-                if (!GUIElementClicked && !gameAssets_.TowerListItem(0).SpellCast)
+                if (!GUIElementClicked && !gameAssets_.TowerListItem(0).SpellCast && activeSpellCDs[(int)spellSelect] <= 0)
                 {
                     //We must iterate through current active spell list to see whether the selected spell is currently on cooldown. (may change)
                     int spellX = Mouse.GetState().X - viewPort_.X;
@@ -141,14 +149,37 @@ namespace SpellSlingerV1._0
                     //Player has cast a spell - intiate global cooldown
                     gameAssets_.TowerListItem(0).SpellCast = true;
                     leftMouseButtonDown = true;
-                }
 
+                    //Add cooldown time to list
+                    activeSpellCDs[(int)spellSelect] = gameAssets_.SpellListItem((int)gameAssets_.SpellListCount - 1).SpellCooldown;
+                }
             }
 
             if (Mouse.GetState().LeftButton == ButtonState.Released)
             {
                 leftMouseButtonDown = false;
             }
+
+            //Iterate over cooldownlist - if anything > 0 we need to count it down
+            for (int i = 0; i < activeSpellCDs.Count; i++)
+            {
+                if (activeSpellCDs[i] > 0)
+                {
+                    activeSpellCDs[i] -=5;                    //Hack - incorporate timers later
+                    if (activeSpellCDs[i] <= 0)
+                    {
+                        Debug.WriteLine("Spell is now ready for use: " + Enum.GetNames(typeof(SPELL_TYPE)).ElementAt(i));
+                    }
+                }
+
+                if (activeSpellCDs[i] < 0)
+                {
+                    activeSpellCDs[i] = 0;
+                }
+            }
+            
+            
+            
             //-------------------------------------------SPELLS
 
             gameAssets_.RemoveEntitiesMarkedForDelete();
