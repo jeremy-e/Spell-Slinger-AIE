@@ -21,6 +21,9 @@ namespace SpellSlingerV1._0
 
         List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
 
+        float damageTick;
+        float delta;
+
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
             gui = new GUI(objectFactory, viewPort);
@@ -38,6 +41,8 @@ namespace SpellSlingerV1._0
                 activeSpellCDs.Add(0);
             }
 
+            delta = 0;
+            damageTick = 500;
         }
 
         public override void Update(GameTime gameTime)
@@ -55,12 +60,12 @@ namespace SpellSlingerV1._0
             MoveViewPort();                                                         //Viewport control
             SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
             gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists
-            CollisionTesting();                                                     //Collisions
+            CollisionTesting(gameTime);                                                     //Collisions
         }
 
 
 
-        void CollisionTesting()
+        void CollisionTesting(GameTime gameTime_)
         {
             //COLLISSION TESTING - Basic Player/Enemy Collission Test - logic here or collider can handle it?
             for (int i = 0; i < gameAssets_.EnemyListCount; i++)
@@ -73,19 +78,25 @@ namespace SpellSlingerV1._0
             }
 
             ///if any spells are active we check for collissions against active enemies
-            if (gameAssets_.SpellListCount > 0)
+            delta += gameTime_.ElapsedGameTime.Milliseconds;
+
+            if (delta >= damageTick)
             {
-                for (int i = 0; i < gameAssets_.SpellListCount; i++)
+                if (gameAssets_.SpellListCount > 0)
                 {
-                    for (int j = 0; j < gameAssets_.EnemyListCount; j++)
+                    for (int i = 0; i < gameAssets_.SpellListCount; i++)
                     {
-                        if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
+                        for (int j = 0; j < gameAssets_.EnemyListCount; j++)
                         {
-                            int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
-                            gameAssets_.TowerListItem(0).Essence += essenceReturned;
+                            if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
+                            {
+                                int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
+                                gameAssets_.TowerListItem(0).Essence += essenceReturned;
+                            }
                         }
                     }
                 }
+                delta = 0;
             }
         }
 
@@ -93,17 +104,17 @@ namespace SpellSlingerV1._0
 
         void MoveViewPort()
         {
-            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) )
+            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A))
             {
                 viewPort_.UnSnapX();
             }
-            if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S) )
+            if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 viewPort_.UnSnapY();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {                
+            {
                 viewPort_.SnapToX(250.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))

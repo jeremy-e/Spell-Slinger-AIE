@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using System.Diagnostics;
+using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
@@ -15,10 +16,15 @@ namespace SpellSlingerV1._0
         SPELL_TYPE type;
         int spellLevel;
         float damage;
+        float damagePerTick;
         Timer activeTimer;
         int activeTime;
         int spellCooldown;
-                
+
+        float initialDamage;
+        Timer damageTimer;
+        int tickCount;
+        
         public Spell(SPELL_TYPE type_, int spellLevel_, float x_, float y_)
         {
             type = type_;
@@ -27,6 +33,8 @@ namespace SpellSlingerV1._0
             Width = 64;
             Height = 64;
             damage = 0;
+            tickCount = 0;
+            initialDamage = 0;
 
             X = x_ - Width / 2;
             Y = y_ - Height / 2;
@@ -38,29 +46,51 @@ namespace SpellSlingerV1._0
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    damage = 50 * (1 + spellLevel * 0.1f);
+                    initialDamage = 5 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.ICELANCE:
-                    damage = 40 * (1 + spellLevel * 0.1f);
+                    initialDamage = 4 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.LIGHTNING:
-                    damage = 30 * (1 + spellLevel * 0.1f);
+                    initialDamage = 3 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.DESPAIR:
-                    damage = 20 * (1 + spellLevel * 0.1f);
+                    initialDamage = 2 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.RAPTURE:
-                    damage = 10 * (1 + spellLevel * 0.1f);
+                    initialDamage = 1 * (1 + spellLevel * 0.1f);
                     break;
                 default:
-                    damage = 0;
+                    initialDamage = 0;
                     break;
             }
 
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    spellCooldown = 2000;                //Switch to milliseconds and incorprate timers 
+                    damagePerTick = 0;
+                    break;
+                case SPELL_TYPE.ICELANCE:
+                    damagePerTick = 0;
+                    break;
+                case SPELL_TYPE.LIGHTNING:
+                    damagePerTick = initialDamage * 0.1f;
+                    break;
+                case SPELL_TYPE.DESPAIR:
+                    damagePerTick = initialDamage * 0.1f;
+                    break;
+                case SPELL_TYPE.RAPTURE:
+                    damagePerTick = initialDamage * 0.1f;
+                    break;
+                default:
+                    damagePerTick = 0;
+                    break;
+            }
+
+            switch (type)
+            {
+                case SPELL_TYPE.FIREBALL:
+                    spellCooldown = 2000;                //Switch to milliseconds and incorporate timers 
                     break;
                 case SPELL_TYPE.ICELANCE:
                     spellCooldown = 400;
@@ -79,18 +109,41 @@ namespace SpellSlingerV1._0
                     break;
             }
 
+            //Spell Timer
             activeTimer = new System.Timers.Timer(1000);  //1 second interval
             activeTimer.Elapsed += OnTimedEvent;
             activeTimer.Interval = activeTime;
             activeTimer.Enabled = true;
             activeTimer.Start();
 
-            Debug.WriteLine("BOOM SPELL CAST: " + type + ". SPELL LEVEL: " + spellLevel + ". SPELL DAMAGE: " + damage);
+            //Spell Damage Timer
+            damageTimer = new System.Timers.Timer(1000);
+            damageTimer.Elapsed += OnTimedEventDamage;
+            damageTimer.Interval = 100; //tick length, 100 milliseconds
+            damageTimer.Enabled = true; //Start enables... why keep putting this in?
+            damageTimer.Start();
         }
-
+                
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Active = false;
+            damageTimer.Stop();
+        }
+
+        private void OnTimedEventDamage(object source, ElapsedEventArgs e)
+        {
+            if (tickCount == 0)
+            {
+                damage = initialDamage;
+            }
+            else
+            {
+                damage = damagePerTick;
+            }
+            tickCount++;
+            //Debug.WriteLine("Tick:" + tickCount + "BOOM SPELL CAST: " + type + ". SPELL LEVEL: " + spellLevel + ". SPELL DAMAGE: " + damage);            
+            damageTimer.Stop();
+            damageTimer.Start();
         }
 
         public int SpellLevel
@@ -115,6 +168,12 @@ namespace SpellSlingerV1._0
         {
             get { return spellCooldown; }
             set { spellCooldown = value; }
+        }
+
+        public float DamagePerTick
+        {
+            get { return damagePerTick; }
+            set { damagePerTick = value; }
         }
 
     }
