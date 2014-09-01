@@ -9,7 +9,7 @@ namespace SpellSlingerV1._0
     class EnemySpawnRules
     {
         Dice dice;
-        List<ENEMY_TYPE> enemyTypes; //use this list to decide what was spawned based on dice roll. 
+        List<ENEMY_TYPE> enemyTypes; //use this list to decide what was spawned based on dice roll.         
 
         public EnemySpawnRules(Dice dice_, ENEMY_TYPE defaultEnemyType_)
         {
@@ -41,5 +41,7 @@ namespace SpellSlingerV1._0
             return enemyTypes[dice_roll];
         }
     }
+
+    
 
 }
