@@ -10,11 +10,14 @@ namespace SpellSlingerV1._0
 
     class Entity
     {
-        private Texture2D texture;
+        protected Texture2D texture;
         protected Vector2 pos;
         private int width;
         private int height;
+        private float rotation;
+        
         protected Color drawColour = Color.White;
+
 
         //Will allow for iteration through lists and if false object will be removed - ie dead enemies, spells cast
         private bool active;                
@@ -63,6 +66,12 @@ namespace SpellSlingerV1._0
         {
             get { return texture; }
             set { texture = value; }
+        }
+
+        public float Rotation
+        {
+            get { return rotation; }
+            set { rotation = value; }
         }
     }
 }

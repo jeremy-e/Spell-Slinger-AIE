@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Timers;
 using Microsoft.Xna.Framework;
+using System.Diagnostics;
 
 namespace SpellSlingerV1._0
 {
@@ -60,10 +61,12 @@ namespace SpellSlingerV1._0
             get
             {
                 Vector2 dir = Pos - playerPos;
-                dir.Normalize();
+                dir.Normalize();                
                 return dir;
             }
         }
+
+        
 
         //happy to leave this hardcoded for now rather than using const vars
         //at least it is neat and everything is in the same spot. 
@@ -159,6 +162,8 @@ namespace SpellSlingerV1._0
             Vector2 movementPreDelta = new Vector2();
             movementPreDelta = (Direction * speed);
             pos -= (movementPreDelta * delta);
+            Rotation = (float)(Math.Atan2(Direction.Y, Direction.X)) - ((float)Math.PI / 2);
+            //Debug.WriteLine(Rotation);
         }
 
         public int Health
