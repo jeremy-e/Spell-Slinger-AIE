@@ -18,6 +18,12 @@ namespace SpellSlingerV1._0
         int focusAreaX;
         int focusAreaY;
         SpriteBatch spriteBatch;
+        Vector2 snapPosition;
+
+        //PC: is the user currently holding W,A,S or D down?
+        bool viewSnappedState;
+
+        
 
         public ViewPort(SpriteBatch spriteBatch_, int viewPortWidth_, int viewPortHeight_)
         {
@@ -26,7 +32,10 @@ namespace SpellSlingerV1._0
             viewPortHeight = viewPortHeight_;
             focusAreaX = 0;
             focusAreaY = 0;
+            viewSnappedState = false;
+            snapPosition = new Vector2(0.0f, 0.0f);
         }
+
 
         public void Draw(Entity entity_)
         {
@@ -34,6 +43,36 @@ namespace SpellSlingerV1._0
             int yPos = (int)entity_.Y + focusAreaY;
             Rectangle drawPos = new Rectangle(xPos, yPos, entity_.Width, entity_.Height);
             spriteBatch.Draw(entity_.Texture, drawPos, entity_.DrawColor);
+        }
+
+        public void SnapToX(float x_)
+        {
+            if (viewSnappedState == false)
+            {
+                focusAreaX -= (int)x_;
+                snapPosition.X -= x_;
+                viewSnappedState = true;
+            }
+        }
+
+        public void SnapToY(float y_)
+        {
+            if (viewSnappedState == false)
+            {
+                focusAreaY -= (int)y_;
+                snapPosition.Y -= y_;
+                viewSnappedState = true;
+            }
+        }
+
+        public void UnSnap()
+        {
+            if (viewSnappedState == true)
+            {
+                viewSnappedState = false;
+                focusAreaX = 0;
+                snapPosition.X = 0.0f;
+            }
         }
 
         public void MoveX(int amount_)

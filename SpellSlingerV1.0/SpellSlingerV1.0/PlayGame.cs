@@ -93,21 +93,31 @@ namespace SpellSlingerV1._0
 
         void MoveViewPort()
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.D))
+
+
+            if (!Keyboard.GetState().IsKeyDown(Keys.D)
+                && !Keyboard.GetState().IsKeyDown(Keys.A)
+                && !Keyboard.GetState().IsKeyDown(Keys.S)
+                && !Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                viewPort_.MoveX(-5);
+                viewPort_.UnSnap();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D))
+            {                
+                viewPort_.SnapToX(250.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                viewPort_.MoveX(5);
+                viewPort_.SnapToX(-250.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                viewPort_.MoveY(5);
+                viewPort_.SnapToY(-150.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                viewPort_.MoveY(-5);
+                viewPort_.SnapToY(150.0f);
             }
 
             for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
