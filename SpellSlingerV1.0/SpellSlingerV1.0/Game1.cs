@@ -209,9 +209,11 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            string output = gameAssets.TowerListItem(0).Essence.ToString();
-            spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
-
+            if (currentGameState == (int)GAME_STATES.PLAY_GAME)
+            {
+                string output = gameAssets.TowerListItem(0).Essence.ToString();
+                spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
+            }
             spriteBatch.End();
 
 
