@@ -153,7 +153,7 @@ namespace SpellSlingerV1._0
 
         //to be called by Update
         //Move enemy towards player
-        public void Move(GameTime gameTime_)
+        public void Update(GameTime gameTime_)
         {
             int delta = gameTime_.ElapsedGameTime.Milliseconds;
             Vector2 movementPreDelta = new Vector2();

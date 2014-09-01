@@ -40,35 +40,66 @@ namespace SpellSlingerV1._0
 
         }
 
-        public void SetActiveSpell(SPELL_TYPE type_)
+        public override void Update(GameTime gameTime)
         {
-            for (int i = 0; i < gameAssets_.GUIListCount; i++)
+            for (int i = 0; i < gameAssets_.EnemyListCount; i++)                    //Enemy logic
             {
-                if (i == (int)type_)
+                gameAssets_.EnemyListItem(i).Update(gameTime);
+            }
+
+            for (int i = 0; i < gameAssets_.TowerListCount; i++)                    //Player logic
+            {
+                gameAssets_.TowerListItem(i).Update(gameTime);
+            }
+
+            MoveViewPort();                                                         //Viewport control
+            SpellManagement();                                                      //Spells - would like to sort out an input handler later to cover some functions already being handled by this function
+
+            if (Mouse.GetState().LeftButton == ButtonState.Released)
+            {
+                leftMouseButtonDown = false;
+            }
+
+            gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists
+
+            CollisionTesting();                                                     //Collisions
+        }
+
+
+
+        void CollisionTesting()
+        {
+            //COLLISSION TESTING - Basic Player/Enemy Collission Test - logic here or collider can handle it?
+            for (int i = 0; i < gameAssets_.EnemyListCount; i++)
+            {
+                if (colliderHandler_.Collider(gameAssets_.TowerListItem(0), gameAssets_.EnemyListItem(i)))
                 {
-                    gameAssets_.GUIListItem(i).Active = true;
+                    gameAssets_.TowerListItem(0).Capacity++;
+
                 }
-                else if (i < 5) //hack temp fix
+            }
+
+            ///if any spells are active we check for collissions against active enemies
+            if (gameAssets_.SpellListCount > 0)
+            {
+                for (int i = 0; i < gameAssets_.SpellListCount; i++)
                 {
-                    gameAssets_.GUIListItem(i).Active = false;
+                    for (int j = 0; j < gameAssets_.EnemyListCount; j++)
+                    {
+                        if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
+                        {
+                            int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
+                            gameAssets_.TowerListItem(0).Essence += essenceReturned;
+                        }
+                    }
                 }
             }
         }
 
-        public override void Update(GameTime gameTime)
+
+
+        void MoveViewPort()
         {
-
-            for (int i = 0; i < gameAssets_.EnemyListCount; i++)
-            {
-                gameAssets_.EnemyListItem(i).Move(gameTime);                               //Testing movement
-            }
-
-            for (int i = 0; i < gameAssets_.TowerListCount; i++)
-            {
-                gameAssets_.TowerListItem(i).Update();
-            }
-
-            //move viewport
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
                 viewPort_.MoveX(-5);
@@ -86,13 +117,31 @@ namespace SpellSlingerV1._0
                 viewPort_.MoveY(-5);
             }
 
-            //move GUI elements w/viewport
-            for (int i = 0; i < gameAssets_.GUIListCount; i++)
+            for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
             {
                 gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
             }
+        }
 
-            //-------------------------------------------SPELLS
+
+        public void SetActiveSpell(SPELL_TYPE type_)
+        {
+            for (int i = 0; i < gameAssets_.GUIListCount; i++)
+            {
+                if (i == (int)type_)
+                {
+                    gameAssets_.GUIListItem(i).Active = true;
+                }
+                else if (i < 5) //hack temp fix
+                {
+                    gameAssets_.GUIListItem(i).Active = false;
+                }
+            }
+        }
+
+
+        void SpellManagement()
+        {
             //Click to cast
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
@@ -135,7 +184,7 @@ namespace SpellSlingerV1._0
                         //Tower - Upgrades?
                         //Spellbook - spell book
                         //hotbar - select
-                        Debug.WriteLine("PING" + gameTime.TotalGameTime);
+                        //Debug.WriteLine("PING" + gameTime.TotalGameTime);
                         GUIElementClicked = true;
                     }
                 }
@@ -155,17 +204,14 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            if (Mouse.GetState().LeftButton == ButtonState.Released)
-            {
-                leftMouseButtonDown = false;
-            }
+
 
             //Iterate over cooldownlist - if anything > 0 we need to count it down
             for (int i = 0; i < activeSpellCDs.Count; i++)
             {
                 if (activeSpellCDs[i] > 0)
                 {
-                    activeSpellCDs[i] -=5;                    //Hack - incorporate timers later
+                    activeSpellCDs[i] -= 5;                    //Hack - incorporate timers later
                     if (activeSpellCDs[i] <= 0)
                     {
                         Debug.WriteLine("Spell is now ready for use: " + Enum.GetNames(typeof(SPELL_TYPE)).ElementAt(i));
@@ -177,41 +223,7 @@ namespace SpellSlingerV1._0
                     activeSpellCDs[i] = 0;
                 }
             }
-            
-            
-            
-            //-------------------------------------------SPELLS
-
-            gameAssets_.RemoveEntitiesMarkedForDelete();
-
-            //COLLISSION TESTING
-            //Basic Player/Enemy Collission Test
-            //Do we put logic here or collider can handle it?
-            for (int i = 0; i < gameAssets_.EnemyListCount; i++)
-            {
-                if (colliderHandler_.Collider(gameAssets_.TowerListItem(0), gameAssets_.EnemyListItem(i)))
-                {
-                    gameAssets_.TowerListItem(0).Capacity++;
-
-                }
-            }
-
-
-            ///if any spells are active we check for collissions against active enemies
-            if (gameAssets_.SpellListCount > 0)
-            {
-                for (int i = 0; i < gameAssets_.SpellListCount; i++)
-                {
-                    for (int j = 0; j < gameAssets_.EnemyListCount; j++)
-                    {
-                        if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
-                        {
-                            int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
-                            gameAssets_.TowerListItem(0).Essence += essenceReturned;
-                        }
-                    }
-                }
-            }
         }
+
     }
 }

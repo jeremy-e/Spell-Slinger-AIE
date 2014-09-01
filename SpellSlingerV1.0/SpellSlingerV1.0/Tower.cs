@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using System.Timers;
+using Microsoft.Xna.Framework;
 
 namespace SpellSlingerV1._0
 {
@@ -38,7 +39,7 @@ namespace SpellSlingerV1._0
             spellCast = false;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime_)
         {
             if (capacity >= maxCap)
             {
