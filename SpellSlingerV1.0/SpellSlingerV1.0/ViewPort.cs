@@ -21,7 +21,8 @@ namespace SpellSlingerV1._0
         Vector2 snapPosition;
 
         //PC: is the user currently holding W,A,S or D down?
-        bool viewSnappedState;
+        bool viewXSnappedState;
+        bool viewYSnappedState;
 
         
 
@@ -32,7 +33,8 @@ namespace SpellSlingerV1._0
             viewPortHeight = viewPortHeight_;
             focusAreaX = 0;
             focusAreaY = 0;
-            viewSnappedState = false;
+            viewXSnappedState = false;
+            viewYSnappedState = false;
             snapPosition = new Vector2(0.0f, 0.0f);
         }
 
@@ -47,30 +49,38 @@ namespace SpellSlingerV1._0
 
         public void SnapToX(float x_)
         {
-            if (viewSnappedState == false)
+            if (viewXSnappedState == false)
             {
                 focusAreaX -= (int)x_;
                 snapPosition.X -= x_;
-                viewSnappedState = true;
+                viewXSnappedState = true;
             }
         }
 
         public void SnapToY(float y_)
         {
-            if (viewSnappedState == false)
+            if (viewYSnappedState == false)
             {
                 focusAreaY -= (int)y_;
                 snapPosition.Y -= y_;
-                viewSnappedState = true;
+                viewYSnappedState = true;
             }
         }
 
-        public void UnSnap()
+        public void UnSnapX()
         {
-            if (viewSnappedState == true)
+            if (viewXSnappedState == true)
             {
-                viewSnappedState = false;
+                viewXSnappedState = false;
                 focusAreaX = 0;
+            }
+        }
+        
+        public void UnSnapY()
+        {
+            if (viewYSnappedState == true)
+            {
+                viewYSnappedState = false;
                 focusAreaY = 0;
             }
         }

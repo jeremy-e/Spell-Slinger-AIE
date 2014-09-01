@@ -95,12 +95,13 @@ namespace SpellSlingerV1._0
         {
 
 
-            if (!Keyboard.GetState().IsKeyDown(Keys.D)
-                && !Keyboard.GetState().IsKeyDown(Keys.A)
-                && !Keyboard.GetState().IsKeyDown(Keys.S)
-                && !Keyboard.GetState().IsKeyDown(Keys.W))
+            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A) )
             {
-                viewPort_.UnSnap();
+                viewPort_.UnSnapX();
+            }
+            if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S) )
+            {
+                viewPort_.UnSnapY();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
