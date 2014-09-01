@@ -32,22 +32,22 @@ namespace SpellSlingerV1._0
             {
                 //50% Ghoul, 50% Running Ghoul
                 EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
-                rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 50, 50); //if we roll 11 or 12 then give us a running ghoul                     
+                rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 50, 50); 
                 spawnRulesList.Add(rules);
             }
             
             {
                 //70% SKELETON_KNIGHT, 30% WEREWOLF
                 EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.SKELETON_KNIGHT);
-                rules.SetEnemyRule(ENEMY_TYPE.WEREWOLF, 70, 30); //if we roll 11 or 12 then give us a running ghoul                     
+                rules.SetEnemyRule(ENEMY_TYPE.WEREWOLF, 70, 30); 
                 spawnRulesList.Add(rules);
             }
 
             {
                 //10% Green Dragon, 40% HEAVY_ZOMBIE, 40% SKELETON KNIGHT
                 EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.HEAVY_ZOMBIE);
-                rules.SetEnemyRule(ENEMY_TYPE.SKELETON_KNIGHT, 70, 30); //if we roll 11 or 12 then give us a running ghoul                     
-                rules.SetEnemyRule(ENEMY_TYPE.GREEN_DRAGON, 70, 30); //if we roll 11 or 12 then give us a running ghoul                     
+                rules.SetEnemyRule(ENEMY_TYPE.SKELETON_KNIGHT, 70, 30); 
+                rules.SetEnemyRule(ENEMY_TYPE.GREEN_DRAGON, 70, 30); 
                 spawnRulesList.Add(rules);
             }
 
