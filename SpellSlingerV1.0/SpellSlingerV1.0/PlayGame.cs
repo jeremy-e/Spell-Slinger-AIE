@@ -42,7 +42,7 @@ namespace SpellSlingerV1._0
             }
 
             delta = 0;
-            damageTick = 500;
+            damageTick = 16;
         }
 
         public override void Update(GameTime gameTime)
@@ -78,26 +78,26 @@ namespace SpellSlingerV1._0
             }
 
             ///if any spells are active we check for collissions against active enemies
-            delta += gameTime_.ElapsedGameTime.Milliseconds;
+            //delta += gameTime_.ElapsedGameTime.Milliseconds;
 
-            if (delta >= damageTick)
+
+            //Issue is the spell can be cast and disappear out of loop before its even been checked against collisions.
+            if (gameAssets_.SpellListCount > 0)
             {
-                if (gameAssets_.SpellListCount > 0)
+                for (int i = 0; i < gameAssets_.SpellListCount; i++)
                 {
-                    for (int i = 0; i < gameAssets_.SpellListCount; i++)
+                    for (int j = 0; j < gameAssets_.EnemyListCount; j++)
                     {
-                        for (int j = 0; j < gameAssets_.EnemyListCount; j++)
+                        if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
                         {
-                            if (colliderHandler_.Collider(gameAssets_.SpellListItem(i), gameAssets_.EnemyListItem(j)))
-                            {
-                                int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
-                                gameAssets_.TowerListItem(0).Essence += essenceReturned;
-                            }
+                            int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
+                            gameAssets_.TowerListItem(0).Essence += essenceReturned;
                         }
                     }
                 }
-                delta = 0;
             }
+
+
         }
 
 

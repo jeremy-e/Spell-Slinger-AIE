@@ -26,7 +26,7 @@ namespace SpellSlingerV1._0
         private ENEMY_STATUS status;
         private Timer recoveryTimer;
 
-        
+
         public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
         {
             pos = pos_;
@@ -45,7 +45,7 @@ namespace SpellSlingerV1._0
 
         public ENEMY_STATUS Status
         {
-            get{ return status; }
+            get { return status; }
         }
 
         private void EnemyRecovered(Object source, ElapsedEventArgs e)
@@ -53,7 +53,7 @@ namespace SpellSlingerV1._0
             recoveryTimer.Stop();
             status = ENEMY_STATUS.OK;
             drawColour = Color.White;
-        } 
+        }
 
         //direction property (we dont need to store as we can calculate on the fly)
         public Vector2 Direction
@@ -61,12 +61,12 @@ namespace SpellSlingerV1._0
             get
             {
                 Vector2 dir = Pos - playerPos;
-                dir.Normalize();                
+                dir.Normalize();
                 return dir;
             }
         }
 
-        
+
 
         //happy to leave this hardcoded for now rather than using const vars
         //at least it is neat and everything is in the same spot. 
@@ -78,7 +78,7 @@ namespace SpellSlingerV1._0
                 case ENEMY_TYPE.GHOUL:
                     health = 60;
                     speed = 0.02f;
-                    weakness = SPELL_TYPE.FIREBALL;                    
+                    weakness = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
                     health = 30;
@@ -138,6 +138,7 @@ namespace SpellSlingerV1._0
 
                 //reduce enemy health by dmg
                 health -= (int)dmg;
+                Debug.WriteLine("Dmg Received: " + dmg + ". Health: " + health);
 
                 if (health <= 0)
                     Active = false;
@@ -149,7 +150,7 @@ namespace SpellSlingerV1._0
                 }
 
                 //TODO fix the way the essence is calculated
-                return 100; 
+                return 100;
             }
             return 0;
         }

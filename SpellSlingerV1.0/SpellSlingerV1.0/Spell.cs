@@ -46,19 +46,19 @@ namespace SpellSlingerV1._0
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    initialDamage = 5 * (1 + spellLevel * 0.1f);
+                    initialDamage = 50 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.ICELANCE:
-                    initialDamage = 4 * (1 + spellLevel * 0.1f);
+                    initialDamage = 40 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.LIGHTNING:
-                    initialDamage = 3 * (1 + spellLevel * 0.1f);
+                    initialDamage = 30 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.DESPAIR:
-                    initialDamage = 2 * (1 + spellLevel * 0.1f);
+                    initialDamage = 20 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.RAPTURE:
-                    initialDamage = 1 * (1 + spellLevel * 0.1f);
+                    initialDamage = 10 * (1 + spellLevel * 0.1f);
                     break;
                 default:
                     initialDamage = 0;
@@ -141,7 +141,7 @@ namespace SpellSlingerV1._0
                 damage = damagePerTick;
             }
             tickCount++;
-            //Debug.WriteLine("Tick:" + tickCount + "BOOM SPELL CAST: " + type + ". SPELL LEVEL: " + spellLevel + ". SPELL DAMAGE: " + damage);            
+            //Debug.WriteLine("[Damage Timer On] BOOM SPELL CAST: " + type + ". SPELL DAMAGE: " + damage);            
             damageTimer.Stop();
             damageTimer.Start();
         }

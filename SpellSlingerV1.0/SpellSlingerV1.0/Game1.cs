@@ -197,7 +197,10 @@ namespace SpellSlingerV1._0
 
             for (int i = 0; i < gameAssets.DrawListCount; i++)
             {
-                viewPort.Draw(gameAssets.DrawListItem(i));
+                if (gameAssets.DrawListItem(i).Active)
+                {
+                    viewPort.Draw(gameAssets.DrawListItem(i));
+                }
             }
 
             //Add GUI to separate drawlist - Always draw on top of everything else
@@ -215,7 +218,7 @@ namespace SpellSlingerV1._0
                 spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
             }
             spriteBatch.End();
-            
+
             base.Draw(gameTime);
         }
 
