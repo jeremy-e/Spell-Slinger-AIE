@@ -43,10 +43,10 @@ namespace SpellSlingerV1._0
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    initialDamage = 50 * (1 + spellLevel * 0.1f);
+                    initialDamage = 100 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.ICELANCE:
-                    initialDamage = 40 * (1 + spellLevel * 0.1f);
+                    initialDamage = 75 * (1 + spellLevel * 0.1f);
                     break;
                 case SPELL_TYPE.LIGHTNING:
                     initialDamage = 30 * (1 + spellLevel * 0.1f);
@@ -71,10 +71,10 @@ namespace SpellSlingerV1._0
                     damagePerTick = 0;
                     break;
                 case SPELL_TYPE.LIGHTNING:
-                    damagePerTick = initialDamage * 0.1f;
+                    damagePerTick = initialDamage * 0.5f;
                     break;
                 case SPELL_TYPE.DESPAIR:
-                    damagePerTick = initialDamage * 0.1f;
+                    damagePerTick = initialDamage * 0.2f;
                     break;
                 case SPELL_TYPE.RAPTURE:
                     damagePerTick = initialDamage * 0.1f;
