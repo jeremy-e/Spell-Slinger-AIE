@@ -72,11 +72,7 @@ namespace SpellSlingerV1._0
                 }
             }
 
-            ///if any spells are active we check for collissions against active enemies
-            //delta += gameTime_.ElapsedGameTime.Milliseconds;
-
-
-            //Issue is the spell can be cast and disappear out of loop before its even been checked against collisions.
+            //spell - enemy
             if (gameAssets_.SpellListCount > 0)
             {
                 for (int i = 0; i < gameAssets_.SpellListCount; i++)
