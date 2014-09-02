@@ -23,8 +23,7 @@ namespace SpellSlingerV1._0
 
         float initialDamage;
         Timer damageTimer;
-        int tickCount;
-        
+
         public Spell(SPELL_TYPE type_, int spellLevel_, float x_, float y_)
         {
             type = type_;
@@ -32,8 +31,6 @@ namespace SpellSlingerV1._0
             Active = true;
             Width = 64;
             Height = 64;
-            damage = 0;
-            tickCount = 0;
             initialDamage = 0;
 
             X = x_ - Width / 2;
@@ -109,6 +106,8 @@ namespace SpellSlingerV1._0
                     break;
             }
 
+            damage = initialDamage;
+
             //Spell Timer
             activeTimer = new System.Timers.Timer(1000);  //1 second interval
             activeTimer.Elapsed += OnTimedEvent;
@@ -123,27 +122,15 @@ namespace SpellSlingerV1._0
             damageTimer.Enabled = true; //Start enables... why keep putting this in?
             damageTimer.Start();
         }
-                
+
         private void OnTimedEvent(object source, ElapsedEventArgs e)
         {
             Active = false;
-            damageTimer.Stop();
         }
 
         private void OnTimedEventDamage(object source, ElapsedEventArgs e)
         {
-            if (tickCount == 0)
-            {
-                damage = initialDamage;
-            }
-            else
-            {
-                damage = damagePerTick;
-            }
-            tickCount++;
-            //Debug.WriteLine("[Damage Timer On] BOOM SPELL CAST: " + type + ". SPELL DAMAGE: " + damage);            
-            damageTimer.Stop();
-            damageTimer.Start();
+            damage = damagePerTick;
         }
 
         public int SpellLevel
