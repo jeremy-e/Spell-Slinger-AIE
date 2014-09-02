@@ -21,9 +21,6 @@ namespace SpellSlingerV1._0
 
         List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
 
-        float damageTick;
-        float delta;
-
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
             gui = new GUI(objectFactory, viewPort);
@@ -41,8 +38,6 @@ namespace SpellSlingerV1._0
                 activeSpellCDs.Add(0);
             }
 
-            delta = 0;
-            damageTick = 16;
         }
 
         public override void Update(GameTime gameTime)

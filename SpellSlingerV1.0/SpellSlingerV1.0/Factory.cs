@@ -93,7 +93,7 @@ namespace SpellSlingerV1._0
         public void CreateEnemy(ENEMY_TYPE enemyType_, Vector2 enemyPos_, int wave_ = 1)
         {
             //TODO: 0 hardcoded in next line for now, will be safe unless multiple towers introduced
-            Enemy enemy = new Enemy(enemyType_, gameAssets.TowerListItem(0).Pos, enemyPos_);
+            Enemy enemy = new Enemy(enemyType_, gameAssets.TowerListItem(0).Pos2, enemyPos_);
 
             enemy.Texture = gameAssets.EnemyTextureList[(int)enemyType_];
             gameAssets.EnemyListAdd(enemy);
