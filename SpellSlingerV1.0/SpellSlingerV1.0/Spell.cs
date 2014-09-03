@@ -87,7 +87,7 @@ namespace SpellSlingerV1._0
             switch (type)
             {
                 case SPELL_TYPE.FIREBALL:
-                    spellCooldown = 2000;                //Switch to milliseconds and incorporate timers 
+                    spellCooldown = 2000;
                     break;
                 case SPELL_TYPE.ICELANCE:
                     spellCooldown = 400;
