@@ -33,8 +33,10 @@ namespace SpellSlingerV1._0
             Height = 64;
             initialDamage = 0;
 
-            X = x_ - Width / 2;
-            Y = y_ - Height / 2;
+            X = x_;
+            Y = y_;
+
+            Debug.WriteLine("spellX" + X + "spellY" + Y);
 
             //Set spell to be 'active' - currently being used to control draw time on screen
             activeTime = 500;

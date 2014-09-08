@@ -39,10 +39,10 @@ namespace SpellSlingerV1._0
 
         public bool Collider(Entity entity_a, Vector2 mousePos_)
         {
-            float entity_a_LH = entity_a.X - entity_a.Width / 2; 	                //LH
-            float entity_a_RH = entity_a.X + entity_a.Width / 2;	//RH
-            float entity_a_T = entity_a.Y - entity_a.Height / 2;	                    //Top
-            float entity_a_B = entity_a.Y + entity_a.Height / 2;	//Btm
+             float entity_a_LH = entity_a.X - entity_a.Width/2; 	                //LH
+            float entity_a_RH = entity_a.X + entity_a.Width/2;	//RH
+            float entity_a_T = entity_a.Y - entity_a.Height/2;	                    //Top
+            float entity_a_B = entity_a.Y +entity_a.Height/2;	//Btm
 
             if (mousePos_.X >= entity_a_LH && mousePos_.X <= entity_a_RH && mousePos_.Y <= entity_a_B && mousePos_.Y >= entity_a_T)
             {

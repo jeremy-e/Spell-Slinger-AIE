@@ -198,6 +198,9 @@ namespace SpellSlingerV1._0
                     //We must iterate through current active spell list to see whether the selected spell is currently on cooldown. (may change)
                     int spellX = Mouse.GetState().X - viewPort_.X;
                     int spellY = Mouse.GetState().Y - viewPort_.Y;
+
+                    Debug.WriteLine("X" + spellX + "Y" + spellY);
+
                     objectFactory_.CastSpell(spellSelect, gameAssets_.TowerListItem(0).SpellLevel[(int)spellSelect], spellX, spellY);
                     //Player has cast a spell - intiate global cooldown
                     gameAssets_.TowerListItem(0).SpellCast = true;
