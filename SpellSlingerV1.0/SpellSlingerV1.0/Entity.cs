@@ -12,7 +12,6 @@ namespace SpellSlingerV1._0
     {
         protected Texture2D texture;
         protected Vector2 pos;
-        protected Vector2 pos2; //Position for centre of tower
         private int width;
         private int height;
         private float rotation;
@@ -34,11 +33,6 @@ namespace SpellSlingerV1._0
             get { return pos; }
         }
 
-        public Vector2 Pos2
-        {
-            get { return pos2; }
-        }
-
         public Vector2 Origin
         {
             get
@@ -55,7 +49,6 @@ namespace SpellSlingerV1._0
             set
             {
                 pos.X = value;
-                pos2.X = value + Width*0.5f;
             }
 
         }
@@ -66,7 +59,6 @@ namespace SpellSlingerV1._0
             set
             {
                 pos.Y = value;
-                pos2.Y = value + Height*0.5f;
             }
         }
 

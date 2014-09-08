@@ -13,9 +13,9 @@ namespace SpellSlingerV1._0
         public bool Collider(Entity entity_a, Entity entity_b)
         {
             float entity_a_LH = entity_a.X; 	                //LH
-            float entity_a_RH = entity_a.X + entity_a.Width;	//RH
+            float entity_a_RH = entity_a.X + entity_a.Width/2;	//RH
             float entity_a_T = entity_a.Y;	                    //Top
-            float entity_a_B = entity_a.Y + entity_a.Height;	//Btm
+            float entity_a_B = entity_a.Y +entity_a.Height/2;	//Btm
 
             //Let's get centre of entity_b for a little more realism/accuracy
             float entity_b_X = entity_b.X;// +(entity_b.Width * 0.5f);
@@ -40,9 +40,9 @@ namespace SpellSlingerV1._0
         public bool Collider(Entity entity_a, Vector2 mousePos_)
         {
             float entity_a_LH = entity_a.X; 	                //LH
-            float entity_a_RH = entity_a.X + entity_a.Width;	//RH
+            float entity_a_RH = entity_a.X + entity_a.Width/2;	//RH
             float entity_a_T = entity_a.Y;	                    //Top
-            float entity_a_B = entity_a.Y + entity_a.Height;	//Btm
+            float entity_a_B = entity_a.Y + entity_a.Height/2;	//Btm
 
             if (mousePos_.X >= entity_a_LH && mousePos_.X <= entity_a_RH && mousePos_.Y <= entity_a_B && mousePos_.Y >= entity_a_T)
             {
