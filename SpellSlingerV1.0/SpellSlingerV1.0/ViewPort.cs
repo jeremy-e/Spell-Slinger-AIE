@@ -45,15 +45,15 @@ namespace SpellSlingerV1._0
             int yPos = (int)entity_.Y + focusAreaY;
             Rectangle drawPos = new Rectangle(xPos, yPos, entity_.Width, entity_.Height);
 
-            //if ( entity_ is Enemy )
-            //{
-            //    Enemy enemy = (Enemy)entity_;
-                spriteBatch.Draw(entity_.Texture, null, drawPos, null, null, entity_.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
-            //}
-            //else
-            //{
-            //    spriteBatch.Draw(entity_.Texture, drawPos, entity_.DrawColor );
-            //}
+            if ( entity_ is Enemy )
+            {
+                Enemy enemy = (Enemy)entity_;
+                spriteBatch.Draw(entity_.Texture, null, drawPos, null, null, enemy.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
+            }
+            else
+            {
+                spriteBatch.Draw(entity_.Texture, drawPos, entity_.DrawColor );
+            }
         }
 
         public void SnapToX(float x_)
