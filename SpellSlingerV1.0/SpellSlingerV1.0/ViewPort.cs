@@ -44,11 +44,13 @@ namespace SpellSlingerV1._0
             int xPos = (int)entity_.X + focusAreaX;
             int yPos = (int)entity_.Y + focusAreaY;
             Rectangle drawPos = new Rectangle(xPos, yPos, entity_.Width, entity_.Height);
+            //Vector2 drawPos = new Vector2(xPos, yPos);
 
-            if ( entity_ is Enemy )
+            if (entity_ is Enemy)
             {
                 Enemy enemy = (Enemy)entity_;
-                spriteBatch.Draw(entity_.Texture, null, drawPos, null, entity_.Pos2, enemy.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
+                spriteBatch.Draw(entity_.Texture, null, drawPos, null, entity_.Origin, entity_.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
+                //spriteBatch.Draw(entity_.Texture, drawPos, null, entity_.DrawColor, entity_.Rotation, entity_.Origin, , null, , SpriteEffects.None, 0f);
             }
             else
             {

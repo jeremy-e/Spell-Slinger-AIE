@@ -39,6 +39,16 @@ namespace SpellSlingerV1._0
             get { return pos2; }
         }
 
+        public Vector2 Origin
+        {
+            get
+            {
+                float width_div2 = width / 2;
+                float height_div2 = height / 2;
+                return new Vector2(width_div2, height_div2); 
+            }
+        }
+
         public float X
         {
             get { return pos.X; }
