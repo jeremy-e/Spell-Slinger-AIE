@@ -48,7 +48,7 @@ namespace SpellSlingerV1._0
             if ( entity_ is Enemy )
             {
                 Enemy enemy = (Enemy)entity_;
-                spriteBatch.Draw(entity_.Texture, null, drawPos, null, null, enemy.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
+                spriteBatch.Draw(entity_.Texture, null, drawPos, null, entity_.Pos2, enemy.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
             }
             else
             {
