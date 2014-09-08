@@ -27,7 +27,7 @@ namespace SpellSlingerV1._0
                 if (entity_a.GetType() == typeof(Tower))
                 {
                     //Temporary for testing - set object to inactive for list clean up - Pass responsibility to enemy directly
-                    entity_b.Active = false;
+                    //entity_b.Active = false;
                 }
                 return true;
             }
