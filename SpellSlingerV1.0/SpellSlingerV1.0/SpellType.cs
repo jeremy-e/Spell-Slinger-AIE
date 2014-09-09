@@ -11,7 +11,9 @@ namespace SpellSlingerV1._0
         ICELANCE,
         LIGHTNING,
         DESPAIR,
-        RAPTURE
+        RAPTURE,
+
+        NUM_SPELL_TYPE
     }
 
 }

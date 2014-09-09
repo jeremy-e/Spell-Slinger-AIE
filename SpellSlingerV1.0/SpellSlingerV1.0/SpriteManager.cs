@@ -7,7 +7,9 @@ namespace SpellSlingerV1._0
 {
     public enum PLAYER_SPRITES
     {
-        TOWER
+        TOWER,
+
+        NUM_PLAYER_SPRITES
     }
 
     public enum GUI_SPRITES
@@ -22,15 +24,17 @@ namespace SpellSlingerV1._0
         ARROW_DOWN,
         ARROW_LEFT,
         ARROW_RIGHT,
-        GUI_TOWER
+        GUI_TOWER,
+
+        NUM_GUI_SPRITES
     }
 
     class SpriteManager
     {
-        public static int playerNumTextures = Enum.GetNames(typeof(PLAYER_SPRITES)).Length;
-        public static int enemyNumTextures = Enum.GetNames(typeof(ENEMY_TYPE)).Length;
-        public static int spellNumTextures = Enum.GetNames(typeof(SPELL_TYPE)).Length;
-        public static int GUINumTextures = Enum.GetNames(typeof(GUI_SPRITES)).Length;
+        public static int playerNumTextures = (int)PLAYER_SPRITES.NUM_PLAYER_SPRITES;
+        public static int enemyNumTextures = (int)ENEMY_TYPE.NUM_ENEMY_TYPE;
+        public static int spellNumTextures = (int)SPELL_TYPE.NUM_SPELL_TYPE;
+        public static int GUINumTextures = (int)GUI_SPRITES.NUM_GUI_SPRITES;
 
         private string[] playerSpriteFileNames = new string[playerNumTextures];
         private string[] enemySpriteFileNames = new string[enemyNumTextures];

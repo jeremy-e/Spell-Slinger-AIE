@@ -13,6 +13,8 @@ namespace SpellSlingerV1._0
         SKELETON_KNIGHT,
         OGRE,
         WEREWOLF,
-        GREEN_DRAGON
+        GREEN_DRAGON,
+
+        NUM_ENEMY_TYPE
     }
 }
