@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using System.Diagnostics;
 using Microsoft.Xna.Framework.Graphics;
+using System.Timers;
 
 namespace SpellSlingerV1._0
 {
@@ -20,6 +21,7 @@ namespace SpellSlingerV1._0
         ColliderHandler colliderHandler_;
         GUI gui;
         List<EnemySpawner> currentWave;
+        private Timer waveCompleteTimer;
 
         List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
 
@@ -40,6 +42,16 @@ namespace SpellSlingerV1._0
                 activeSpellCDs.Add(0);
             }
 
+            //remove arbitrary timer value
+            waveCompleteTimer = new System.Timers.Timer(3000);
+            waveCompleteTimer.Elapsed += CreateANewWave;
+        }
+
+        //triggered from the waveCompleteTimer.Elapsed
+        private void CreateANewWave(Object source, ElapsedEventArgs e)
+        {
+            waveCompleteTimer.Stop();
+            playState = PLAY_STATES.ABOUT_TO_GENERATE_WAVE;
         }
 
         public override void Update(GameTime gameTime)
@@ -91,6 +103,7 @@ namespace SpellSlingerV1._0
                 {
                     playState = PLAY_STATES.WAVE_COMPLETE;
                     Debug.WriteLine("WAVE COMPLETE");
+                    waveCompleteTimer.Start();
                 }
             }
         }
@@ -272,6 +285,11 @@ namespace SpellSlingerV1._0
             {
                 leftMouseButtonDown = false;
             }
+        }
+
+        public PLAY_STATES CurrentPlayState
+        {
+            get { return playState; } 
         }
 
     }

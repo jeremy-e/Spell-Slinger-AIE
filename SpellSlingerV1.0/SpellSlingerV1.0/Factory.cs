@@ -95,7 +95,7 @@ namespace SpellSlingerV1._0
             const uint TIMER_INTERVAL = 350;          
 
             //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
-            for (float i = 1; i < 10; ++i)
+            for (float i = 1; i < 3; ++i)
             {
                 //grab a random rules                
                 EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];

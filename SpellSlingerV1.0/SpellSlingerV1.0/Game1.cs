@@ -40,6 +40,10 @@ namespace SpellSlingerV1._0
         SpriteFont myFont;
         Vector2 fontPos;
 
+        //Text to screen
+        SpriteFont waveStateFont;
+        Vector2 waveStateFontPos;
+
         public Game1()
             : base()
         {
@@ -50,32 +54,6 @@ namespace SpellSlingerV1._0
 
             IsMouseVisible = true;
         }
-
-        //private void CreateWave1()
-        //{
-        //    //2 six sided dice. 
-        //    Dice dice = new Dice(2, 6);
-
-        //    //all dice rolls will give us a ghoul if no other rule is set
-        //    EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.GHOUL);
-
-        //    //if we roll an 11 or 12 (array pos 10 or 11) then give us a running ghoul
-        //    rules.SetEnemyRule(ENEMY_TYPE.RUNNING_GHOUL, 10, 2); //if we roll 11 or 12 then give us a running ghoul
-
-        //    //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
-        //    objectFactory.CreatePlayer();
-
-        //    //Circle
-        //    Circle circle = new Circle(new Vector2(gameAssets.TowerList[0].X, gameAssets.TowerList[0].Y), 600.0);
-
-        //    //comment below line to remove circle of enemies
-        //    //objectFactory.CircleTest();
-
-        //    //create the spawner, this will be effected by the rules and the spawn rate (1000 miliseconds in this case)
-        //    //enemySpawner = new EnemySpawner(objectFactory, rules, waveTimer, circle);
-        //    objectFactory.CreateTestWave();
-
-        //}
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -138,6 +116,10 @@ namespace SpellSlingerV1._0
             //Text to screen - initiliase font & position
             myFont = Content.Load<SpriteFont>("myFont");
             fontPos = new Vector2(20, 80);
+
+            //JEREMY!! where is "myFont" defined???
+            waveStateFont = Content.Load<SpriteFont>("myFont");
+            waveStateFontPos = new Vector2(20, 100);
 
             
         }
@@ -219,6 +201,27 @@ namespace SpellSlingerV1._0
             {
                 string output = gameAssets.TowerListItem(0).Essence.ToString();
                 spriteBatch.DrawString(myFont, output, fontPos, Color.Black);
+
+                if (gameState is PlayGame)
+                {
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.ABOUT_TO_GENERATE_WAVE)
+                    {
+                        spriteBatch.DrawString(waveStateFont, "ABOUT_TO_GENERATE_WAVE", waveStateFontPos, Color.Black);
+                    }
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.DURING_WAVE)
+                    {
+                        spriteBatch.DrawString(waveStateFont, "DURING_WAVE", waveStateFontPos, Color.Black);
+                    }
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.WAITING_FOR_WAVE_TO_START)
+                    {
+                        spriteBatch.DrawString(waveStateFont, "WAITING_FOR_WAVE_TO_START", waveStateFontPos, Color.Black);
+                    }
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.WAVE_COMPLETE)
+                    {
+                        spriteBatch.DrawString(waveStateFont, "WAVE_COMPLETE", waveStateFontPos, Color.Black);
+                    }
+                }
+                
             }
             spriteBatch.End();
 
