@@ -21,6 +21,7 @@ namespace SpellSlingerV1._0
             
             InitEnemySpawnRules();
             spawnRulesSelector = new Dice(1, spawnRulesList.Count);
+            
         }
 
 #region TEST WAVES
@@ -86,6 +87,25 @@ namespace SpellSlingerV1._0
                 ++spawnNumber;
             }            
         }
+
+        public void GenerateWave(int pointsToSpend_ = 100, int maxPointsPerSpawner_ = 10, int timeBetweenSpawners_ = 5000)
+        {
+            uint spawnNumber = 0;
+            const uint TIMER_INTERVAL = 350;          
+
+            //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
+            for (float i = 1; i < 10; ++i)
+            {
+                //grab a random rules                
+                EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];
+
+                Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
+                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, (uint)(spawnNumber * timeBetweenSpawners_) + 1, (uint)i * 2, circle);
+                ++spawnNumber;
+            }  
+        }
+
+        
 
 #endregion
 

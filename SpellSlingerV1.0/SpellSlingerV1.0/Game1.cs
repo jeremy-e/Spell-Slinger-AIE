@@ -94,8 +94,8 @@ namespace SpellSlingerV1._0
             spriteBatch = new SpriteBatch(GraphicsDevice);
             viewPort = new ViewPort(spriteBatch, SCREEN_WIDTH, SCREEN_HEIGHT);
             colliderHandler = new ColliderHandler();
-
             gameState = new Intro();
+            
             currentGameState = -1;
 
             wave = 1;
@@ -132,11 +132,15 @@ namespace SpellSlingerV1._0
                 gameAssets.GUITextureList.Add(Content.Load<Texture2D>(spriteManager.GetGUISpriteFileName(i)));
             }
 
+            //CreatePlayer relies on the gameAssets being initialised
+            objectFactory.CreatePlayer();
+            objectFactory.GenerateWave();
+
             //Text to screen - initiliase font & position
             myFont = Content.Load<SpriteFont>("myFont");
             fontPos = new Vector2(20, 80);
 
-            objectFactory.CreateTestWave();
+            
         }
 
         /// <summary>

@@ -76,41 +76,41 @@ namespace SpellSlingerV1._0
             switch (enemyType)
             {
                 case ENEMY_TYPE.GHOUL:
-                    health = 60;
+                    health = 6;
                     speed = 0.02f;
                     weakness = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
-                    health = 30;
+                    health = 3;
                     speed = 0.03f;
                     weakness = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.HEAVY_ZOMBIE:
-                    health = 110;
+                    health = 11;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.FIREBALL;
                     resistance = SPELL_TYPE.LIGHTNING;
                     break;
                 case ENEMY_TYPE.SKELETON_KNIGHT:
-                    health = 150;
+                    health = 15;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
                     break;
                 case ENEMY_TYPE.OGRE:
-                    health = 150;
+                    health = 15;
                     speed = 0.05f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.WEREWOLF:
-                    health = 180;
+                    health = 18;
                     speed = 0.05f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
                     break;
                 case ENEMY_TYPE.GREEN_DRAGON:
-                    health = 250;
+                    health = 25;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
