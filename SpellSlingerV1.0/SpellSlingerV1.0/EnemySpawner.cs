@@ -113,6 +113,17 @@ namespace SpellSlingerV1._0
             
             //TODO: flag for deletion
         }
+
+        public bool HasStopped
+        {
+            get { return timerStopped; }
+        }
+
+        public bool Running
+        {
+            get { return !timerStopped; }
+        }
+
         
     }
 }

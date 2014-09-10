@@ -13,11 +13,13 @@ namespace SpellSlingerV1._0
     {
         bool leftMouseButtonDown = false;
         SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
+        PLAY_STATES playState = PLAY_STATES.ABOUT_TO_GENERATE_WAVE;
         GameAssets gameAssets_;
         ViewPort viewPort_;
         Factory objectFactory_;
         ColliderHandler colliderHandler_;
         GUI gui;
+        List<EnemySpawner> currentWave;
 
         List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
 
@@ -42,6 +44,8 @@ namespace SpellSlingerV1._0
 
         public override void Update(GameTime gameTime)
         {
+            
+
             for (int i = 0; i < gameAssets_.EnemyListCount; i++)                    //Enemy logic
             {
                 gameAssets_.EnemyListItem(i).Update(gameTime);
@@ -54,8 +58,41 @@ namespace SpellSlingerV1._0
 
             MoveViewPort();                                                         //Viewport control
             SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
-            gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists
+            gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists            
             CollisionTesting(gameTime);                                                     //Collisions
+
+            UpdateState();
+        }
+
+        private void UpdateState()
+        {
+            if (playState == PLAY_STATES.ABOUT_TO_GENERATE_WAVE)
+            {
+                currentWave = objectFactory_.GenerateWave();
+                playState = PLAY_STATES.WAITING_FOR_WAVE_TO_START;
+            }
+            if (playState == PLAY_STATES.WAITING_FOR_WAVE_TO_START && gameAssets_.EnemyListCount > 0)
+            {
+                playState = PLAY_STATES.DURING_WAVE;
+            }
+            if (playState == PLAY_STATES.DURING_WAVE && gameAssets_.EnemyListCount == 0)
+            {
+                //check that all spawners have stopped spawning
+                bool running = false;
+                for ( int i = 0; i < currentWave.Count; ++i )
+                {
+                    if (currentWave[i].Running)
+                    {
+                        running = true;
+                    }
+                }
+
+                if (!running)
+                {
+                    playState = PLAY_STATES.WAVE_COMPLETE;
+                    Debug.WriteLine("WAVE COMPLETE");
+                }
+            }
         }
 
 

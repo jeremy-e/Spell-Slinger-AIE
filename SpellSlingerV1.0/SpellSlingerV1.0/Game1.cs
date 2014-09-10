@@ -134,7 +134,6 @@ namespace SpellSlingerV1._0
 
             //CreatePlayer relies on the gameAssets being initialised
             objectFactory.CreatePlayer();
-            objectFactory.GenerateWave();
 
             //Text to screen - initiliase font & position
             myFont = Content.Load<SpriteFont>("myFont");
