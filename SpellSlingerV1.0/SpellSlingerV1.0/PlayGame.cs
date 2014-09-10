@@ -55,9 +55,7 @@ namespace SpellSlingerV1._0
         }
 
         public override void Update(GameTime gameTime)
-        {
-            
-
+        {          
             for (int i = 0; i < gameAssets_.EnemyListCount; i++)                    //Enemy logic
             {
                 gameAssets_.EnemyListItem(i).Update(gameTime);
@@ -69,6 +67,8 @@ namespace SpellSlingerV1._0
             }
 
             MoveViewPort();                                                         //Viewport control
+            viewPort_.Update();
+
             SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
             gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists            
             CollisionTesting(gameTime);                                                     //Collisions
@@ -85,9 +85,9 @@ namespace SpellSlingerV1._0
             }
             if (playState == PLAY_STATES.WAITING_FOR_WAVE_TO_START && gameAssets_.EnemyListCount > 0)
             {
-                playState = PLAY_STATES.DURING_WAVE;
+                playState = PLAY_STATES.WAVE_IN_PROGRESS;
             }
-            if (playState == PLAY_STATES.DURING_WAVE && gameAssets_.EnemyListCount == 0)
+            if (playState == PLAY_STATES.WAVE_IN_PROGRESS && gameAssets_.EnemyListCount == 0)
             {
                 //check that all spawners have stopped spawning
                 bool running = false;
@@ -145,30 +145,38 @@ namespace SpellSlingerV1._0
 
         void MoveViewPort()
         {
-            if (!Keyboard.GetState().IsKeyDown(Keys.D) && !Keyboard.GetState().IsKeyDown(Keys.A))
+            if (!Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                viewPort_.UnSnapX();
+                viewPort_.UnSnapLeft();
             }
-            if (!Keyboard.GetState().IsKeyDown(Keys.W) && !Keyboard.GetState().IsKeyDown(Keys.S))
+            if (!Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                viewPort_.UnSnapY();
+                viewPort_.UnSnapRight();
+            }
+            if (!Keyboard.GetState().IsKeyDown(Keys.W))
+            {
+                viewPort_.UnSnapUp();
+            }
+            if (!Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                viewPort_.UnSnapDown();
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.D))
             {
-                viewPort_.SnapToX(250.0f);
+                viewPort_.SnapToRight(250.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.A))
             {
-                viewPort_.SnapToX(-250.0f);
+                viewPort_.SnapToLeft(250.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.W))
             {
-                viewPort_.SnapToY(-150.0f);
+                viewPort_.SnapToUp(-150.0f);
             }
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                viewPort_.SnapToY(150.0f);
+                viewPort_.SnapToDown(150.0f);
             }
 
             for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
@@ -291,6 +299,5 @@ namespace SpellSlingerV1._0
         {
             get { return playState; } 
         }
-
     }
 }

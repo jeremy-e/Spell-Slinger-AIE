@@ -208,9 +208,9 @@ namespace SpellSlingerV1._0
                     {
                         spriteBatch.DrawString(waveStateFont, "ABOUT_TO_GENERATE_WAVE", waveStateFontPos, Color.Black);
                     }
-                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.DURING_WAVE)
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.WAVE_IN_PROGRESS)
                     {
-                        spriteBatch.DrawString(waveStateFont, "DURING_WAVE", waveStateFontPos, Color.Black);
+                        spriteBatch.DrawString(waveStateFont, "WAVE_IN_PROGRESS", waveStateFontPos, Color.Black);
                     }
                     if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.WAITING_FOR_WAVE_TO_START)
                     {

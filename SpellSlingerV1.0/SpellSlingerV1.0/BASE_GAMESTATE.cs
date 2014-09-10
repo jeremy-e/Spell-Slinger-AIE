@@ -19,7 +19,7 @@ namespace SpellSlingerV1._0
     {
         ABOUT_TO_GENERATE_WAVE,
         WAITING_FOR_WAVE_TO_START,
-        DURING_WAVE,
+        WAVE_IN_PROGRESS,
         WAVE_COMPLETE,
         PAUSE
     }

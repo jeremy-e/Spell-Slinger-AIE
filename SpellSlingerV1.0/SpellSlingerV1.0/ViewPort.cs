@@ -15,15 +15,24 @@ namespace SpellSlingerV1._0
     {
         int viewPortWidth;
         int viewPortHeight;
+
+        int aimAreaX;
+        int aimAreaY;
+
         int focusAreaX;
         int focusAreaY;
+
+        const int VIEW_PORT_SPEED = 30;
+
         SpriteBatch spriteBatch;
         Vector2 snapPosition;
         Rectangle drawPos;
 
         //PC: is the user currently holding W,A,S or D down?
-        bool viewXSnappedState;
-        bool viewYSnappedState;
+        bool viewLeftSnappedState;
+        bool viewRightSnappedState;
+        bool viewUpSnappedState;
+        bool viewDownSnappedState;
 
         
 
@@ -34,8 +43,14 @@ namespace SpellSlingerV1._0
             viewPortHeight = viewPortHeight_;
             focusAreaX = 0;
             focusAreaY = 0;
-            viewXSnappedState = false;
-            viewYSnappedState = false;
+            aimAreaX = 0;
+            aimAreaY = 0;
+
+            viewLeftSnappedState = false;
+            viewRightSnappedState = false;
+            viewUpSnappedState = false;
+            viewDownSnappedState = false;
+
             snapPosition = new Vector2(0.0f, 0.0f);
             drawPos = new Rectangle(0, 0, 0, 0);
         }
@@ -55,50 +70,101 @@ namespace SpellSlingerV1._0
             spriteBatch.Draw(entity_.Texture, null, drawPos, null, entity_.Origin, entity_.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
         }
 
-        public void SnapToX(float x_)
+        public void SnapToLeft(float x_)
         {
-            if (viewXSnappedState == false)
+            if (viewLeftSnappedState == false)
             {
-                focusAreaX -= (int)x_;
-                snapPosition.X -= x_;
-                viewXSnappedState = true;
+                aimAreaX += (int)x_;
+                //snapPosition.X += x_;
+                viewLeftSnappedState = true;
             }
         }
 
-        public void SnapToY(float y_)
+        public void SnapToRight(float x_)
         {
-            if (viewYSnappedState == false)
+            if (viewRightSnappedState == false)
             {
-                focusAreaY -= (int)y_;
-                snapPosition.Y -= y_;
-                viewYSnappedState = true;
+                aimAreaX -= (int)x_;
+                //snapPosition.X -= x_;
+                viewRightSnappedState = true;
             }
         }
 
-        public void UnSnapX()
+        public void SnapToUp(float y_)
         {
-            if (viewXSnappedState == true)
+            if (viewUpSnappedState == false)
             {
-                viewXSnappedState = false;
-                focusAreaX = 0;
+                aimAreaY -= (int)y_;
+                //snapPosition.Y -= y_;
+                viewUpSnappedState = true;
+            }
+        }
+
+        public void SnapToDown(float y_)
+        {
+            if (viewDownSnappedState == false)
+            {
+                aimAreaY -= (int)y_;
+                //snapPosition.Y += y_;
+                viewDownSnappedState = true;
+            }
+        }
+
+        public void UnSnapLeft()
+        {
+            if (viewLeftSnappedState == true)
+            {
+                viewLeftSnappedState = false;
+                aimAreaX = 0;
             }
         }
         
-        public void UnSnapY()
+        public void UnSnapRight()
         {
-            if (viewYSnappedState == true)
+            if (viewRightSnappedState == true)
             {
-                viewYSnappedState = false;
-                focusAreaY = 0;
+                viewRightSnappedState = false;
+                aimAreaX = 0;
+            }
+        }
+        public void UnSnapUp()
+        {
+            if (viewUpSnappedState == true)
+            {
+                viewUpSnappedState = false;
+                aimAreaY = 0;
             }
         }
 
-        public void MoveX(int amount_)
+        public void UnSnapDown()
+        {
+            if (viewDownSnappedState == true)
+            {
+                viewDownSnappedState = false;
+                aimAreaY = 0;
+            }
+        }
+
+        public void Update()
+        {
+            if (focusAreaX < aimAreaX)
+                focusAreaX += VIEW_PORT_SPEED;
+            if (focusAreaX > aimAreaX)
+                focusAreaX -= VIEW_PORT_SPEED;
+            if (focusAreaY < aimAreaY)
+                focusAreaY += VIEW_PORT_SPEED;
+            if (focusAreaY > aimAreaY)
+                focusAreaY -= VIEW_PORT_SPEED;
+        }
+
+
+
+        private void MoveX(int amount_)
         {
             focusAreaX += amount_;
         }
         
-        public void MoveY(int amount_)
+        private void MoveY(int amount_)
         {
             focusAreaY += amount_;
         }
