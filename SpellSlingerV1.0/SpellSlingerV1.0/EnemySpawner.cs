@@ -15,8 +15,9 @@ namespace SpellSlingerV1._0
         //stopTimer was a (my) dumb idea. better off just counting how many enemies to spawn
         //private Timer stopTimer;
 
-        private uint numEnemiesToSpawn;
-        private uint numEnemiesSpawned;
+        //private uint numEnemiesToSpawn;
+        //private uint numEnemiesSpawned;
+        private int pointsToSpend;
 
 
         private Timer startTimer;
@@ -34,10 +35,13 @@ namespace SpellSlingerV1._0
         Circle spawnCircle;
 
         //constructor takes a factory (because we have already created this in Game and dont want to create a second one)
-        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, uint startTimerms_, uint numEnemiesToSpawn_,Circle spawnCircle_)
+        public EnemySpawner(Factory factory_, EnemySpawnRules esr_, uint timerIntervalMs_, uint startTimerms_, Circle spawnCircle_, int pointsToSpend_)
         {
-            numEnemiesSpawned = 0;
-            numEnemiesToSpawn = numEnemiesToSpawn_;
+            pointsToSpend = pointsToSpend_;
+            
+            //numEnemiesSpawned = 0;
+            //numEnemiesToSpawn = numEnemiesToSpawn_;
+
             //assign classwide variables
             spawnCircle = spawnCircle_;
             esr = esr_;
@@ -92,15 +96,20 @@ namespace SpellSlingerV1._0
             {
                 ENEMY_TYPE enemy_type = esr.RandomiseEnemy();
 
-                factoryOrder.CreateEnemy(enemy_type, spawnCircle.GetPointNearLastRandomAngle());
-                
-                ++numEnemiesSpawned;
+                Enemy enemy = factoryOrder.CreateEnemy(enemy_type, spawnCircle.GetPointNearLastRandomAngle());
 
-                //do we keep spawning? 
-                if (numEnemiesSpawned < numEnemiesToSpawn)
-                    ResetTimer();
+                //if (enemy.Cost > pointsToSpend)
+                //do not spawn enemy and tell the owner that the EnemySpawner has stopped
+                if (enemy.Cost > pointsToSpend)
+                {
+                    this.StopSpawner();
+                    return;
+                }
                 else
-                    StopSpawner();
+                {
+                    pointsToSpend -= enemy.Cost;
+                    this.ResetTimer();                    
+                }
             }
         }
 

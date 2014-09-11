@@ -60,48 +60,52 @@ namespace SpellSlingerV1._0
 
         }
 
-        public void CreateTestWave()
+        //public void CreateTestWave()
+        //{
+        //    uint spawnNumber = 0;
+        //    const uint SPAWN_INTERVAL = 5000;
+        //    const uint TIMER_INTERVAL = 350;
+        //    const float ENEMIES_WAVE_ONE = 5.0f;
+        //    const float ENEMIES_INCREMENTER = 0.6f;
+        //    const float ENEMIES_WAVE_END = 50.0f;
+
+        //    //const float ENEMIES_WAVE_ONE = 1.0f;
+        //    //const float ENEMIES_INCREMENTER = 0.6f;
+        //    //const float ENEMIES_WAVE_END = 1.5f;
+
+        //    //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
+        //    CreatePlayer();
+
+        //    //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
+        //    for (float i = ENEMIES_WAVE_ONE; i < ENEMIES_WAVE_END; i += ENEMIES_INCREMENTER)
+        //    {
+        //        //grab a random rules                
+        //        EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];
+
+        //        Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
+        //        EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, (uint)(spawnNumber * SPAWN_INTERVAL) + 1, (uint)i * 2, circle);
+        //        ++spawnNumber;
+        //    }            
+        //}
+
+        public List<EnemySpawner> GenerateWave(int pointsToSpend_ = 100, int numOfSpawners_ = 5, int timeBetweenSpawners_ = 5000)
         {
-            uint spawnNumber = 0;
-            const uint SPAWN_INTERVAL = 5000;
-            const uint TIMER_INTERVAL = 350;
-            const float ENEMIES_WAVE_ONE = 5.0f;
-            const float ENEMIES_INCREMENTER = 0.6f;
-            const float ENEMIES_WAVE_END = 50.0f;
+            //WARNING!!!! DO NOT PASS IN 0 FOR numOfSpawners
+            int costPerSpawner = pointsToSpend_ / numOfSpawners_;
 
-            //const float ENEMIES_WAVE_ONE = 1.0f;
-            //const float ENEMIES_INCREMENTER = 0.6f;
-            //const float ENEMIES_WAVE_END = 1.5f;
-
-            //had to move CreatePlayer here as the creation of the spawn circle needs it to exist.
-            CreatePlayer();
-
-            //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
-            for (float i = ENEMIES_WAVE_ONE; i < ENEMIES_WAVE_END; i += ENEMIES_INCREMENTER)
-            {
-                //grab a random rules                
-                EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];
-
-                Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
-                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, (uint)(spawnNumber * SPAWN_INTERVAL) + 1, (uint)i * 2, circle);
-                ++spawnNumber;
-            }            
-        }
-
-        public List<EnemySpawner> GenerateWave(int pointsToSpend_ = 100, int maxPointsPerSpawner_ = 10, int timeBetweenSpawners_ = 5000)
-        {
             List<EnemySpawner> wave = new List<EnemySpawner>();
             uint spawnNumber = 0;
             const uint TIMER_INTERVAL = 350;          
 
             //even though these enemySpawner instances instantly go out of scope. they are not destroyed while their timers are running. 
-            for (float i = 1; i < 3; ++i)
+            for (float i = 1; i < numOfSpawners_; ++i)
             {
                 //grab a random rules                
                 EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];
 
                 Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
-                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, (uint)(spawnNumber * timeBetweenSpawners_) + 1, (uint)i * 2, circle);
+                uint startTimerMS = (uint)(spawnNumber * timeBetweenSpawners_) + 1;
+                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, startTimerMS, circle, pointsToSpend_);
                 wave.Add(enemySpawner);
                 ++spawnNumber;
             }
@@ -113,13 +117,15 @@ namespace SpellSlingerV1._0
 #endregion
 
         //By the time we get to CreateEnemy the EnemySpawner, Dice and EnemySpawnRules have done their job i.e. decided what enemy to spawn. 
-        public void CreateEnemy(ENEMY_TYPE enemyType_, Vector2 enemyPos_, int wave_ = 1)
+        public Enemy CreateEnemy(ENEMY_TYPE enemyType_, Vector2 enemyPos_, int wave_ = 1)
         {
             //TODO: 0 hardcoded in next line for now, will be safe unless multiple towers introduced
             Enemy enemy = new Enemy(enemyType_, gameAssets.TowerListItem(0).Pos, enemyPos_);
 
             enemy.Texture = gameAssets.EnemyTextureList[(int)enemyType_];
             gameAssets.EnemyListAdd(enemy);
+            
+            return enemy;
         }
 
         public void CreatePlayer()

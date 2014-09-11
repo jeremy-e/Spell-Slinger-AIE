@@ -25,6 +25,7 @@ namespace SpellSlingerV1._0
         private SPELL_TYPE weakness;
         private ENEMY_STATUS status;
         private Timer recoveryTimer;
+        private int cost;
 
 
         public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
@@ -79,41 +80,48 @@ namespace SpellSlingerV1._0
                     health = 6;
                     speed = 0.02f;
                     weakness = SPELL_TYPE.FIREBALL;
+                    cost = 10;
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
                     health = 3;
                     speed = 0.03f;
                     weakness = SPELL_TYPE.FIREBALL;
+                    cost = 20;
                     break;
                 case ENEMY_TYPE.HEAVY_ZOMBIE:
                     health = 11;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.FIREBALL;
                     resistance = SPELL_TYPE.LIGHTNING;
+                    cost = 30;
                     break;
                 case ENEMY_TYPE.SKELETON_KNIGHT:
                     health = 15;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
+                    cost = 40;
                     break;
                 case ENEMY_TYPE.OGRE:
                     health = 15;
                     speed = 0.05f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
+                    cost = 80;
                     break;
                 case ENEMY_TYPE.WEREWOLF:
                     health = 18;
                     speed = 0.05f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
+                    cost = 160;
                     break;
                 case ENEMY_TYPE.GREEN_DRAGON:
                     health = 25;
                     speed = 0.04f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
+                    cost = 320;
                     break;
             }
         }
@@ -138,7 +146,8 @@ namespace SpellSlingerV1._0
 
                 //reduce enemy health by dmg
                 health -= (int)dmg;
-                Debug.WriteLine("Dmg Received: " + dmg + ". Health: " + health);
+
+                //Debug.WriteLine("Dmg Received: " + dmg + ". Health: " + health);
 
                 if (health <= 0)
                     Active = false;
@@ -179,6 +188,11 @@ namespace SpellSlingerV1._0
             {
                 return enemyType;
             }
+        }
+
+        public int Cost
+        {
+            get { return cost; }
         }
     }
 }

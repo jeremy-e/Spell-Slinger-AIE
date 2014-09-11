@@ -26,7 +26,7 @@ namespace SpellSlingerV1._0
         //allocate EnemyType results to enemyTypes List from pos, to len number of elements
         public void SetEnemyRule(ENEMY_TYPE enemyType, int pos, int len)
         {
-            //fill with default to start with
+            //fill with enemyType passed in
             for (int i = pos; i < pos + len; ++i) //this will fall over if len + pos >= enemyTypes.Count 
             {
                 enemyTypes[i] = enemyType;

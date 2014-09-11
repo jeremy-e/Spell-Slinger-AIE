@@ -12,6 +12,11 @@ namespace SpellSlingerV1._0
 {
     class PlayGame : BASE_GAMESTATE
     {
+        const int TIME_BETWEEN_SPAWNERS_BASE = 3000;
+        const int TIME_BETWEEN_SPAWNERS_MULTI = 100;
+        const int POINTS_TO_SPEND_MULTI = 250;
+        const int SPAWNER_NUM_MULTI = 2;
+
         bool leftMouseButtonDown = false;
         SPELL_TYPE spellSelect = SPELL_TYPE.FIREBALL;
         PLAY_STATES playState = PLAY_STATES.ABOUT_TO_GENERATE_WAVE;
@@ -22,11 +27,16 @@ namespace SpellSlingerV1._0
         GUI gui;
         List<EnemySpawner> currentWave;
         private Timer waveCompleteTimer;
+        int waveNum;
 
         List<int> activeSpellCDs;                                                   //Tracks cooldown time when specific spell cast
 
         public PlayGame(GameAssets gameAssets, ViewPort viewPort, Factory objectFactory, ColliderHandler colliderHandler)
         {
+            //I am assuming PlayGame is only created to start new game
+            //correct me if im wrong. 
+            waveNum = 1;
+
             gui = new GUI(objectFactory, viewPort);
             gameAssets_ = gameAssets;
             viewPort_ = viewPort;
@@ -80,7 +90,8 @@ namespace SpellSlingerV1._0
         {
             if (playState == PLAY_STATES.ABOUT_TO_GENERATE_WAVE)
             {
-                currentWave = objectFactory_.GenerateWave();
+                int timeBetweenSpawners = waveNum * TIME_BETWEEN_SPAWNERS_MULTI + TIME_BETWEEN_SPAWNERS_BASE;
+                currentWave = objectFactory_.GenerateWave(waveNum * POINTS_TO_SPEND_MULTI, waveNum * SPAWNER_NUM_MULTI, timeBetweenSpawners);
                 playState = PLAY_STATES.WAITING_FOR_WAVE_TO_START;
             }
             if (playState == PLAY_STATES.WAITING_FOR_WAVE_TO_START && gameAssets_.EnemyListCount > 0)
@@ -101,8 +112,9 @@ namespace SpellSlingerV1._0
 
                 if (!running)
                 {
-                    playState = PLAY_STATES.WAVE_COMPLETE;
-                    Debug.WriteLine("WAVE COMPLETE");
+                    waveNum++;                    
+                    playState = PLAY_STATES.WAVE_COMPLETE;                    
+                    Debug.WriteLine("BEGIN WAVE" + waveNum);                    
                     waveCompleteTimer.Start();
                 }
             }
@@ -279,7 +291,7 @@ namespace SpellSlingerV1._0
                     activeSpellCDs[i] -= 5;                    //Hack - incorporate timers later
                     if (activeSpellCDs[i] <= 0)
                     {
-                        Debug.WriteLine("Spell is now ready for use: " + Enum.GetNames(typeof(SPELL_TYPE)).ElementAt(i));
+                    //    Debug.WriteLine("Spell is now ready for use: " + Enum.GetNames(typeof(SPELL_TYPE)).ElementAt(i));
                     }
                 }
 
