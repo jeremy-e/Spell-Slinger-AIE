@@ -44,7 +44,7 @@ namespace SpellSlingerV1._0
         {
             if (capacity >= maxCap)
             {
-                //Debug.WriteLine("You have been overwhelmed!");
+                Debug.WriteLine("You have been overwhelmed!");
             }
 
             if (spellCast && !spellTimer.Enabled)               //spell cast & timer not enabled

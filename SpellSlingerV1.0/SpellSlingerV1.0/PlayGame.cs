@@ -14,7 +14,8 @@ namespace SpellSlingerV1._0
     {
         const int TIME_BETWEEN_SPAWNERS_BASE = 3000;
         const int TIME_BETWEEN_SPAWNERS_MULTI = 100;
-        const int POINTS_TO_SPEND_MULTI = 250;
+        const int POINTS_TO_SPEND_BASE = 200;
+        const int POINTS_TO_SPEND_MULTI = 50;
         const int SPAWNER_NUM_MULTI = 2;
 
         bool leftMouseButtonDown = false;
@@ -90,8 +91,15 @@ namespace SpellSlingerV1._0
         {
             if (playState == PLAY_STATES.ABOUT_TO_GENERATE_WAVE)
             {
+                int pointsToSpendPerSpawner = waveNum * POINTS_TO_SPEND_MULTI + POINTS_TO_SPEND_BASE;
+                int numOfSpawners = waveNum * SPAWNER_NUM_MULTI;                
                 int timeBetweenSpawners = waveNum * TIME_BETWEEN_SPAWNERS_MULTI + TIME_BETWEEN_SPAWNERS_BASE;
-                currentWave = objectFactory_.GenerateWave(waveNum * POINTS_TO_SPEND_MULTI, waveNum * SPAWNER_NUM_MULTI, timeBetweenSpawners);
+
+                Debug.WriteLine("pointsToSpendPerSpawner: " + pointsToSpendPerSpawner);
+                Debug.WriteLine("numOfSpawners: " + numOfSpawners);
+                Debug.WriteLine("timeBetweenSpawners: " + timeBetweenSpawners);
+
+                currentWave = objectFactory_.GenerateWave(pointsToSpendPerSpawner, numOfSpawners, timeBetweenSpawners);
                 playState = PLAY_STATES.WAITING_FOR_WAVE_TO_START;
             }
             if (playState == PLAY_STATES.WAITING_FOR_WAVE_TO_START && gameAssets_.EnemyListCount > 0)
@@ -269,7 +277,7 @@ namespace SpellSlingerV1._0
                     int spellX = Mouse.GetState().X - viewPort_.X;
                     int spellY = Mouse.GetState().Y - viewPort_.Y;
 
-                    Debug.WriteLine("X" + spellX + "Y" + spellY);
+                    //Debug.WriteLine("X" + spellX + "Y" + spellY);
 
                     objectFactory_.CastSpell(spellSelect, gameAssets_.TowerListItem(0).SpellLevel[(int)spellSelect], spellX, spellY);
                     //Player has cast a spell - intiate global cooldown

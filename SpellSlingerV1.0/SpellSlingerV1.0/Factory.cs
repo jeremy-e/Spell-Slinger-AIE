@@ -88,10 +88,10 @@ namespace SpellSlingerV1._0
         //    }            
         //}
 
-        public List<EnemySpawner> GenerateWave(int pointsToSpend_ = 100, int numOfSpawners_ = 5, int timeBetweenSpawners_ = 5000)
+        public List<EnemySpawner> GenerateWave(int pointsToSpendPerSpawner_, int numOfSpawners_, int timeBetweenSpawners_)
         {
             //WARNING!!!! DO NOT PASS IN 0 FOR numOfSpawners
-            int costPerSpawner = pointsToSpend_ / numOfSpawners_;
+            //int costPerSpawner = pointsToSpend_ / numOfSpawners_;
 
             List<EnemySpawner> wave = new List<EnemySpawner>();
             uint spawnNumber = 0;
@@ -105,7 +105,7 @@ namespace SpellSlingerV1._0
 
                 Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
                 uint startTimerMS = (uint)(spawnNumber * timeBetweenSpawners_) + 1;
-                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, startTimerMS, circle, pointsToSpend_);
+                EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, startTimerMS, circle, pointsToSpendPerSpawner_);
                 wave.Add(enemySpawner);
                 ++spawnNumber;
             }

@@ -36,7 +36,7 @@ namespace SpellSlingerV1._0
             X = x_;
             Y = y_;
 
-            Debug.WriteLine("spellX" + X + "spellY" + Y);
+//            Debug.WriteLine("spellX" + X + "spellY" + Y);
 
             //Set spell to be 'active' - currently being used to control draw time on screen
             activeTime = 500;
