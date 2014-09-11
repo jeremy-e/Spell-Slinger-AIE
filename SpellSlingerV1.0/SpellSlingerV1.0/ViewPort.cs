@@ -68,6 +68,7 @@ namespace SpellSlingerV1._0
             drawPos.Y = yPos;
                 
             spriteBatch.Draw(entity_.Texture, null, drawPos, null, entity_.Origin, entity_.Rotation, null, entity_.DrawColor, SpriteEffects.None, 0f);
+            entity_.ResetDrawColour();
         }
 
         public void SnapToLeft(float x_)

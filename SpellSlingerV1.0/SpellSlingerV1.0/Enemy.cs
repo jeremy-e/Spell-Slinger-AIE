@@ -8,11 +8,11 @@ using System.Diagnostics;
 
 namespace SpellSlingerV1._0
 {
-    enum ENEMY_STATUS
-    {
-        OK,
-        RECOVERING
-    }
+    //enum ENEMY_STATUS
+    //{
+    //    OK,
+    //    RECOVERING
+    //}
 
     class Enemy : Entity
     {
@@ -23,15 +23,15 @@ namespace SpellSlingerV1._0
         private Vector2 playerPos;
         private SPELL_TYPE resistance;
         private SPELL_TYPE weakness;
-        private ENEMY_STATUS status;
-        private Timer recoveryTimer;
+        //private ENEMY_STATUS status;
+        //private Timer recoveryTimer;
         private int cost;
 
 
         public Enemy(ENEMY_TYPE enemyType_, Vector2 playerPos_, Vector2 pos_)
         {
             pos = pos_;
-            status = ENEMY_STATUS.OK;
+            //status = ENEMY_STATUS.OK;
             enemyType = enemyType_;
             InitialiseEnemyVariables();
             playerPos = playerPos_;
@@ -40,19 +40,19 @@ namespace SpellSlingerV1._0
             Active = true;
 
             //enemy invincible for this long after a hit
-            recoveryTimer = new System.Timers.Timer(500);
-            recoveryTimer.Elapsed += EnemyRecovered;
+            //recoveryTimer = new System.Timers.Timer(500);
+            //recoveryTimer.Elapsed += EnemyRecovered;
         }
 
-        public ENEMY_STATUS Status
-        {
-            get { return status; }
-        }
+        //public ENEMY_STATUS Status
+        //{
+        //    get { return status; }
+        //}
 
         private void EnemyRecovered(Object source, ElapsedEventArgs e)
         {
-            recoveryTimer.Stop();
-            status = ENEMY_STATUS.OK;
+            //recoveryTimer.Stop();
+            //status = ENEMY_STATUS.OK;
             drawColour = Color.White;
         }
 
@@ -130,37 +130,35 @@ namespace SpellSlingerV1._0
         //else returns 0
         public int Hit(Spell spell_)
         {
-            //dont kick him while he is down
-            if (status != ENEMY_STATUS.RECOVERING)
+            drawColour = Color.Red;
+
+            float dmg = spell_.Damage;
+
+            //do we have a resistance to this spell? if so half the damage
+            if (resistance == spell_.Type)
+                dmg /= 2;
+
+            //are we weak on this spell?
+            if (weakness == spell_.Type)
+                dmg *= 2;
+
+            //reduce enemy health by dmg
+            health -= (int)dmg;
+
+            //Debug.WriteLine("Dmg Received: " + dmg + ". Health: " + health);
+
+            if (health <= 0)
             {
-
-                float dmg = spell_.Damage;
-
-                //do we have a resistance to this spell? if so half the damage
-                if (resistance == spell_.Type)
-                    dmg /= 2;
-
-                //are we weak on this spell?
-                if (weakness == spell_.Type)
-                    dmg *= 2;
-
-                //reduce enemy health by dmg
-                health -= (int)dmg;
-
-                //Debug.WriteLine("Dmg Received: " + dmg + ". Health: " + health);
-
-                if (health <= 0)
-                    Active = false;
-                else
-                {
-                    status = ENEMY_STATUS.RECOVERING;
-                    drawColour = Color.Red;
-                    recoveryTimer.Start();
-                }
-
-                //TODO fix the way the essence is calculated
+                Active = false;
                 return 100;
             }
+            //else
+            //{
+            //    //status = ENEMY_STATUS.RECOVERING;                    
+            //    //recoveryTimer.Start();
+            //}
+
+            //TODO fix the way the essence is calculated
             return 0;
         }
 

@@ -22,6 +22,11 @@ namespace SpellSlingerV1._0
         //Will allow for iteration through lists and if false object will be removed - ie dead enemies, spells cast
         private bool active;
 
+        public void ResetDrawColour()
+        {
+            drawColour = Color.White;
+        }
+
         public bool Active
         {
             get { return active; }

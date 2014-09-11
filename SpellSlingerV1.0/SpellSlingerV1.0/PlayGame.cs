@@ -153,7 +153,7 @@ namespace SpellSlingerV1._0
                         {
                             int essenceReturned = gameAssets_.EnemyListItem(j).Hit(gameAssets_.SpellListItem(i));
                             gameAssets_.TowerListItem(0).Essence += essenceReturned;
-                        }
+                        }                        
                     }
                 }
             }
