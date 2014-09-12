@@ -22,7 +22,7 @@ namespace SpellSlingerV1._0
         int spellCooldown;
 
         float initialDamage;
-        Timer damageTimer;
+        //Timer damageTimer;
 
         public Spell(SPELL_TYPE type_, int spellLevel_, float x_, float y_)
         {
@@ -73,13 +73,13 @@ namespace SpellSlingerV1._0
                     damagePerTick = 0;
                     break;
                 case SPELL_TYPE.LIGHTNING:
-                    damagePerTick = initialDamage * 0.5f;
+                    damagePerTick = initialDamage * 0.03f;
                     break;
                 case SPELL_TYPE.DESPAIR:
-                    damagePerTick = initialDamage * 0.2f;
+                    damagePerTick = initialDamage * 0.03f;
                     break;
                 case SPELL_TYPE.RAPTURE:
-                    damagePerTick = initialDamage * 0.1f;
+                    damagePerTick = initialDamage * 0.03f;
                     break;
                 default:
                     damagePerTick = 0;
@@ -117,12 +117,17 @@ namespace SpellSlingerV1._0
             activeTimer.Enabled = true;
             activeTimer.Start();
 
-            //Spell Damage Timer
-            damageTimer = new System.Timers.Timer(1000);
-            damageTimer.Elapsed += OnTimedEventDamage;
-            damageTimer.Interval = 100; //tick length, 100 milliseconds
-            damageTimer.Enabled = true; //Start enables... why keep putting this in?
-            damageTimer.Start();
+            ////Spell Damage Timer
+            //damageTimer = new System.Timers.Timer(1000);
+            //damageTimer.Elapsed += OnTimedEventDamage;
+            //damageTimer.Interval = 100; //tick length, 100 milliseconds
+            //damageTimer.Enabled = true; //Start enables... why keep putting this in?
+            //damageTimer.Start();
+        }
+
+        public void InitialHitFinished()
+        {
+            damage = damagePerTick;
         }
 
         private void OnTimedEvent(object source, ElapsedEventArgs e)
@@ -130,10 +135,10 @@ namespace SpellSlingerV1._0
             Active = false;
         }
 
-        private void OnTimedEventDamage(object source, ElapsedEventArgs e)
-        {
-            damage = damagePerTick;
-        }
+        //private void OnTimedEventDamage(object source, ElapsedEventArgs e)
+        //{
+        //    damage = damagePerTick;
+        //}
 
         public int SpellLevel
         {
@@ -149,9 +154,16 @@ namespace SpellSlingerV1._0
 
         public float Damage
         {
-            get { return damage; }
+            //make sure the first time we get initial damage. 
+            //every time after, damagePerTick
+            get 
+            {                
+                return damage; 
+            }
             set { damage = value; }
         }
+
+        
 
         public int SpellCooldown
         {

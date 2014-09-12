@@ -224,6 +224,12 @@ namespace SpellSlingerV1._0
 
         void SpellManagement()
         {
+            //set all existing on screen spells Initialhit=false
+            for (int i = 0; i < gameAssets_.SpellListCount; i++)
+            {
+                gameAssets_.SpellListItem(i).InitialHitFinished();
+            }
+
             //Click to cast
             if (Keyboard.GetState().IsKeyDown(Keys.D1))
             {
