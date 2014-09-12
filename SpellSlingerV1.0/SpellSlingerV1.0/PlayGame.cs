@@ -80,6 +80,11 @@ namespace SpellSlingerV1._0
             MoveViewPort();                                                         //Viewport control
             viewPort_.Update();
 
+            for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
+            {
+                gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
+            }
+
             SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
             gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists            
             CollisionTesting(gameTime);                                                     //Collisions
@@ -199,10 +204,7 @@ namespace SpellSlingerV1._0
                 viewPort_.SnapToDown(150.0f);
             }
 
-            for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
-            {
-                gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
-            }
+
         }
 
 
