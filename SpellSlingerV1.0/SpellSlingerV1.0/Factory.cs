@@ -103,7 +103,7 @@ namespace SpellSlingerV1._0
                 //grab a random rules                
                 EnemySpawnRules rules = spawnRulesList[spawnRulesSelector.Roll()];
 
-                Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 400.0);
+                Circle circle = new Circle(new Vector2(gameAssets.TowerListItem(0).X, gameAssets.TowerListItem(0).Y), 600.0);
                 uint startTimerMS = (uint)(spawnNumber * timeBetweenSpawners_) + 1;
                 EnemySpawner enemySpawner = new EnemySpawner(this, rules, TIMER_INTERVAL, startTimerMS, circle, pointsToSpendPerSpawner_);
                 wave.Add(enemySpawner);
