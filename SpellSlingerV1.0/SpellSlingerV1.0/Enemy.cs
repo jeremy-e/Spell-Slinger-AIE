@@ -133,7 +133,7 @@ namespace SpellSlingerV1._0
             drawColour = Color.Red;
 
             float dmg = spell_.Damage;
-            Console.WriteLine("Damage: " + dmg);
+            //Console.WriteLine("Damage: " + dmg);
 
             //do we have a resistance to this spell? if so half the damage
             if (resistance == spell_.Type)

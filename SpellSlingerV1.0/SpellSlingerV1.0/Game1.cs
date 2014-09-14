@@ -220,6 +220,10 @@ namespace SpellSlingerV1._0
                     {
                         spriteBatch.DrawString(waveStateFont, "WAVE_COMPLETE", waveStateFontPos, Color.Black);
                     }
+                    if (((PlayGame)gameState).CurrentPlayState == PLAY_STATES.OVERWHELMED)
+                    {
+                        spriteBatch.DrawString(waveStateFont, "OVERWHELMED", waveStateFontPos, Color.Black);
+                    }
                 }
                 
             }

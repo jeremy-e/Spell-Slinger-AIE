@@ -74,26 +74,35 @@ namespace SpellSlingerV1._0
 
             for (int i = 0; i < gameAssets_.TowerListCount; i++)                    //Player logic
             {
-                gameAssets_.TowerListItem(i).Update(gameTime);
+                //pass a reference to the playstate, if the playstate is set to overwhelmed then it is a game over.
+                gameAssets_.TowerListItem(i).Update(gameTime, ref playState);
             }
 
-            MoveViewPort();                                                         //Viewport control
-            viewPort_.Update();
-
-            for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
+            if (playState == PLAY_STATES.OVERWHELMED)
             {
-                gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
+
             }
+            else
+            {
+                MoveViewPort();                                                         //Viewport control
+                viewPort_.Update();
 
-            SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
-            gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists            
-            CollisionTesting(gameTime);                                                     //Collisions
+                for (int i = 0; i < gameAssets_.GUIListCount; i++)                  //Move GUI Elements with Viewport
+                {
+                    gameAssets_.GUIListItem(i).Update(viewPort_.X, viewPort_.Y);
+                }
 
-            UpdateState();
+                SpellManagement();                                                      //Spells - suggest input handler later to cover some functions already being handled by this function
+                gameAssets_.RemoveEntitiesMarkedForDelete();                            //Removing all objects marked as !active from appropriate lists            
+                CollisionTesting(gameTime);                                                     //Collisions
+
+                UpdateState();
+            }
         }
 
         private void UpdateState()
         {
+            //below playstate is only ever set for one tick. this is the tick that we generate the wave
             if (playState == PLAY_STATES.ABOUT_TO_GENERATE_WAVE)
             {
                 int pointsToSpendPerSpawner = waveNum * POINTS_TO_SPEND_MULTI + POINTS_TO_SPEND_BASE;
@@ -105,12 +114,19 @@ namespace SpellSlingerV1._0
                 Debug.WriteLine("timeBetweenSpawners: " + timeBetweenSpawners);
 
                 currentWave = objectFactory_.GenerateWave(pointsToSpendPerSpawner, numOfSpawners, timeBetweenSpawners);
+                
+                //we need this state so we dont accidentally think the level is over before it has started (enemies may not spawn immediately)
                 playState = PLAY_STATES.WAITING_FOR_WAVE_TO_START;
             }
+
+            //as soon as an enemy has spawned, we are in progress
             if (playState == PLAY_STATES.WAITING_FOR_WAVE_TO_START && gameAssets_.EnemyListCount > 0)
             {
                 playState = PLAY_STATES.WAVE_IN_PROGRESS;
             }
+
+            //if the wave has been running, and there are no enemies left it may be the end of the wave,
+            //although we also need to check that there are no spawners that are waiting to start. 
             if (playState == PLAY_STATES.WAVE_IN_PROGRESS && gameAssets_.EnemyListCount == 0)
             {
                 //check that all spawners have stopped spawning

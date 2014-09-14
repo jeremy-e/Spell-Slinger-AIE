@@ -40,11 +40,13 @@ namespace SpellSlingerV1._0
             spellCast = false;
         }
 
-        public void Update(GameTime gameTime_)
+        public void Update(GameTime gameTime_, ref PLAY_STATES playState_)
         {
             if (capacity >= maxCap)
             {
+                playState_ = PLAY_STATES.OVERWHELMED;
                 Debug.WriteLine("You have been overwhelmed!");
+                return;
             }
 
             if (spellCast && !spellTimer.Enabled)               //spell cast & timer not enabled

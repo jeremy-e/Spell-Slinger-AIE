@@ -21,7 +21,8 @@ namespace SpellSlingerV1._0
         WAITING_FOR_WAVE_TO_START,
         WAVE_IN_PROGRESS,
         WAVE_COMPLETE,
-        PAUSE
+        PAUSE,
+        OVERWHELMED
     }
 
     class BASE_GAMESTATE

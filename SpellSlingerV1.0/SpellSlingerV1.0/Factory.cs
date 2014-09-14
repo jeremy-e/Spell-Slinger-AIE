@@ -90,9 +90,6 @@ namespace SpellSlingerV1._0
 
         public List<EnemySpawner> GenerateWave(int pointsToSpendPerSpawner_, int numOfSpawners_, int timeBetweenSpawners_)
         {
-            //WARNING!!!! DO NOT PASS IN 0 FOR numOfSpawners
-            //int costPerSpawner = pointsToSpend_ / numOfSpawners_;
-
             List<EnemySpawner> wave = new List<EnemySpawner>();
             uint spawnNumber = 0;
             const uint TIMER_INTERVAL = 350;          
