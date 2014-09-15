@@ -219,8 +219,6 @@ namespace SpellSlingerV1._0
             {
                 viewPort_.SnapToDown(150.0f);
             }
-
-
         }
 
 

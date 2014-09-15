@@ -18,6 +18,7 @@ namespace SpellSlingerV1._0
     {
 
         private int health;
+        private int essence;
         private float speed;
         private ENEMY_TYPE enemyType;
         private Vector2 playerPos;
@@ -38,22 +39,6 @@ namespace SpellSlingerV1._0
             this.Width = 32;
             this.Height = 32;
             Active = true;
-
-            //enemy invincible for this long after a hit
-            //recoveryTimer = new System.Timers.Timer(500);
-            //recoveryTimer.Elapsed += EnemyRecovered;
-        }
-
-        //public ENEMY_STATUS Status
-        //{
-        //    get { return status; }
-        //}
-
-        private void EnemyRecovered(Object source, ElapsedEventArgs e)
-        {
-            //recoveryTimer.Stop();
-            //status = ENEMY_STATUS.OK;
-            drawColour = Color.White;
         }
 
         //direction property (we dont need to store as we can calculate on the fly)
@@ -67,8 +52,6 @@ namespace SpellSlingerV1._0
             }
         }
 
-
-
         //happy to leave this hardcoded for now rather than using const vars
         //at least it is neat and everything is in the same spot. 
         //eventually want to database drive this. 
@@ -78,50 +61,57 @@ namespace SpellSlingerV1._0
             {
                 case ENEMY_TYPE.GHOUL:
                     health = 6;
-                    speed = 0.02f;
+                    speed = 0.01f;
                     weakness = SPELL_TYPE.FIREBALL;
                     cost = 10;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.RUNNING_GHOUL:
                     health = 3;
-                    speed = 0.03f;
+                    speed = 0.02f;
                     weakness = SPELL_TYPE.FIREBALL;
                     cost = 20;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.HEAVY_ZOMBIE:
                     health = 11;
-                    speed = 0.04f;
+                    speed = 0.025f;
                     weakness = SPELL_TYPE.FIREBALL;
                     resistance = SPELL_TYPE.LIGHTNING;
                     cost = 30;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.SKELETON_KNIGHT:
                     health = 15;
-                    speed = 0.04f;
+                    speed = 0.03f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
                     cost = 40;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.OGRE:
                     health = 15;
-                    speed = 0.05f;
+                    speed = 0.035f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
                     cost = 80;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.WEREWOLF:
                     health = 18;
-                    speed = 0.05f;
+                    speed = 0.04f;
                     weakness = SPELL_TYPE.ICELANCE;
                     resistance = SPELL_TYPE.FIREBALL;
                     cost = 160;
+                    essence = cost;
                     break;
                 case ENEMY_TYPE.GREEN_DRAGON:
                     health = 25;
-                    speed = 0.04f;
+                    speed = 0.05f;
                     weakness = SPELL_TYPE.RAPTURE;
                     resistance = SPELL_TYPE.DESPAIR;
                     cost = 320;
+                    essence = cost;
                     break;
             }
         }
@@ -151,7 +141,7 @@ namespace SpellSlingerV1._0
             if (health <= 0)
             {
                 Active = false;
-                return 100;
+                return essence;
             }
             //else
             //{
