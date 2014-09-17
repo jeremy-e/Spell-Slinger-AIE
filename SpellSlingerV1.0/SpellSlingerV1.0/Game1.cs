@@ -117,7 +117,7 @@ namespace SpellSlingerV1._0
             myFont = Content.Load<SpriteFont>("myFont");
             fontPos = new Vector2(20, 80);
 
-            //JEREMY!! where is "myFont" defined???
+            //JEREMY!! where is "myFont" defined??? - "Content" -> myFont.xnb
             waveStateFont = Content.Load<SpriteFont>("myFont");
             waveStateFontPos = new Vector2(20, 100);
 
