@@ -47,8 +47,8 @@ namespace SpellSlingerV1._0
             {
                 //10% Green Dragon, 40% HEAVY_ZOMBIE, 40% SKELETON KNIGHT
                 EnemySpawnRules rules = new EnemySpawnRules(dice, ENEMY_TYPE.HEAVY_ZOMBIE);
-                rules.SetEnemyRule(ENEMY_TYPE.SKELETON_KNIGHT, 70, 30); 
-                rules.SetEnemyRule(ENEMY_TYPE.GREEN_DRAGON, 70, 30); 
+                rules.SetEnemyRule(ENEMY_TYPE.GREEN_DRAGON, 0, 10); 
+                rules.SetEnemyRule(ENEMY_TYPE.SKELETON_KNIGHT, 10, 30);                 
                 spawnRulesList.Add(rules);
             }
 
